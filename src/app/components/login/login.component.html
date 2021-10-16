@@ -1,0 +1,35 @@
+<div class="container" style="margin-bottom: 5em;">
+    <form [formGroup]="formulario" (ngSubmit)="enviar()">
+
+        <div class="mb-3">
+            <label for="mail" class="form-label">Mail</label>
+            <input type="email" class="form-control" id="mail" placeholder="Mail" formControlName='mail'>
+            <small class="invalid"
+                *ngIf="formulario.controls.mail.errors?.required  && formulario.controls.mail.touched">
+                El mail es requerido</small>
+            <small class="invalid" *ngIf="formulario.controls.mail.errors?.validadorDeEspacios">
+                El mail no puede contener espacios</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="password">Contraseña</label>
+            <input type="password" class="form-control" id="password" placeholder="Contraseña"
+                formControlName='password'>
+            <small class="invalid"
+                *ngIf="formulario.controls.password.errors?.required  && formulario.controls.password.touched">
+                La contraseña es requerida</small>
+            <small class="invalid"
+                *ngIf="formulario.controls.password.errors?.minLength  && formulario.controls.password.touched">
+                La contraseña debe tener al menos 6 caracteres
+            </small>
+        </div>
+
+        <div class="col-md-12 d-grid gap-2">
+            <button type="submit" class="btn btn-primary btn-block">
+                Enviar
+            </button>
+        </div>
+
+    </form>
+
+</div>
