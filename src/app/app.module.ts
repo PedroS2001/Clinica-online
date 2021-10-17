@@ -13,6 +13,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from 'src/environments/environment';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { NgxLoadingModule } from 'ngx-loading';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -31,6 +33,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
     AngularFireStorageModule,
     FormsModule,
     ReactiveFormsModule,
+    NgxLoadingModule,
+    ToastrModule.forRoot(),
     AppRoutingModule
   ],
   providers: [],

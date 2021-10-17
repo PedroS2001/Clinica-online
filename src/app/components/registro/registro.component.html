@@ -80,22 +80,26 @@
         <ng-template #templateName>
 
           <div class="form-group mb-3">
-            <label for="">Especialidad</label>
+            <label for="especialidad">Especialidad</label>
             <select class="form-control" id="especialidad">
-              <option value="">Cirujano</option>
-              <option value="">Oftalmologo</option>
-              <option value="">Dentista</option>
+              <option value="cirujano" selected >Cirujano</option>
+              <option value="dentista" >Dentista</option>
+              <option value="oftalmologo">Oftalmologo</option>
             </select>
           </div>
 
         </ng-template>
 
 
-        <input type="file" class="form-control mb-3 " id="imagen" formControlName='imagen'>
+        <div>
+          <label for="imagen">Foto de Perfil</label>
+          <input type="file"  class="form-control mb-3 " id="imagen" formControlName='imagen'>
+        </div>
         <div *ngIf="esPaciente">
-          <input type="file" class="form-control mb-3" id="image" formControlName='image'>
+          <input type="file" class="form-control mb-3" id="imagen2" formControlName='imagen2'>
         </div>
 
+      
 
 
     </div>  <!--Cierre ROW-->
@@ -108,6 +112,10 @@
 
   </form>
 
-  <img src={{pepe}} alt="">
+  <img src={{urlImagen}} width="50px" height="50px" alt="">
+  <img src={{urlImagen2}} width="50px" height="50px" alt="">
+
+  <ngx-loading [show]="loading" ></ngx-loading>
+
 
 </div>
