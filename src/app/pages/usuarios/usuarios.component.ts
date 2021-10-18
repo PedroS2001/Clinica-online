@@ -14,7 +14,7 @@ export class UsuariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  boton(tabla:string)
+  seleccionarTabla(tabla:string)
   {
     this.tabla = tabla;
   }

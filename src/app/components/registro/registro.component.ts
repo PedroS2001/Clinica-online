@@ -62,7 +62,7 @@ export class RegistroComponent implements OnInit {
         'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
         'mail': ['', [Validators.required, Validators.email]],
         'password': ['', [Validators.required, Validators.minLength(6)]],
-        'especialidad': ['',],
+        'especialidad': [''],
         'imagen': [null, [Validators.required]]
       });
     }

@@ -31,27 +31,27 @@ export class LoginComponent implements OnInit {
   funcioncita(correo:string)
   {
     this.arrayAdministradores.forEach( (element:any) => {
-      console.info('administrador', element);
+      // console.info('administrador', element);
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
-        console.info('le pego',correo);
+        // console.info('le pego',correo);
       }
     });
     this.arrayPacientes.forEach( (element:any) => {
-      console.info('paciente', element);
+      // console.info('paciente', element);
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
-        console.info('le pego',correo);
+        // console.info('le pego',correo);
       }
     });
     this.arrayEspecialistas.forEach( (element:any) => {
-      console.info('especialsta', element);
+      // console.info('especialsta', element);
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
-        console.info('le pego',correo);
+        // console.info('le pego',correo);
       }
     });
   }
@@ -71,8 +71,22 @@ export class LoginComponent implements OnInit {
       //si tiene el email verificado lo logueo, sino le aviso que no esta logueado
       if(result.user?.emailVerified)
       {
-        this.authService.estaLogueado = true;
         this.funcioncita(correo);
+
+        if(this.authService.currentUser.perfil == 'especialista')
+        {
+          if(!this.authService.currentUser.habilitado)
+          {
+            this.toastr.error('No se encuentra habilitado','Error', {
+              timeOut:1500,
+              closeButton:true
+            });
+            this.authService.currentUser = '';
+            this.authService.SignOut();
+            return;
+          }
+        }
+        this.authService.estaLogueado = true;
         
         console.info('currentUser', this.authService.currentUser);  
         this.toastr.success('Ingreso con exito','Bienvenido', {
@@ -106,6 +120,9 @@ export class LoginComponent implements OnInit {
   {
     this.formulario.get('mail')?.setValue('juani.mp1@gmail.com');
     this.formulario.get('password')?.setValue('mazzucco');
+
+    this.formulario.get('mail')?.setValue('gikerucsubustosgil@gmail.com');
+    this.formulario.get('password')?.setValue('felipe');
   }
 
   ingresaPaciente()
