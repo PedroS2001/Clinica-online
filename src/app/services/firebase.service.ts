@@ -29,6 +29,17 @@ export class FirebaseService {
     return this.afs.collection('especialistas').snapshotChanges();
   }
 
+  AgregarAdministrador(administrador:any)
+  {
+    return this.afs.collection('administradores').add(administrador);
+  }
+  
+  LeerAdministradores()
+  {
+    return this.afs.collection('administradores').snapshotChanges();
+  }
+
+
   // ModificarPedido(doc:string, repartidor:any)
   // {
   //   return this.afs.collection('pedidos').doc(doc).set(repartidor);

@@ -69,20 +69,20 @@ export class LoginComponent implements OnInit {
 
   ingresaEspecialista()
   {
-    this.formulario.get('mail')?.setValue('especialista@especialista.com');
-    this.formulario.get('password')?.setValue('especialista');
+    this.formulario.get('mail')?.setValue('juani.mp1@gmail.com');
+    this.formulario.get('password')?.setValue('mazzucco');
   }
 
   ingresaPaciente()
   {
-    this.formulario.get('mail')?.setValue('paciente@paciente.com');
-    this.formulario.get('password')?.setValue('paciente');
+    this.formulario.get('mail')?.setValue('facundofalcioni2410@gmail.com');
+    this.formulario.get('password')?.setValue('facundo');
   }
 
   ingresaAdministrador()
   {
-    this.formulario.get('mail')?.setValue('administrador@administrador.com');
-    this.formulario.get('password')?.setValue('administrador');
+    this.formulario.get('mail')?.setValue('pedroseneriz01@gmail.com');
+    this.formulario.get('password')?.setValue('123456');
   }
 
 

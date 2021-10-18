@@ -24,11 +24,14 @@ export class RegistroComponent implements OnInit {
 
   nuevoUsuario:any;
 
-  public esPaciente:any = true;
+  public esPaciente:any = false;
+  public esEspecialista:any = false;
+  public esAdministrador:any = true;
+
   public formulario!: FormGroup;
 
   constructor(private fb: FormBuilder, private afs: FirebaseService, private storage: AngularFireStorage,
-     private authService: AuthService, private router: Router, private toast:ToastrService) { 
+     private authService: AuthService, private toast:ToastrService) { 
   }
 
   ngOnInit(): void {
@@ -37,11 +40,26 @@ export class RegistroComponent implements OnInit {
     //   this.loading = false;
     // }, 1000);
 
-    if(!this.esPaciente)
+    if(this.esPaciente)
     {
       this.formulario = this.fb.group({
         'nombre': ['', Validators.required],
         'apellido': ['', Validators.required],
+        'edad': ['', [Validators.required, Validators.min(0), Validators.max(150)]],
+        'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
+        'mail': ['', [Validators.required, Validators.email]],
+        'password': ['', [Validators.required, Validators.minLength(6)]],
+        'obrasocial': ['', Validators.required],
+        'imagen': [null, [Validators.required]],
+        'imagen2': [null, [Validators.required]]
+      });
+    }
+    else if(this.esEspecialista)
+    {
+      this.formulario = this.fb.group({
+        'nombre': ['', Validators.required],
+        'apellido': ['', Validators.required],
+        'habilitado': [false],
         'edad': ['', [Validators.required, Validators.min(0), Validators.max(150)]],
         'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
         'mail': ['', [Validators.required, Validators.email]],
@@ -59,9 +77,7 @@ export class RegistroComponent implements OnInit {
         'dni': ['', [Validators.required, Validators.min(1000000), Validators.max(99999999)]],
         'mail': ['', [Validators.required, Validators.email]],
         'password': ['', [Validators.required, Validators.minLength(6)]],
-        'obrasocial': ['', Validators.required],
-        'imagen': [null, [Validators.required]],
-        'imagen2': [null, [Validators.required]]
+        'imagen': [null, [Validators.required]]
       });
     }
   }
@@ -71,7 +87,6 @@ export class RegistroComponent implements OnInit {
   {
     console.info('FORMULARIO', this.formulario);
     console.info('STATUS', this.formulario.status);
-
 
     if(this.formulario.status == 'VALID')
     {
@@ -104,6 +119,7 @@ export class RegistroComponent implements OnInit {
           this.nuevoUsuario = {
             nombre: formValue.nombre,
             apellido: formValue.apellido,
+            perfil: 'paciente',
             edad: formValue.edad,
             dni: formValue.dni,
             mail: formValue.mail,
@@ -113,10 +129,12 @@ export class RegistroComponent implements OnInit {
             obrasocial: formValue.obrasocial
           }
         }
-        else{
+        else if(this.esEspecialista)
+        {
           this.nuevoUsuario = {
             nombre: formValue.nombre,
             apellido: formValue.apellido,
+            perfil: 'especialista',
             edad: formValue.edad,
             dni: formValue.dni,
             mail: formValue.mail,
@@ -124,6 +142,20 @@ export class RegistroComponent implements OnInit {
             imagen: this.urlImagen,
             especialidad: formValue.especialidad,
           }
+        }
+        else
+        {
+          this.nuevoUsuario = {
+            nombre: formValue.nombre,
+            apellido: formValue.apellido,
+            perfil: 'administrador',
+            edad: formValue.edad,
+            dni: formValue.dni,
+            mail: formValue.mail,
+            password: formValue.password,
+            imagen: this.urlImagen
+          }
+
         }
         this.Registrar();
         this.loading = false;
@@ -190,9 +222,16 @@ export class RegistroComponent implements OnInit {
           await newUserCredential.user?.sendEmailVerification(); 
         });
       }
-      else
+      else if(this.esEspecialista)
       {
         this.afs.AgregarEspecialista(this.nuevoUsuario).then(async()=>{
+          console.log(newUserCredential);
+          await newUserCredential.user?.sendEmailVerification(); 
+        });
+      }
+      else
+      {
+        this.afs.AgregarAdministrador(this.nuevoUsuario).then(async()=>{
           console.log(newUserCredential);
           await newUserCredential.user?.sendEmailVerification(); 
         });

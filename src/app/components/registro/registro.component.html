@@ -66,7 +66,7 @@
 
         <!-- HASTA ACA LO TIENEN LOS 2 FORMS -->
 
-        <div *ngIf="esPaciente;else templateName" >
+        <div *ngIf="esPaciente" >
           <div class="mb-3">
             <label for="obrasocial" class="form-label">Obra social</label>
             <input type="text" class="form-control" id="obrasocial" placeholder="Obra Social"
@@ -77,8 +77,7 @@
           </div>
         </div>
 
-        <ng-template #templateName>
-
+        <div *ngIf="esEspecialista">
           <div class="form-group mb-3">
             <label for="especialidad">Especialidad</label>
             <select class="form-control" id="especialidad">
@@ -87,8 +86,7 @@
               <option value="oftalmologo">Oftalmologo</option>
             </select>
           </div>
-
-        </ng-template>
+        </div>
 
 
         <div>
