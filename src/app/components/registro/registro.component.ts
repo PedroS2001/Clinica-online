@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FirebaseService } from 'src/app/services/firebase.service';
 
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { AuthService } from 'src/app/services/auth.service';
+
 import { Router } from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
@@ -31,6 +32,12 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+    this.loading = true;
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
 
     if(!this.esPaciente)
     {
@@ -68,6 +75,7 @@ export class RegistroComponent implements OnInit {
     console.info('FORMULARIO', this.formulario);
     console.info('FORMULARIO', this.formulario.status);
 
+
     if(this.formulario.status == 'VALID')
     {
       this.loading = true;
@@ -104,8 +112,6 @@ export class RegistroComponent implements OnInit {
             imagen2: this.urlImagen2,
             obrasocial: formValue.obrasocial
           }
-          this.signUp();
-          //this.afs.AgregarPaciente(user);
         }
         else{
           this.nuevoUsuario = {
@@ -118,18 +124,14 @@ export class RegistroComponent implements OnInit {
             imagen: this.urlImagen,
             especialidad: formValue.especialidad,
           }
-          this.signUp();
-          //this.afs.AgregarEspecialista(user);
-          //console.info('SeAgrego', user);
-
         }
+        this.Registrar();
         this.loading = false;
         this.toast.success('Se registro con exito ', '', {
           timeOut:1500,
           closeButton:true
         })
       }, 1500);
-      //COLOCAR SPINNER DE CARGA
     }
     else
     {
@@ -165,8 +167,8 @@ export class RegistroComponent implements OnInit {
   }
   
 
-  signUp() {
-    this.authService.SignUp(this.nuevoUsuario.mail , this.nuevoUsuario.password)
+  Registrar() {
+    this.authService.Registrar(this.nuevoUsuario.mail , this.nuevoUsuario.password)
     .then((result) => {
       console.log('Se registro correctamente');
       if(this.esPaciente)
@@ -178,6 +180,7 @@ export class RegistroComponent implements OnInit {
         this.afs.AgregarEspecialista(this.nuevoUsuario); 
       }
       this.authService.estaLogueado = true;
+      this.authService.currentUser = {'correo': this.nuevoUsuario.mail, 'clave': this.nuevoUsuario.password};
       console.info('SeAgrego', this.nuevoUsuario);
 
       // this.router.navigateByUrl('home');

@@ -12,12 +12,12 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth) { }
 
-  SignUp(email:string, password:string) {
+  Registrar(email:string, password:string) {
     return this.auth.createUserWithEmailAndPassword(email, password);
   }
 
   // Sign in with email/password. VERIFICAR QUE EL USUARIO EXISTA Y SUS DATOS
-  SignIn(email:string, password:string) {
+  Ingresar(email:string, password:string) {
     return this.auth.signInWithEmailAndPassword(email, password);
   }
 
