@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AngularFireModule } from '@angular/fire/compat';
@@ -16,7 +19,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RegisterComponent } from './pages/register/register.component';
+
 
 
 @NgModule({
@@ -25,7 +28,8 @@ import { RegisterComponent } from './pages/register/register.component';
     BienvenidaComponent,
     RegistroComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,

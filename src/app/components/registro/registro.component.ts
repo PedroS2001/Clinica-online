@@ -32,16 +32,13 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    
-    this.loading = true;
-    setTimeout(() => {
-      this.loading = false;
-    }, 1000);
+    // this.loading = true;
+    // setTimeout(() => {
+    //   this.loading = false;
+    // }, 1000);
 
     if(!this.esPaciente)
     {
-
       this.formulario = this.fb.group({
         'nombre': ['', Validators.required],
         'apellido': ['', Validators.required],
@@ -73,7 +70,7 @@ export class RegistroComponent implements OnInit {
   async enviar()
   {
     console.info('FORMULARIO', this.formulario);
-    console.info('FORMULARIO', this.formulario.status);
+    console.info('STATUS', this.formulario.status);
 
 
     if(this.formulario.status == 'VALID')
@@ -82,6 +79,8 @@ export class RegistroComponent implements OnInit {
       let formValue = this.formulario.getRawValue();
       
       let pathImg = `imagenes/especialistas/${formValue.dni}_${formValue.apellido}`;
+
+      //Si es paciente, recoge tambien el archivo del input2, por lo que hay que crear referencias para este input tambien
       if(this.esPaciente)
       {
         pathImg = `imagenes/pacientes/${formValue.dni}_${formValue.apellido}`;
@@ -89,6 +88,7 @@ export class RegistroComponent implements OnInit {
 
         let inputFile2 : any = (<HTMLInputElement> document.getElementById("imagen2"));
 
+        //Sube la imagen2
         await this.subirImagen(inputFile2, pathImg2, 2);
         console.info('IMANGEN2', this.urlImagen2);
       }
@@ -127,7 +127,7 @@ export class RegistroComponent implements OnInit {
         }
         this.Registrar();
         this.loading = false;
-        this.toast.success('Se registro con exito ', '', {
+        this.toast.success('Se envio un mensaje para validar su correo', '', {
           timeOut:1500,
           closeButton:true
         })
@@ -142,6 +142,13 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+
+  /** Sube un archivo a Storage y guarda sus referencias en variables
+   * 
+   * @param input El inputFile que va a subir
+   * @param filePath El path donde va a guardar el archivo en el storage
+   * @param num sirve para diferenciar en que variable guarda el link de referencia al archivo, dependiendo de cuantos archivos suba
+   */
   async subirImagen(input:any, filePath:string, num:number)
   {
     let file = input.files[0];  //Recojo el archivo que haya subido el usuario
@@ -155,38 +162,42 @@ export class RegistroComponent implements OnInit {
         if(num==1)
         {
           this.urlImagen = url;
+          console.info('url', this.urlImagen);
         }
         else
         {
           this.urlImagen2 = url;
+          console.info('url2', this.urlImagen2);
         }
-        console.info('url', this.urlImagen);
       })
     }, 500);
 
   }
   
 
-  Registrar() {
+  /** Registra al usuario en firebase y le manda un mail para verificar el correo.
+   *  Recoge el correo y contraseña del formulario para crear su cuenta en auth
+   *  Luego agrega el usuario en firestore, en la coleccion correspondiente al tipo de usuario
+   *  Finalmente le manda un mail para verificar la cuenta en auth.
+   */
+  async Registrar() {
     this.authService.Registrar(this.nuevoUsuario.mail , this.nuevoUsuario.password)
-    .then((result) => {
-      console.log('Se registro correctamente');
+    .then(async (newUserCredential)=>{
       if(this.esPaciente)
       {
-        this.afs.AgregarPaciente(this.nuevoUsuario);
+        this.afs.AgregarPaciente(this.nuevoUsuario).then(async()=>{
+          console.log(newUserCredential);
+          await newUserCredential.user?.sendEmailVerification(); 
+        });
       }
       else
       {
-        this.afs.AgregarEspecialista(this.nuevoUsuario); 
+        this.afs.AgregarEspecialista(this.nuevoUsuario).then(async()=>{
+          console.log(newUserCredential);
+          await newUserCredential.user?.sendEmailVerification(); 
+        });
       }
-      this.authService.estaLogueado = true;
-      this.authService.currentUser = {'correo': this.nuevoUsuario.mail, 'clave': this.nuevoUsuario.password};
-      console.info('SeAgrego', this.nuevoUsuario);
-
-      // this.router.navigateByUrl('home');
-    }).catch((error) => {
-      alert(error.message);
-    })
+    });
   }
 
 
