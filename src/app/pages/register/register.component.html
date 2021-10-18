@@ -1,1 +1,7 @@
-<app-registro></app-registro>
+<button type="button" class="btn btn-primary" (click)="cambiarValor('paciente')">Registrar paciente</button>
+<button type="button" class="btn btn-primary" (click)="cambiarValor('especialista')">Registrar especialista</button>
+
+<!-- <button *ngIf="auth.currentUser.perfil == 'administrador'" type="button" class="btn btn-primary" (click)="cambiarValor('administrador')">Registrar administrador</button> -->
+
+
+<app-registro [tipoUsuario]="tipoRegistro" ></app-registro>

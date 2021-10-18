@@ -39,6 +39,11 @@ export class FirebaseService {
     return this.afs.collection('administradores').snapshotChanges();
   }
 
+  ModificarEstadoEspecialista(id:any, valor:any)
+  {
+    return this.afs.collection('especialistas').doc(id).update({habilitado:valor})
+  }
+
 
   // ModificarPedido(doc:string, repartidor:any)
   // {

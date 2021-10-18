@@ -19,6 +19,10 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { NgxLoadingModule } from 'ngx-loading';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TablaEspecialistasComponent } from './components/usuarios/tabla-especialistas/tabla-especialistas.component';
+import { TablaPacientesComponent } from './components/usuarios/tabla-pacientes/tabla-pacientes.component';
+import { TablaAdministradoresComponent } from './components/usuarios/tabla-administradores/tabla-administradores.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 
 
@@ -30,6 +34,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
+    TablaEspecialistasComponent,
+    TablaPacientesComponent,
+    TablaAdministradoresComponent,
+    UsuariosComponent,
   ],
   imports: [
     BrowserModule,

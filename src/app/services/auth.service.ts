@@ -9,7 +9,7 @@ import { FirebaseService } from './firebase.service';
 export class AuthService {
 
   estaLogueado:boolean = false;
-  estaVerificado:boolean = false;
+  esAdmin:boolean = false;
   currentUser:any;
 
 

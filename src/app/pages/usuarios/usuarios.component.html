@@ -1,0 +1,29 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-outline-primary" (click)="boton('administradores')" >Tabla de administradores</button>
+            <button type="button" class="btn btn-outline-primary" (click)="boton('especialistas')" >Tabla de especialistas</button>
+            <button type="button" class="btn btn-outline-primary" (click)="boton('pacientes')" >Tabla de pacientes</button>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="tabla=='administradores'">
+            <app-tabla-administradores></app-tabla-administradores>
+        </div>
+        <div *ngIf="tabla=='especialistas'">
+            <app-tabla-especialistas></app-tabla-especialistas>
+
+        </div>
+        <div *ngIf="tabla=='pacientes'">
+            <app-tabla-pacientes></app-tabla-pacientes>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button class="btn btn-primary btn-block" (click)="btnAgregar()">Agregar Usuario Administrador</button>
+        </div>
+    </div>
+    <div class="row" *ngIf="agregarUsuario">
+        <app-registro [tipoUsuario]="'administrador'"></app-registro>
+    </div>
+</div>

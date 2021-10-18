@@ -10,8 +10,12 @@
                 <!-- <a class="nav-link active" aria-current="page" >Home</a> -->
                 <a class="nav-link " aria-current="page" (click)="goToLogin()" >Login</a>
                 <a class="nav-link " aria-current="page" (click)="goToRegistro()" >Registro</a>
+                <div *ngIf="auth.currentUser">
+                    <a *ngIf="auth.currentUser.perfil == 'administrador'" class="nav-link " aria-current="page" (click)="goToUsuarios()" >Usuarios</a>
+                </div>
+
             </div>
-            <label *ngIf="auth.currentUser" align="right" for="" style="color: white;">{{auth.currentUser.correo}}</label>
+            <label *ngIf="auth.currentUser" align="right" for="" style="color: white;">{{auth.currentUser.mail}}</label>
         </div>
     </div>
 </nav>

@@ -66,7 +66,7 @@
 
         <!-- HASTA ACA LO TIENEN LOS 2 FORMS -->
 
-        <div *ngIf="esPaciente" >
+        <div *ngIf="tipoUsuario=='paciente'" >
           <div class="mb-3">
             <label for="obrasocial" class="form-label">Obra social</label>
             <input type="text" class="form-control" id="obrasocial" placeholder="Obra Social"
@@ -77,7 +77,7 @@
           </div>
         </div>
 
-        <div *ngIf="esEspecialista">
+        <div *ngIf="tipoUsuario=='especialista'">
           <div class="form-group mb-3">
             <label for="especialidad">Especialidad</label>
             <select class="form-control" id="especialidad">
@@ -93,7 +93,7 @@
           <label for="imagen">Foto de Perfil</label>
           <input type="file"  class="form-control mb-3 " id="imagen" formControlName='imagen'>
         </div>
-        <div *ngIf="esPaciente">
+        <div *ngIf="tipoUsuario=='paciente'">
           <input type="file" class="form-control mb-3" id="imagen2" formControlName='imagen2'>
         </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AngularFireStorage } from '@angular/fire/compat/storage';
@@ -19,14 +19,12 @@ export class RegistroComponent implements OnInit {
 
   public loading = false;
 
+  @Input() tipoUsuario!:string;
+  
   urlImagen!:string;
   urlImagen2!:string;
 
   nuevoUsuario:any;
-
-  public esPaciente:any = false;
-  public esEspecialista:any = false;
-  public esAdministrador:any = true;
 
   public formulario!: FormGroup;
 
@@ -40,7 +38,7 @@ export class RegistroComponent implements OnInit {
     //   this.loading = false;
     // }, 1000);
 
-    if(this.esPaciente)
+    if(this.tipoUsuario == 'paciente')
     {
       this.formulario = this.fb.group({
         'nombre': ['', Validators.required],
@@ -54,7 +52,7 @@ export class RegistroComponent implements OnInit {
         'imagen2': [null, [Validators.required]]
       });
     }
-    else if(this.esEspecialista)
+    else if(this.tipoUsuario == 'especialista')
     {
       this.formulario = this.fb.group({
         'nombre': ['', Validators.required],
@@ -83,6 +81,11 @@ export class RegistroComponent implements OnInit {
   }
 
 
+  /** Verifica que el formulario tenga todos los valores validos
+   *  Pone el spinner de cargando, sube la imagen o las imagenes al storage, recibe sus paths
+   *  Sube el usuario a firestore, con los datos del formulario mas las referencias a las imagenes en el storage y el perfil
+   *  Muestra un toast con lo acontecido
+   */
   async enviar()
   {
     console.info('FORMULARIO', this.formulario);
@@ -96,7 +99,7 @@ export class RegistroComponent implements OnInit {
       let pathImg = `imagenes/especialistas/${formValue.dni}_${formValue.apellido}`;
 
       //Si es paciente, recoge tambien el archivo del input2, por lo que hay que crear referencias para este input tambien
-      if(this.esPaciente)
+      if(this.tipoUsuario == 'paciente')
       {
         pathImg = `imagenes/pacientes/${formValue.dni}_${formValue.apellido}`;
         let pathImg2 = `imagenes/pacientes/${formValue.dni}_${formValue.apellido}_2`;
@@ -114,7 +117,7 @@ export class RegistroComponent implements OnInit {
       setTimeout(() => {
         console.info('Imagen1', this.urlImagen);
 
-        if(this.esPaciente)
+        if(this.tipoUsuario == 'paciente')
         {
           this.nuevoUsuario = {
             nombre: formValue.nombre,
@@ -129,7 +132,7 @@ export class RegistroComponent implements OnInit {
             obrasocial: formValue.obrasocial
           }
         }
-        else if(this.esEspecialista)
+        else if(this.tipoUsuario == 'especialista')
         {
           this.nuevoUsuario = {
             nombre: formValue.nombre,
@@ -215,14 +218,14 @@ export class RegistroComponent implements OnInit {
   async Registrar() {
     this.authService.Registrar(this.nuevoUsuario.mail , this.nuevoUsuario.password)
     .then(async (newUserCredential)=>{
-      if(this.esPaciente)
+      if(this.tipoUsuario == 'paciente')
       {
         this.afs.AgregarPaciente(this.nuevoUsuario).then(async()=>{
           console.log(newUserCredential);
           await newUserCredential.user?.sendEmailVerification(); 
         });
       }
-      else if(this.esEspecialista)
+      else if(this.tipoUsuario == 'especialista')
       {
         this.afs.AgregarEspecialista(this.nuevoUsuario).then(async()=>{
           console.log(newUserCredential);
