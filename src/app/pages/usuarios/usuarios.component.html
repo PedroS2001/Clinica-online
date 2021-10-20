@@ -1,30 +1,34 @@
-<div class="container">
-    <div class="row">
+<div class="container-fluid">
+    <div class="row m-4">
         <div class="col">
             <button type="button" class="btn btn-outline-primary" (click)="seleccionarTabla('administradores')" >Tabla de administradores</button>
+        </div>
+        <div class="col">
             <button type="button" class="btn btn-outline-primary" (click)="seleccionarTabla('especialistas')" >Tabla de especialistas</button>
+        </div>
+        <div class="col">
             <button type="button" class="btn btn-outline-primary" (click)="seleccionarTabla('pacientes')" >Tabla de pacientes</button>
         </div>
     </div>
-    <div class="row">
+    <div class="row m-4">
         <div *ngIf="tabla=='administradores'">
             <app-tabla-administradores></app-tabla-administradores>
         </div>
         <div *ngIf="tabla=='especialistas'">
             <app-tabla-especialistas></app-tabla-especialistas>
-
         </div>
         <div *ngIf="tabla=='pacientes'">
             <app-tabla-pacientes></app-tabla-pacientes>
         </div>
     </div>
 
-    <div class="row">
-        <div class="col">
-            <button class="btn btn-primary btn-block mb-4" (click)="btnAgregar()">Agregar Usuario Administrador</button>
+    <div class="row m-4">
+        <div class="col" align="center">
+            <button class="bttn-float bttn-lg bttn-primary"(click)="btnAgregar()">Agregar Usuario Administrador</button>
+            <!-- <button class="btn btn-primary btn-block mb-4" (click)="btnAgregar()">Agregar Usuario Administrador</button> -->
         </div>
     </div>
-    <div class="row" *ngIf="agregarUsuario">
+    <div class="row m-4" *ngIf="agregarUsuario">
         <div class="container">
             <app-registro [tipoUsuario]="'administrador'"></app-registro>
         </div>

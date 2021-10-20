@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit {
+export class RegistroComponent implements OnInit, OnChanges {
 
   public loading = false;
 
@@ -32,12 +32,8 @@ export class RegistroComponent implements OnInit {
      private authService: AuthService, private toast:ToastrService) { 
   }
 
-  ngOnInit(): void {
-    // this.loading = true;
-    // setTimeout(() => {
-    //   this.loading = false;
-    // }, 1000);
-
+  ngOnChanges()
+  {
     if(this.tipoUsuario == 'paciente')
     {
       this.formulario = this.fb.group({
@@ -78,6 +74,9 @@ export class RegistroComponent implements OnInit {
         'imagen': [null, [Validators.required]]
       });
     }
+  }
+
+  ngOnInit(): void {
   }
 
 

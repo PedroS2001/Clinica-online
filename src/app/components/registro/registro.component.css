@@ -1,3 +1,11 @@
 .invalid{
     color: red;
 }
+
+.miContenedor{
+    border-radius: 25px;
+    border: 2px solid rgb(40, 183, 141);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+

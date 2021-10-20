@@ -1,11 +1,10 @@
 <div class="container" style="margin: 50px; max-width: 720px;">
 
-    <div class="contenedor p-3 mb-5" style="padding: 50px">
-
+    <div class="miContenedor p-3 mb-5" style="padding: 50px">
         <div class="col">
-
+                                        <!-- TITULO Y FOTO -->
             <div class="row" align="center">
-                <h1>INGRESO</h1>
+                <h1 style="font-family: 'Bebas Neue';">INGRESO</h1>
             </div>
 
             <div class="row ">
@@ -13,29 +12,22 @@
                     <img src="./assets/icono.png" style="border-radius: 50%;" width="150px" height="150px">
                 </div>
             </div>
+                                        <!-- FORMULARIO -->
             <div class="row">
-
                 <form [formGroup]="formulario" (ngSubmit)="Ingresar()">
                     <div class="mb-3">
                         <label for="mail" class="form-label">Mail</label>
-                        <input type="email" class="form-control" id="mail" placeholder="Mail" formControlName='mail'>
+                        <input type="email" class="form-control miContenedor" id="mail" placeholder="Mail" formControlName='mail'>
                         <small class="invalid"
                             *ngIf="formulario.controls.mail.errors?.required  && formulario.controls.mail.touched">
                             El mail es requerido</small>
                         <small class="invalid" *ngIf="formulario.controls.mail.errors?.validadorDeEspacios">
                             El mail no puede contener espacios</small>
-                        <!-- <label for="mail" class="form-label">Mail</label>
-                        <input type="email" class="form-control" id="mail" placeholder="Mail" formControlName='mail'>
-                        <small class="invalid"
-                            *ngIf="formulario.controls.mail.errors?.required  && formulario.controls.mail.touched">
-                            El mail es requerido</small>
-                        <small class="invalid" *ngIf="formulario.controls.mail.errors?.validadorDeEspacios">
-                            El mail no puede contener espacios</small> -->
                     </div>
 
                     <div class="mb-3">
                         <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" placeholder="Contraseña"
+                        <input type="password" class="form-control miContenedor" id="password" placeholder="Contraseña"
                             formControlName='password'>
                         <small class="invalid"
                             *ngIf="formulario.controls.password.errors?.required  && formulario.controls.password.touched">
@@ -50,19 +42,19 @@
                         <button type="submit" class="bttn-pill bttn-md bttn-success">Ingresar</button>
                     </div>
                 </form>
-                
+
+                                        <!-- BOTONES DE ACCESO RAPIDO -->
                 <div class="col-md-12 d-grid gap-2">
                     <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
                     <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaEspecialista()" >Especialista</button>
                     <button class="bttn-unite bttn-md bttn-warning" (click)="ingresaPaciente()" >Paciente</button>
                 </div>  
 
-            </div>
-        </div>
+            </div> <!--Cierre row formulario-->
+        </div> <!--Cierre col general-->
 
-    </div>
+    </div>  <!--Cierre miContenedor-->
 
-
-</div>
+</div>   <!--Cierre container 720p-->
 
 <ngx-loading [show]="loading"  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }" ></ngx-loading>
