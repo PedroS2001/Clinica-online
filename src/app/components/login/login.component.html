@@ -1,6 +1,6 @@
-<div class="container" style="margin-bottom: 5em;">
+<div class="container" style="margin: 50px; max-width: 720px;">
 
-    <div class="shadow p-3 mb-5 bg-body rounded">
+    <div class="contenedor p-3 mb-5" style="padding: 50px">
 
         <div class="col">
 
@@ -15,7 +15,7 @@
             </div>
             <div class="row">
 
-                <form [formGroup]="formulario" (ngSubmit)="enviar()">
+                <form [formGroup]="formulario" (ngSubmit)="Ingresar()">
                     <div class="mb-3">
                         <label for="mail" class="form-label">Mail</label>
                         <input type="email" class="form-control" id="mail" placeholder="Mail" formControlName='mail'>
@@ -24,6 +24,13 @@
                             El mail es requerido</small>
                         <small class="invalid" *ngIf="formulario.controls.mail.errors?.validadorDeEspacios">
                             El mail no puede contener espacios</small>
+                        <!-- <label for="mail" class="form-label">Mail</label>
+                        <input type="email" class="form-control" id="mail" placeholder="Mail" formControlName='mail'>
+                        <small class="invalid"
+                            *ngIf="formulario.controls.mail.errors?.required  && formulario.controls.mail.touched">
+                            El mail es requerido</small>
+                        <small class="invalid" *ngIf="formulario.controls.mail.errors?.validadorDeEspacios">
+                            El mail no puede contener espacios</small> -->
                     </div>
 
                     <div class="mb-3">
@@ -40,14 +47,14 @@
                     </div>
 
                     <div class="col-md-12 d-grid gap-2 mb-3">
-                        <button type="submit" class="bttn-pill bttn-md bttn-success">Enviar</button>
+                        <button type="submit" class="bttn-pill bttn-md bttn-success">Ingresar</button>
                     </div>
                 </form>
                 
                 <div class="col-md-12 d-grid gap-2">
-                    <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaAdministrador()" >Administrador</button>
+                    <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
                     <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaEspecialista()" >Especialista</button>
-                    <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaPaciente()" >Paciente</button>
+                    <button class="bttn-unite bttn-md bttn-warning" (click)="ingresaPaciente()" >Paciente</button>
                 </div>  
 
             </div>

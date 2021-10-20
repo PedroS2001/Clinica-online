@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   public loading = false;
 
   public formulario!: FormGroup;
-  constructor(private fb: FormBuilder, private afs:FirebaseService, private authService:AuthService, private toastr:ToastrService) {
+  constructor(private fb: FormBuilder, private afs:FirebaseService,
+     private authService:AuthService, private toastr:ToastrService, private router:Router) {
     this.traerAdministradores();
     this.traerEspecialistas();
     this.traerPacientes();
@@ -60,7 +62,7 @@ export class LoginComponent implements OnInit {
   /** 
    *  Recoge el mail y la contraseña del formulario y ingresa en ese usuario, verificando que tenga el mail validado
    */
-  enviar() {
+  Ingresar() {
     let correo = this.formulario.get('mail')?.value;
     let clave = this.formulario.get('password')?.value;
 
@@ -93,6 +95,8 @@ export class LoginComponent implements OnInit {
           timeOut:1500,
           closeButton:true
         })
+        this.router.navigateByUrl('bienvenida');
+        
       }
       else
       {
@@ -121,8 +125,8 @@ export class LoginComponent implements OnInit {
     this.formulario.get('mail')?.setValue('juani.mp1@gmail.com');
     this.formulario.get('password')?.setValue('mazzucco');
 
-    this.formulario.get('mail')?.setValue('gikerucsubustosgil@gmail.com');
-    this.formulario.get('password')?.setValue('felipe');
+    // this.formulario.get('mail')?.setValue('gikerucsubustosgil@gmail.com');
+    // this.formulario.get('password')?.setValue('felipe');
   }
 
   ingresaPaciente()

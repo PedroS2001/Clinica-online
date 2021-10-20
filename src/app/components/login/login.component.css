@@ -1,3 +1,13 @@
 .invalid{
     color: red;
 }
+
+#mail,
+#password,
+.contenedor{
+    border-radius: 25px;
+    border: 2px solid rgb(40, 183, 141);
+    /* padding: 20px;  */
+    /* width: 200px; */
+    /* height: 15px;     */
+}
