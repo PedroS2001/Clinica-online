@@ -5,8 +5,6 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { AuthService } from 'src/app/services/auth.service';
 
-import { Router } from '@angular/router';
-
 import { ToastrService } from 'ngx-toastr';
 
 

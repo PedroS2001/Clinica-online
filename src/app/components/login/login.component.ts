@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
    *  Recoge el mail y la contraseña del formulario y ingresa en ese usuario, verificando que tenga el mail validado
    */
   Ingresar() {
+    this.loading = true;
     let correo = this.formulario.get('mail')?.value;
     let clave = this.formulario.get('password')?.value;
 
@@ -82,6 +83,7 @@ export class LoginComponent implements OnInit {
             });
             this.authService.currentUser = '';
             this.authService.SignOut();
+            this.loading = false;
             return;
           }
         }
@@ -92,8 +94,8 @@ export class LoginComponent implements OnInit {
           timeOut:1500,
           closeButton:true
         })
+        this.loading = false;
         this.router.navigateByUrl('bienvenida');
-        
       }
       else
       {
@@ -101,6 +103,7 @@ export class LoginComponent implements OnInit {
           timeOut:1500,
           closeButton:true
         });
+        this.loading = false;
       }
       //En Caso de que ponga una contraseña o mail invalidos, le muestro un toast generico
     }).catch((error) => {
@@ -109,8 +112,9 @@ export class LoginComponent implements OnInit {
         timeOut:1500,
         closeButton:true
       })
+      this.loading = false;
+
     });
-    
   }
 
   
