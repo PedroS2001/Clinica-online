@@ -18,9 +18,6 @@ export class LoginComponent implements OnInit {
   public formulario!: FormGroup;
   constructor(private fb: FormBuilder, private afs:FirebaseService,
      private authService:AuthService, private toastr:ToastrService, private router:Router) {
-    this.traerAdministradores();
-    this.traerEspecialistas();
-    this.traerPacientes();
    }
 
   ngOnInit(): void {
@@ -32,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   funcioncita(correo:string)
   {
-    this.arrayAdministradores.forEach( (element:any) => {
+    this.afs.arrayAdministradores.forEach( (element:any) => {
       // console.info('administrador', element);
       if(element.data.mail == correo)
       {
@@ -40,7 +37,7 @@ export class LoginComponent implements OnInit {
         // console.info('le pego',correo);
       }
     });
-    this.arrayPacientes.forEach( (element:any) => {
+    this.afs.arrayPacientes.forEach( (element:any) => {
       // console.info('paciente', element);
       if(element.data.mail == correo)
       {
@@ -48,7 +45,7 @@ export class LoginComponent implements OnInit {
         // console.info('le pego',correo);
       }
     });
-    this.arrayEspecialistas.forEach( (element:any) => {
+    this.afs.arrayEspecialistas.forEach( (element:any) => {
       // console.info('especialsta', element);
       if(element.data.mail == correo)
       {
@@ -147,62 +144,62 @@ export class LoginComponent implements OnInit {
 
 
 
-  arrayEspecialistas:any = [];
-  traerEspecialistas()
-  {
-    this.afs.LeerEspecialistas().subscribe((especialistas) => {
-      this.arrayEspecialistas = [];
-      especialistas.forEach((item: any) => {
-        this.arrayEspecialistas.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
+  // arrayEspecialistas:any = [];
+  // traerEspecialistas()
+  // {
+  //   this.afs.LeerEspecialistas().subscribe((especialistas) => {
+  //     this.arrayEspecialistas = [];
+  //     especialistas.forEach((item: any) => {
+  //       this.arrayEspecialistas.push({
+  //         id: item.payload.doc.id,
+  //         data: item.payload.doc.data()
+  //       });
+  //     })
 
-      setTimeout(() => {
-        console.info('Especialistas', this.arrayEspecialistas);
-      }, 1500);
+  //     setTimeout(() => {
+  //       console.info('Especialistas', this.arrayEspecialistas);
+  //     }, 1500);
       
-    });
-  }
+  //   });
+  // }
 
-  arrayPacientes:any = [];
-  traerPacientes()
-  {
-    this.afs.LeerPacientes().subscribe((pacientes) => {
-      this.arrayPacientes = [];
-      pacientes.forEach((item: any) => {
-        this.arrayPacientes.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
+  // arrayPacientes:any = [];
+  // traerPacientes()
+  // {
+  //   this.afs.LeerPacientes().subscribe((pacientes) => {
+  //     this.arrayPacientes = [];
+  //     pacientes.forEach((item: any) => {
+  //       this.arrayPacientes.push({
+  //         id: item.payload.doc.id,
+  //         data: item.payload.doc.data()
+  //       });
+  //     })
 
-      setTimeout(() => {
-        console.info('Pacientes', this.arrayPacientes);
-      }, 1500);
+  //     setTimeout(() => {
+  //       console.info('Pacientes', this.arrayPacientes);
+  //     }, 1500);
       
-    });
-  }
+  //   });
+  // }
 
-  arrayAdministradores:any = [];
-  traerAdministradores()
-  {
-    this.afs.LeerAdministradores().subscribe((administrador) => {
-      this.arrayAdministradores = [];
-      administrador.forEach((item: any) => {
-        this.arrayAdministradores.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
+  // arrayAdministradores:any = [];
+  // traerAdministradores()
+  // {
+  //   this.afs.LeerAdministradores().subscribe((administrador) => {
+  //     this.arrayAdministradores = [];
+  //     administrador.forEach((item: any) => {
+  //       this.arrayAdministradores.push({
+  //         id: item.payload.doc.id,
+  //         data: item.payload.doc.data()
+  //       });
+  //     })
 
-      setTimeout(() => {
-        console.info('Administradores', this.arrayAdministradores);
-      }, 1500);
+  //     setTimeout(() => {
+  //       console.info('Administradores', this.arrayAdministradores);
+  //     }, 1500);
       
-    });
-  }
+  //   });
+  // }
   
 
 }
