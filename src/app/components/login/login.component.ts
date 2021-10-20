@@ -113,15 +113,11 @@ export class LoginComponent implements OnInit {
     
   }
 
-
-
-
   
   ingresaEspecialista()
   {
     this.formulario.get('mail')?.setValue('juani.mp1@gmail.com');
     this.formulario.get('password')?.setValue('mazzucco');
-
     // this.formulario.get('mail')?.setValue('gikerucsubustosgil@gmail.com');
     // this.formulario.get('password')?.setValue('felipe');
   }
@@ -138,68 +134,5 @@ export class LoginComponent implements OnInit {
     this.formulario.get('password')?.setValue('123456');
   }
 
-
-
-
-
-
-
-  // arrayEspecialistas:any = [];
-  // traerEspecialistas()
-  // {
-  //   this.afs.LeerEspecialistas().subscribe((especialistas) => {
-  //     this.arrayEspecialistas = [];
-  //     especialistas.forEach((item: any) => {
-  //       this.arrayEspecialistas.push({
-  //         id: item.payload.doc.id,
-  //         data: item.payload.doc.data()
-  //       });
-  //     })
-
-  //     setTimeout(() => {
-  //       console.info('Especialistas', this.arrayEspecialistas);
-  //     }, 1500);
-      
-  //   });
-  // }
-
-  // arrayPacientes:any = [];
-  // traerPacientes()
-  // {
-  //   this.afs.LeerPacientes().subscribe((pacientes) => {
-  //     this.arrayPacientes = [];
-  //     pacientes.forEach((item: any) => {
-  //       this.arrayPacientes.push({
-  //         id: item.payload.doc.id,
-  //         data: item.payload.doc.data()
-  //       });
-  //     })
-
-  //     setTimeout(() => {
-  //       console.info('Pacientes', this.arrayPacientes);
-  //     }, 1500);
-      
-  //   });
-  // }
-
-  // arrayAdministradores:any = [];
-  // traerAdministradores()
-  // {
-  //   this.afs.LeerAdministradores().subscribe((administrador) => {
-  //     this.arrayAdministradores = [];
-  //     administrador.forEach((item: any) => {
-  //       this.arrayAdministradores.push({
-  //         id: item.payload.doc.id,
-  //         data: item.payload.doc.data()
-  //       });
-  //     })
-
-  //     setTimeout(() => {
-  //       console.info('Administradores', this.arrayAdministradores);
-  //     }, 1500);
-      
-  //   });
-  // }
-  
 
 }

@@ -8,30 +8,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class TablaAdministradoresComponent implements OnInit {
 
-  constructor(private afs:FirebaseService) {
-    this.traerAdministradores();
+  constructor(public afs:FirebaseService) {
    }
 
   ngOnInit(): void {
-  }
-
-  arrayAdministradores:any = [];
-  traerAdministradores()
-  {
-    this.afs.LeerAdministradores().subscribe((administrador) => {
-      this.arrayAdministradores = [];
-      administrador.forEach((item: any) => {
-        this.arrayAdministradores.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
-
-      setTimeout(() => {
-        console.info('Administradores', this.arrayAdministradores);
-      }, 1500);
-      
-    });
   }
 
 }

@@ -8,30 +8,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class TablaPacientesComponent implements OnInit {
 
-  constructor(private afs:FirebaseService) {
-    this.traerPacientes();
+  constructor(public afs:FirebaseService) {
    }
 
   ngOnInit(): void {
-  }
-
-  arrayPacientes:any = [];
-  traerPacientes()
-  {
-    this.afs.LeerPacientes().subscribe((pacientes) => {
-      this.arrayPacientes = [];
-      pacientes.forEach((item: any) => {
-        this.arrayPacientes.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
-
-      setTimeout(() => {
-        console.info('Pacientes', this.arrayPacientes);
-      }, 1500);
-      
-    });
   }
 
 }

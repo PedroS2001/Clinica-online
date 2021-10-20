@@ -8,8 +8,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class TablaEspecialistasComponent implements OnInit {
 
-  constructor(private afs:FirebaseService) {
-    this.traerEspecialistas();
+  constructor(public afs:FirebaseService) {
    }
 
   ngOnInit(): void {
@@ -17,37 +16,18 @@ export class TablaEspecialistasComponent implements OnInit {
 
   cambiarEstado(index:number)
   {
-    if(this.arrayEspecialistas[index].data.habilitado)
+    if(this.afs.arrayEspecialistas[index].data.habilitado)
     {
-      this.arrayEspecialistas[index].data.habilitado = false;
-      this.afs.ModificarEstadoEspecialista(this.arrayEspecialistas[index].id, false);
+      this.afs.arrayEspecialistas[index].data.habilitado = false;
+      this.afs.ModificarEstadoEspecialista(this.afs.arrayEspecialistas[index].id, false);
     }
     else
     {
-      this.arrayEspecialistas[index].data.habilitado = true;
-      this.afs.ModificarEstadoEspecialista(this.arrayEspecialistas[index].id, true);
+      this.afs.arrayEspecialistas[index].data.habilitado = true;
+      this.afs.ModificarEstadoEspecialista(this.afs.arrayEspecialistas[index].id, true);
     }
   }
 
-  
-  arrayEspecialistas:any = [];
-  traerEspecialistas()
-  {
-    this.afs.LeerEspecialistas().subscribe((especialistas) => {
-      this.arrayEspecialistas = [];
-      especialistas.forEach((item: any) => {
-        this.arrayEspecialistas.push({
-          id: item.payload.doc.id,
-          data: item.payload.doc.data()
-        });
-      })
-
-      setTimeout(() => {
-        console.info('Especialistas', this.arrayEspecialistas);
-      }, 1500);
-      
-    });
-  }
 
 
 }
