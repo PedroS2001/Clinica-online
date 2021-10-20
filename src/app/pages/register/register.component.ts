@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
   tipoRegistro!:string;
 
   ngOnInit(): void {
-    this.tipoRegistro = 'especialista';
+    this.tipoRegistro = 'paciente';
   }
 
   cambiarValor(valor:string)

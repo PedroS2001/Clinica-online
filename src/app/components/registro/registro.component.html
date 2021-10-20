@@ -1,4 +1,4 @@
-<div class="container" style="margin-bottom: 5em;">
+<div class="container" style="margin-bottom: 5em; max-width: 720px;">
 
   <form [formGroup]="formulario" (ngSubmit)="enviar()">
     <div class="row">
@@ -79,7 +79,7 @@
 
         <div *ngIf="tipoUsuario=='especialista'">
           <div class="form-group mb-3">
-            <label for="especialidad">Especialidad</label>
+            <label for="especialidad" class="form-label" >Especialidad</label>
             <select class="form-control" id="especialidad">
               <option value="cirujano" selected >Cirujano</option>
               <option value="dentista" >Dentista</option>
@@ -103,15 +103,22 @@
     </div>  <!--Cierre ROW-->
 
     <div class="col-md-12 d-grid gap-2">
-      <button type="submit" class="btn btn-primary btn-block">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!formulario.valid" >
         Enviar
       </button>
     </div>
 
   </form>
 
-  <img src={{urlImagen}} width="50px" height="50px" alt="">
-  <img src={{urlImagen2}} width="50px" height="50px" alt="">
+  <div class="container" align="center">
+    <div *ngIf="urlImagen">
+      <img src={{urlImagen}} width="50px" height="50px" alt="">
+    </div>
+    <div *ngIf="urlImagen2">
+      <img src={{urlImagen2}} width="50px" height="50px" alt="">
+    </div>
+  </div>
+
 
   <ngx-loading [show]="loading"  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }" ></ngx-loading>
 

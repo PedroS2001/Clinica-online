@@ -1,7 +1,17 @@
-<button type="button" class="btn btn-primary" (click)="cambiarValor('paciente')">Registrar paciente</button>
-<button type="button" class="btn btn-primary" (click)="cambiarValor('especialista')">Registrar especialista</button>
-
-<!-- <button *ngIf="auth.currentUser.perfil == 'administrador'" type="button" class="btn btn-primary" (click)="cambiarValor('administrador')">Registrar administrador</button> -->
-
-
-<app-registro [tipoUsuario]="tipoRegistro" ></app-registro>
+<div class="container" style="max-width: 720px;">
+    <div class="row mb-4 mt-2" style="justify-content: center;" align="center">
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="cambiarValor('paciente')">Registrar paciente</button>
+        </div>
+        
+        <div class="col">
+            <button type="button" class="btn btn-primary" (click)="cambiarValor('especialista')">Registrar especialista</button>        
+        </div>
+    </div>
+    <div class="row mb-4">
+        <h2 align="center">Registro {{tipoRegistro}}</h2>
+        <app-registro [tipoUsuario]="tipoRegistro" ></app-registro>
+    </div>
+    <!-- <button *ngIf="auth.currentUser.perfil == 'administrador'" type="button" class="btn btn-primary" (click)="cambiarValor('administrador')">Registrar administrador</button> -->
+    
+</div>
