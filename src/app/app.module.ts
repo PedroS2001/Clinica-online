@@ -23,6 +23,8 @@ import { TablaEspecialistasComponent } from './components/usuarios/tabla-especia
 import { TablaPacientesComponent } from './components/usuarios/tabla-pacientes/tabla-pacientes.component';
 import { TablaAdministradoresComponent } from './components/usuarios/tabla-administradores/tabla-administradores.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { TurnosespecialistaComponent } from './components/turnos/turnosespecialista/turnosespecialista.component';
+import { TurnospacienteComponent } from './components/turnos/turnospaciente/turnospaciente.component';
 
 
 
@@ -38,6 +40,8 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
     TablaPacientesComponent,
     TablaAdministradoresComponent,
     UsuariosComponent,
+    TurnosespecialistaComponent,
+    TurnospacienteComponent,
   ],
   imports: [
     BrowserModule,

@@ -31,7 +31,12 @@ export class NavbarComponent implements OnInit {
 
   goToUsuarios()
   {
-    this.router.navigateByUrl('/usuarios')
+    this.router.navigateByUrl('/usuarios');
+  }
+
+  goToMisTurnos()
+  {
+    this.router.navigateByUrl('/paciente/misturnos');
   }
 
 }
