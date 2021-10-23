@@ -1,1 +1,45 @@
-<p>turnospaciente works!</p>
+<div class="container-fluid" align="center">
+
+    <div class="row">
+        
+        <div class="col-4">
+            <div class="row">
+                <h2>ESPECIALIDAD</h2>
+            </div>
+            <div class="row" *ngFor="let item of afs.listaEspecialidades, let i as index">
+                <h4 (click)="seleccionaEspecialidad(i)" > {{item}}</h4>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <h2>ESPECIALISTAS</h2>
+            </div>
+            <div class="row" *ngFor="let item of listaEspecialistas, let i as index">
+                <h4 (click)="seleccionaEspecialista(i)" >{{item.data.nombre}} {{item.data.apellido}} </h4>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="row">
+                <h2>TURNOS DISPONIBLES</h2>
+            </div>
+            <div class="row" *ngFor="let item of listadoHorarios, let i as index">
+                <div *ngIf="item.dia;else templateName">
+                    <h4>{{item.dia}}</h4>
+                </div>
+                <ng-template #templateName>
+                    <button (click)="seleccionaEspecialista(i)">{{item}}</button>
+                </ng-template>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+</div>
+
+
+

@@ -25,6 +25,7 @@ import { TablaAdministradoresComponent } from './components/usuarios/tabla-admin
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { TurnosespecialistaComponent } from './components/turnos/turnosespecialista/turnosespecialista.component';
 import { TurnospacienteComponent } from './components/turnos/turnospaciente/turnospaciente.component';
+import { MiperfilComponent } from './pages/miperfil/miperfil.component';
 
 
 
@@ -42,6 +43,7 @@ import { TurnospacienteComponent } from './components/turnos/turnospaciente/turn
     UsuariosComponent,
     TurnosespecialistaComponent,
     TurnospacienteComponent,
+    MiperfilComponent,
   ],
   imports: [
     BrowserModule,

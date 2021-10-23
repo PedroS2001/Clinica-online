@@ -10,12 +10,15 @@ export class FirebaseService {
   arrayPacientes:any = [];
   arrayEspecialistas:any = [];
 
+  listaEspecialidades:any = [];
+
 
   constructor( private afs: AngularFirestore) {
     console.log('ConstructorService');
     this.traerAdministradores();
     this.traerEspecialistas();
     this.traerPacientes();
+    this.traerEspecialidades();
    }
 
   AgregarPaciente(paciente:any)
@@ -98,6 +101,27 @@ export class FirebaseService {
       })
       setTimeout(() => {
         console.info('Administradores', this.arrayAdministradores);
+      }, 1500);   
+    });
+  }
+
+
+
+  LeerEspecialidades()
+  {
+    return this.afs.collection('especialidades').snapshotChanges();
+  }
+  traerEspecialidades()
+  {
+    this.LeerEspecialidades().subscribe((especialidades) => {
+      this.listaEspecialidades = [];
+      especialidades.forEach((item: any) => {
+        this.listaEspecialidades.push(
+          item.payload.doc.id
+        );
+      })
+      setTimeout(() => {
+        console.info('Especialidades', this.listaEspecialidades);
       }, 1500);   
     });
   }

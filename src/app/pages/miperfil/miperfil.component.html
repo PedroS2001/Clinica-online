@@ -1,0 +1,70 @@
+<div class="container mt-5" style="max-width: 520px;">
+
+    <div class="miContenedor p-3 mb-5" style="padding: 50px">
+
+        <div class="row" align="center">
+            <h1 style="font-family: 'Bebas Neue';">{{auth.currentUser.nombre}} {{auth.currentUser.apellido}}</h1>
+        </div>
+        
+
+        <div class="row" align="center">
+            <div class="container " align="center" >
+                <img src={{auth.currentUser.imagen}} style="width: 50%; border-radius: 50%;" alt="">
+                <img *ngIf="auth.currentUser.imagen2" src={{auth.currentUser.imagen2}} style="width: 50%; border-radius: 50%;" alt="">
+            </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">DNI</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.dni}} aria-describedby="basic-addon2">
+              </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">EDAD</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.edad}} aria-describedby="basic-addon2">
+              </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">CORREO</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.mail}} aria-describedby="basic-addon2">
+              </div>
+        </div>
+
+        <div class="row" align="center">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">CLAVE</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.password}} aria-describedby="basic-addon2">
+              </div>
+        </div>
+
+        <div class="row" align="center">
+            <div *ngIf="auth.currentUser.especialidad" class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">ESPECIALIDAD</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.especialidad}} aria-describedby="basic-addon2">
+            </div>
+            <div *ngIf="auth.currentUser.obrasocial" class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">OBRA SOCIAL</span>
+                <input type="text" class="form-control" readonly value={{auth.currentUser.obrasocial}} aria-describedby="basic-addon2">
+            </div>
+        </div>
+
+        <div *ngIf="auth.currentUser.especialidad" class="row" align="center">
+            <div class="col-md-12 d-grid gap-2 mb-3">
+                <button type="submit" class="bttn-pill bttn-md bttn-success">Mis turnos</button>
+            </div>
+        </div>
+
+        
+
+
+
+
+    </div>  
+
+
+</div>

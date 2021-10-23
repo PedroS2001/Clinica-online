@@ -38,5 +38,9 @@ export class NavbarComponent implements OnInit {
   {
     this.router.navigateByUrl('/paciente/misturnos');
   }
+  goToMiPerfil()
+  {
+    this.router.navigateByUrl('/miperfil')
+  }
 
 }
