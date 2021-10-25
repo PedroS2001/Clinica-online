@@ -26,6 +26,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { TurnosespecialistaComponent } from './components/turnos/turnosespecialista/turnosespecialista.component';
 import { TurnospacienteComponent } from './components/turnos/turnospaciente/turnospaciente.component';
 import { MiperfilComponent } from './pages/miperfil/miperfil.component';
+import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.component';
 
 
 
@@ -44,6 +45,7 @@ import { MiperfilComponent } from './pages/miperfil/miperfil.component';
     TurnosespecialistaComponent,
     TurnospacienteComponent,
     MiperfilComponent,
+    SolicitarturnoComponent,
   ],
   imports: [
     BrowserModule,

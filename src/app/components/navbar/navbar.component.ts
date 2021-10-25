@@ -40,7 +40,11 @@ export class NavbarComponent implements OnInit {
   }
   goToMiPerfil()
   {
-    this.router.navigateByUrl('/miperfil')
+    this.router.navigateByUrl('/miperfil');
+  }
+  goToSolicitarTurno()
+  {
+    this.router.navigateByUrl('/solicitarturno');
   }
 
 }

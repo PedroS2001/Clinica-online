@@ -19,6 +19,7 @@ export class FirebaseService {
     this.traerEspecialistas();
     this.traerPacientes();
     this.traerEspecialidades();
+    this.traerTurnos();
    }
 
   AgregarPaciente(paciente:any)
@@ -125,6 +126,34 @@ export class FirebaseService {
       }, 1500);   
     });
   }
+
+  agregarTurno(especialista:string, datos:any)
+  {
+    return this.afs.collection('turnos').doc(especialista).set(datos);
+  }
+
+  listaTurnos:any;
+  LeerTurnos()
+  {
+    return this.afs.collection('turnos').snapshotChanges();
+  }
+  traerTurnos()
+  {
+    this.LeerTurnos().subscribe((Turnos) => {
+      this.listaTurnos = [];
+      Turnos.forEach((item: any) => {
+        this.listaTurnos.push(
+          item.payload.doc.id
+        );
+      })
+      setTimeout(() => {
+        console.info('Turnos', this.listaTurnos);
+      }, 1500);   
+    });
+  }
+
+
+
 
 
 }

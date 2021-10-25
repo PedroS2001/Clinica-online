@@ -12,8 +12,11 @@
                 <a class="nav-link " aria-current="page" (click)="goToRegistro()" >Registro</a>
                 <div *ngIf="auth.currentUser">
                     <a *ngIf="auth.currentUser.perfil == 'administrador'" class="nav-link " aria-current="page" (click)="goToUsuarios()" >Usuarios</a>
+                    <a *ngIf="auth.currentUser.perfil == 'paciente' || auth.currentUser.perfil == 'administrador'  " class="nav-link " aria-current="page" (click)="goToSolicitarTurno()" >Solicitar turno</a>
+
                 </div>
-                <a class="nav-link " aria-current="page" (click)="goToMisTurnos()" >Mis turnos</a>
+                <!-- <a class="nav-link " aria-current="page" (click)="goToMisTurnos()" >Mis turnos</a> -->
+                <!-- <a class="nav-link " aria-current="page" (click)="goToSolicitarTurno()" >Solicitar turno</a> -->
                 <a class="nav-link " aria-current="page" (click)="goToMiPerfil()" >Mi Perfil</a>
 
             </div>

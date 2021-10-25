@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
-import { forEachChild } from 'typescript';
 
 @Component({
-  selector: 'app-turnospaciente',
-  templateUrl: './turnospaciente.component.html',
-  styleUrls: ['./turnospaciente.component.css']
+  selector: 'app-solicitarturno',
+  templateUrl: './solicitarturno.component.html',
+  styleUrls: ['./solicitarturno.component.css']
 })
-export class TurnospacienteComponent implements OnInit {
+export class SolicitarturnoComponent implements OnInit {
 
   constructor(public afs:FirebaseService, private auth:AuthService, private toastr:ToastrService) { }
 
