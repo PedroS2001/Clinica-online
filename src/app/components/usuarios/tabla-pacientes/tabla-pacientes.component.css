@@ -10,7 +10,7 @@ body {
 }
 
 /*Estilos del header */
-.container .table thead tr th {
+.container-fluid .table thead tr th {
     background-color: #28b78d;
     /* padding: 30px 10px; */
     border: none;
@@ -26,7 +26,7 @@ td:nth-child(2n) {
 }
 
 /* Tamaño de la fuente de las celdas */
-.container .table tbody tr td {
+.container-fluid .table tbody tr td {
     padding: 5px 5px 5px 5px;
     font-weight: 500
 }

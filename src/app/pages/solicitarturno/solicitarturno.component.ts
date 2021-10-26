@@ -10,7 +10,24 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class SolicitarturnoComponent implements OnInit {
 
-  constructor(public afs:FirebaseService, private auth:AuthService, private toastr:ToastrService) { }
+  pacienteSeleccionado:any = null;
+
+  /** En caso de que el que ingrese sea un administrador se le muestra la tabla de pacientes
+   *  Debe seleccionar uno. esta funcion recibe el paciente que la tabla emite
+   *  y lo guarda en la variable correspondiente
+   * @param e el usuario paciente con todos sus datos
+   */
+  evento(e:any)
+  {
+    this.toastr.info('Se selecciono al paciente: ' + e.data.nombre + ' ' + e.data.apellido, '', {
+      timeOut:1500,
+      closeButton:true
+    })
+    console.log(e);
+    this.pacienteSeleccionado = e; 
+  }
+
+  constructor(public afs:FirebaseService, public auth:AuthService, private toastr:ToastrService) { }
 
   loading:boolean = false;;
   especialidad:any;
@@ -23,7 +40,7 @@ export class SolicitarturnoComponent implements OnInit {
   listadoDias:any = [];
   horariosAtencion:any = [];
 
-  //
+  
   ngOnInit(): void {
   }
 
@@ -167,15 +184,33 @@ export class SolicitarturnoComponent implements OnInit {
    */
   seleccionaHorario(hora:any)
   {
+    this.loading = true;
+    if(this.auth.currentUser.perfil == 'administrador' && this.pacienteSeleccionado == null)
+    {
+      this.toastr.error('Primero debe seleccionar un paciente','Error', {
+        timeOut:1500,
+        closeButton:true
+      })
+      this.loading = false;
+      return;
+    }
     try
     {
-      this.loading = true;
       this.datosTurno.especialista = this.elEspecialista.data.apellido + ', ' + this.elEspecialista.data.nombre ;
       this.datosTurno.dniEspecialista = this.elEspecialista.data.dni;
-      this.datosTurno.paciente = this.auth.currentUser.apellido + ', ' +  this.auth.currentUser.nombre;
-      this.datosTurno.dniPaciente = this.auth.currentUser.dni;
+      if(this.pacienteSeleccionado)
+      {
+        this.datosTurno.paciente = this.pacienteSeleccionado.data.apellido + ', ' +  this.pacienteSeleccionado.data.nombre;
+        this.datosTurno.dniPaciente = this.pacienteSeleccionado.data.dni;
+      }
+      else
+      {
+        this.datosTurno.paciente = this.auth.currentUser.apellido + ', ' +  this.auth.currentUser.nombre;
+        this.datosTurno.dniPaciente = this.auth.currentUser.dni;
+      }
       this.datosTurno.fecha = this.fechaSeleccionada;
       this.datosTurno.horario = hora;
+      this.datosTurno.estado = 'pendiente';
 
       this.elEspecialistaData = this.fechaSeleccionada+'_'+this.datosTurno.especialista + '_'+ hora;
       console.log(this.datosTurno);
@@ -183,6 +218,7 @@ export class SolicitarturnoComponent implements OnInit {
       this.afs.agregarTurno(this.elEspecialistaData, this.datosTurno).then( () =>{
         this.seleccionaDia(this.fechaSeleccionada);
 
+        /***HABRIA QUE EDITAR EL ESPECIALIST Y PACIENTE PARA VINCULARLO?? */
         this.toastr.success('Se reservo el turno','Exito', {
           timeOut:1500,
           closeButton:true

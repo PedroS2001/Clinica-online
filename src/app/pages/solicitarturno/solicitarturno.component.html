@@ -1,5 +1,12 @@
 <div class="container-fluid" align="center">
 
+    <div class="row" *ngIf="auth.currentUser.perfil == 'administrador' ">
+        <div class="col-12">
+            <h2>Seleccione el paciente</h2>
+            <app-tabla-pacientes (pacienteSeleccionado)="evento($event)" ></app-tabla-pacientes>
+        </div>
+    </div>
+
     <div class="row" align="center">
         
         <div class="col-6">
@@ -8,7 +15,6 @@
             </div>
             <div class="row p-1" *ngFor="let item of afs.listaEspecialidades, let i as index">
                 <button (click)="seleccionaEspecialidad(i)" id={{i}} class="bttn-unite bttn-md bttn-primary">{{item}} </button>
-                
             </div>
         </div>
 
@@ -49,7 +55,7 @@
             <div class="row">
                 <div *ngFor="let item of horariosAtencion, let i as index" class="col-6 p-1">
                     <div *ngIf="item == 'No hay turnos disponibles';else pedrito">
-                        <h2>{{item}}</h2>
+                        <h2 class="w100" >{{item}}</h2>
                     </div>
                     <ng-template #pedrito>
                         <button (click)="seleccionaHorario(i)"  class="bttn-unite bttn-md bttn-primary w-100">{{item}}hs </button>
