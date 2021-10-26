@@ -55,13 +55,34 @@
 
         <div *ngIf="auth.currentUser.especialidad" class="row" align="center">
             <div class="col-md-12 d-grid gap-2 mb-3">
-                <button type="submit" class="bttn-pill bttn-md bttn-success">Mis turnos</button>
+                <button type="submit" class="bttn-pill bttn-md bttn-success" (click)="mostrarHorarios()">Mis horarios</button>
             </div>
         </div>
 
-        
+        <div class="row" *ngIf="misHorarios">
+
+                <div class="col mb-2" *ngFor="let item of listaDiario; let i = index ">
+                    <div class="row">
+                        <label class="btn bttn-success">
+                            <input type="checkbox" name={{i}} id={{i}} [checked]="listaDias[i]" >
+                            {{item}}
+                        </label>
+                    </div>
+                </div>
 
 
+                <div class="col-3 m-1" align="center" *ngFor="let item of listaHorarios; let i = index">
+                    <div class="row" align="center">
+                        <label class="btn btn-primary active">
+                            <input type="checkbox" name={{i}} id={{i}} [checked]="listaHorarios[i]" >
+                            {{i+8}} hs
+                        </label>
+                    </div>
+                </div>
+                
+
+
+        </div>
 
 
     </div>  

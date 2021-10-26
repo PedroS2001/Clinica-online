@@ -24,10 +24,11 @@
                         <td>{{item.data.fecha}} </td>
                         <td>{{item.data.horario}}hs </td>
                         <td>{{item.data.estado}} </td>
-                        <td *ngIf="item.data.estado == 'pendiente'" >Cancelar</td>
+                        <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
+                        <td *ngIf="item.data.comentario" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
+
                         <td *ngIf="item.data.estado == 'realizado'" >Completar encuesta</td>
                         <td *ngIf="item.data.estado == 'realizado'" >Calificar la atencion</td>
-                        <td *ngIf="item.data.comentario" >Ver reseña</td>
                     </tr>
                 </tbody>
             </table>

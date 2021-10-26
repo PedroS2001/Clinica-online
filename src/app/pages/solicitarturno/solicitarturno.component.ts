@@ -76,7 +76,7 @@ export class SolicitarturnoComponent implements OnInit {
   }
 
   //LUNES Y MIERCOLES
-  dias:any ;//= [1,3]
+  dias:any = [];//= [1,3]
   fecha:Date = new Date();
   /** Funcion que se llama cada vez que se selecciona un especialista
    *  Guarda los datos del especialista en una variable
@@ -97,9 +97,18 @@ export class SolicitarturnoComponent implements OnInit {
 
     this.fecha = new Date();
     this.listadoDias = [];
+    this.dias = [];
 
+    especialista.data.dias.forEach( (element:any, index:any) => {
+      console.info('element',element);
+      console.info('index',index);
+      if(element == true)
+      {
+        this.dias.push(index);
+      }
+    });
     //Guarda en el array de dias los dias de la semana que trabaja el especialista (1 y 3 serian lunes y miercoles)
-    this.dias = especialista.data.dias;
+    //this.dias = [2,4] //especialista.data.dias;
 
     console.log(this.fecha);
     this.sumarDias(this.fecha,14);
