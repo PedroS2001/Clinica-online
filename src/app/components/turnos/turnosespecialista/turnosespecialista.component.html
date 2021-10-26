@@ -8,7 +8,7 @@
 
     <div class="row" >
         <div class="col">
-            <table class="table-dark table-striped table-hover">
+            <table >
                 <thead>
                     <th>Especialidad</th>
                     <th>Paciente</th>
@@ -24,11 +24,11 @@
                         <td>{{item.data.fecha}} </td>
                         <td>{{item.data.horario}}hs </td>
                         <td>{{item.data.estado}} </td>
-                        <td *ngIf="item.data.estado == 'pendiente'" > <button type="button" class="btn btn-outline-danger">Cancelar</button> </td>
-                        <td *ngIf="item.data.estado == 'pendiente'" ><button type="button" class="btn btn-outline-warning">Rechazar</button></td>
-                        <td *ngIf="item.data.estado == 'pendiente'" ><button type="button" class="btn btn-outline-success">Aceptar</button></td>
-                        <td *ngIf="item.data.estado == 'aceptado'" ><button type="button" class="btn btn-outline-success">Finalizar</button></td>
-                        <td *ngIf="item.data.comentario" ><button type="button" class="btn btn-outline-info">Ver reseña</button></td>
+                        <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
+                        <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="rechazarTurno(item)" type="button" class="btn btn-outline-warning">Rechazar</button></td>
+                        <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="aceptarTurno(item)" type="button" class="btn btn-outline-success">Aceptar</button></td>
+                        <td *ngIf="item.data.estado == 'aceptado'" ><button (click)="finalizarTurno(item)" type="button" class="btn btn-outline-success">Finalizar</button></td>
+                        <td *ngIf="item.data.comentario" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
                     </tr>
                 </tbody>
             </table>

@@ -1,18 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-turnosespecialista',
   templateUrl: './turnosespecialista.component.html',
   styleUrls: ['./turnosespecialista.component.css']
 })
-export class TurnosespecialistaComponent implements OnInit {
+export class TurnosespecialistaComponent implements OnInit, OnChanges {
 
   turnosDelEspecialista:any = [];
   constructor(private afs:FirebaseService, private auth:AuthService) { }
 
   ngOnInit(): void {
+  }
+
+  ngOnChanges()
+  {
   }
 
   cargarTurnos()
@@ -27,6 +32,7 @@ export class TurnosespecialistaComponent implements OnInit {
         this.turnosDelEspecialista.push(item);
       }
     });
+    
   }
 
   filtrarPor(paciente:any)
@@ -41,7 +47,123 @@ export class TurnosespecialistaComponent implements OnInit {
     });
 
     this.turnosDelEspecialista = arrayAux;
+  }
+
+
+
+
+
+  //#region ACCIONES
+
+  cancelarTurno(item:any)
+  {
+    Swal.fire({
+      input: 'text',
+      title: 'Cancelar',
+      text: '¿Por que quiere cancelar el turno?',
+      icon: 'error',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar'
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        await this.afs.updateEstado(item.id, 'cancelado');
+        await this.afs.updateComentario(item.id, result.value).then(()=> {
+          this.cargarTurnos();
+        });
+
+        Swal.fire({
+          title: 'Se cancelo el turno',
+          text:  result.value ,
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
+  }
+
+  rechazarTurno(item:any)
+  {
+    Swal.fire({
+      input: 'text',
+      title: 'Rechazar',
+      text: '¿Por que quiere rechazar el turno?',
+      icon: 'error',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar'
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+
+        await this.afs.updateEstado(item.id, 'rechazado');
+        await this.afs.updateComentario(item.id, result.value).then(()=>{
+          this.cargarTurnos();
+        });
+
+        Swal.fire({
+          title: 'Se rechazo el turno',
+          text:  result.value ,
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
+  }
+
+  async aceptarTurno(item:any)
+  {
+    Swal.fire({
+      icon: 'success',
+      text: 'Se acepto el turno',
+      // showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Aceptar'
+    });
+
+    this.afs.updateEstado(item.id, 'aceptado').then( () => {
+      this.cargarTurnos();
+    });
 
   }
+
+  finalizarTurno(item:any)
+  {
+    Swal.fire({
+      input: 'text',
+      title: 'Finalizar',
+      text: 'Por favor deje una reseña del turno y el diagnostico realizado',
+      icon: 'info',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar'
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        await this.afs.updateEstado(item.id, 'realizado');
+        await this.afs.updateComentario(item.id, result.value).then(()=> {
+          this.cargarTurnos();
+        });
+
+        Swal.fire({
+          title: 'Se finalizo el turno',
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
+  }
+
+  verComentario(item:any)
+  {
+    console.info('item',item);
+    Swal.fire({
+      title: 'Comentario',
+      icon: 'info',
+      text: item.data.comentario,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+  //#endregion
 
 }

@@ -153,6 +153,15 @@ export class FirebaseService {
     });
   }
 
+  updateEstado(documento:any, nuevoEstado:string)
+  {
+    return this.afs.collection('turnos').doc(documento).update({'estado': nuevoEstado})
+  }
+  updateComentario(documento:any, comentario:string)
+  {
+    return this.afs.collection('turnos').doc(documento).update({'comentario': comentario})
+  }
+
 
 
 
