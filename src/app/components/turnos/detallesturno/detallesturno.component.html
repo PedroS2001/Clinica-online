@@ -1,0 +1,38 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col">
+            <button type="button" (click)="filtrarPor('Mazzucchelli, Juan')" class="btn btn-primary">Filtrar</button>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col">
+            <table class="table table-secondary table-striped table-hover">
+                <thead>
+                    <th>Especialidad</th>
+                    <th>Especialista</th>
+                    <th>Fecha</th>
+                    <th>Horario</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of turnosDelPaciente">
+                        <td>{{item.data.especialidad}} </td>
+                        <td>{{item.data.especialista}} </td>
+                        <td>{{item.data.fecha}} </td>
+                        <td>{{item.data.horario}}hs </td>
+                        <td>{{item.data.estado}} </td>
+                        <td *ngIf="item.data.estado == 'pendiente'" >Cancelar</td>
+                        <td *ngIf="item.data.estado == 'realizado'" >Completar encuesta</td>
+                        <td *ngIf="item.data.estado == 'realizado'" >Calificar la atencion</td>
+                        <td *ngIf="item.data.comentario" >Ver reseña</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<button (click)="cargarTurnos()">CargarTurnos</button>

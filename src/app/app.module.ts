@@ -27,6 +27,8 @@ import { TurnosespecialistaComponent } from './components/turnos/turnosespeciali
 import { TurnospacienteComponent } from './components/turnos/turnospaciente/turnospaciente.component';
 import { MiperfilComponent } from './pages/miperfil/miperfil.component';
 import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.component';
+import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
+import { DetallesturnoComponent } from './components/turnos/detallesturno/detallesturno.component';
 
 
 
@@ -46,6 +48,8 @@ import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.c
     TurnospacienteComponent,
     MiperfilComponent,
     SolicitarturnoComponent,
+    TurnosadministradorComponent,
+    DetallesturnoComponent,
   ],
   imports: [
     BrowserModule,

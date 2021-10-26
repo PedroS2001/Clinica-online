@@ -34,10 +34,15 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/usuarios');
   }
 
-  goToMisTurnos()
+  goToTurnosPaciente()
   {
     this.router.navigateByUrl('/paciente/misturnos');
   }
+  goToTurnosEspecialista()
+  {
+    this.router.navigateByUrl('/especialista/misturnos');
+  }
+
   goToMiPerfil()
   {
     this.router.navigateByUrl('/miperfil');

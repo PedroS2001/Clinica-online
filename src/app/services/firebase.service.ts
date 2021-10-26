@@ -142,9 +142,10 @@ export class FirebaseService {
     this.LeerTurnos().subscribe((Turnos) => {
       this.listaTurnos = [];
       Turnos.forEach((item: any) => {
-        this.listaTurnos.push(
-          item.payload.doc.id
-        );
+        this.listaTurnos.push({
+          data : item.payload.doc.data(),
+          id: item.payload.doc.id
+        });
       })
       setTimeout(() => {
         console.info('Turnos', this.listaTurnos);

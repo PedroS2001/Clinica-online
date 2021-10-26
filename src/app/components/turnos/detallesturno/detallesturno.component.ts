@@ -3,13 +3,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
-  selector: 'app-turnosespecialista',
-  templateUrl: './turnosespecialista.component.html',
-  styleUrls: ['./turnosespecialista.component.css']
+  selector: 'app-detallesturno',
+  templateUrl: './detallesturno.component.html',
+  styleUrls: ['./detallesturno.component.css']
 })
-export class TurnosespecialistaComponent implements OnInit {
+export class DetallesturnoComponent implements OnInit {
 
-  turnosDelEspecialista:any = [];
+  turnosDelPaciente:any = [];
   constructor(private afs:FirebaseService, private auth:AuthService) { }
 
   ngOnInit(): void {
@@ -18,29 +18,29 @@ export class TurnosespecialistaComponent implements OnInit {
   cargarTurnos()
   {
     let listadoTurnos = this.afs.listaTurnos;
-    this.turnosDelEspecialista = [];
+    this.turnosDelPaciente = [];
 
     listadoTurnos.forEach( (item:any) => {
       console.log(item);
-      if(item.data.dniEspecialista == this.auth.currentUser.dni)
+      if(item.data.dniPaciente == this.auth.currentUser.dni)
       {
-        this.turnosDelEspecialista.push(item);
+        this.turnosDelPaciente.push(item);
       }
     });
   }
 
-  filtrarPor(paciente:any)
+  filtrarPor(especialista:any)
   {
     let arrayAux:any = [];
-    this.turnosDelEspecialista.forEach( (element:any) => {
+    this.turnosDelPaciente.forEach( (element:any) => {
       console.log(element);
-      if(element.data.paciente == paciente )
+      if(element.data.especialista == especialista )
       {
         arrayAux.push(element);
       }
     });
 
-    this.turnosDelEspecialista = arrayAux;
+    this.turnosDelPaciente = arrayAux;
 
   }
 

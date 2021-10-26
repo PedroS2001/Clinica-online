@@ -16,8 +16,9 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'solicitarturno', component: SolicitarturnoComponent },
-  { path: 'especialista/misturnos', component: TurnosespecialistaComponent},
   { path: 'miperfil', component: MiperfilComponent},
+  { path: 'paciente/misturnos', component: TurnospacienteComponent},
+  { path: 'especialista/misturnos', component: TurnosespecialistaComponent},
 
 
 ];

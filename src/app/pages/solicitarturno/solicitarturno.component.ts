@@ -148,8 +148,8 @@ export class SolicitarturnoComponent implements OnInit {
         let pedrito = false;
         this.afs.listaTurnos.forEach( (nombre:any) => {
           console.info('PTENCIALLNOMBR', potencialNombre);
-          console.info('NOMBREDOC', nombre);
-          if(potencialNombre == nombre)
+          console.info('NOMBREDOC', nombre.id);
+          if(potencialNombre == nombre.id)
           {
             console.log('TURNO OCUPADO');
             pedrito = true;
@@ -208,6 +208,7 @@ export class SolicitarturnoComponent implements OnInit {
         this.datosTurno.paciente = this.auth.currentUser.apellido + ', ' +  this.auth.currentUser.nombre;
         this.datosTurno.dniPaciente = this.auth.currentUser.dni;
       }
+      this.datosTurno.especialidad = this.elEspecialista.data.especialidad;
       this.datosTurno.fecha = this.fechaSeleccionada;
       this.datosTurno.horario = hora;
       this.datosTurno.estado = 'pendiente';
