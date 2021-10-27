@@ -1,8 +1,19 @@
 <div class="container">
 
+    <div class="row"> 
+        <div class="col-3 m-3">
+            <h5>Filtrar por especialista: </h5>
+        </div>
+        <div class="col-3 m-3" *ngFor="let item of especialistasFiltrados">
+            <button type="button" (click)="filtrarPorEspecialista(item)" class="btn btn-primary">{{item}}</button>
+        </div>
+    </div>
     <div class="row">
-        <div class="col">
-            <button type="button" (click)="filtrarPor('Mazzucchelli, Juan')" class="btn btn-primary">Filtrar</button>
+        <div class="col-3 m-3">
+            <h5>Filtrar por especialidad: </h5>
+        </div>
+        <div class="col-3 m-3" *ngFor="let item of especialidadesFiltradas">
+            <button type="button" (click)="filtrarPorEspecialidad(item)" class="btn btn-primary">{{item}}</button>
         </div>
     </div>
 
@@ -23,7 +34,7 @@
                         <td>{{item.data.especialista}} </td>
                         <td>{{item.data.fecha}} </td>
                         <td>{{item.data.horario}}hs </td>
-                        <td>{{item.data.estado}} </td>
+                        <td> <strong> {{item.data.estado}} </strong> </td>
                         <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
                         <td *ngIf="item.data.comentarioEspecialista || item.data.comentarioPaciente" > <button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button> </td>
 
@@ -33,6 +44,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    
+    <div class="row">
+        <button type="button" (click)="cargarTurnos()" class="btn btn-primary">Limpiar filtros</button>
     </div>
 </div>
 

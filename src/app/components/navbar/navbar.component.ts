@@ -42,6 +42,10 @@ export class NavbarComponent implements OnInit {
   {
     this.router.navigateByUrl('/especialista/misturnos');
   }
+  goToTurnosAdministrador()
+  {
+    this.router.navigateByUrl('/administrador/turnos')
+  }
 
   goToMiPerfil()
   {

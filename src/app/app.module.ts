@@ -29,6 +29,7 @@ import { MiperfilComponent } from './pages/miperfil/miperfil.component';
 import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.component';
 import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
 import { DetallesturnoComponent } from './components/turnos/detallesturno/detallesturno.component';
+import { CaptchaComponent } from './components/captcha/captcha.component';
 
 
 
@@ -50,6 +51,7 @@ import { DetallesturnoComponent } from './components/turnos/detallesturno/detall
     SolicitarturnoComponent,
     TurnosadministradorComponent,
     DetallesturnoComponent,
+    CaptchaComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-turnosadministrador',
+  selector: 'app-turnosadministrador', 
   templateUrl: './turnosadministrador.component.html',
   styleUrls: ['./turnosadministrador.component.css']
 })
@@ -10,8 +12,8 @@ export class TurnosadministradorComponent implements OnInit {
 
   
   //Listas que se van a mostrar
-  turnosDelEspecialista:any = [];   //Los turnos del especialista que se van a mostrar
-  pacientesFiltrados:any;           //Todos los pacientes de este especialista 1 sola vez, se utiliza para el filtro
+  todosLosTurnos:any = [];   //Los turnos del especialista que se van a mostrar
+  especialistasFiltrados:any;           //Todos los pacientes de este especialista 1 sola vez, se utiliza para el filtro
   especialidadesFiltradas:any;      //Todas las especialidades de este especialista 1 sola vez, se utiliza para el filtro
   
   turnosSinFiltrar:any;             //Todos los turnos del especialista. Se mantiene constante
@@ -22,7 +24,7 @@ export class TurnosadministradorComponent implements OnInit {
   ngOnInit(): void {
     this.cargarTurnos();
     this.filtrarEspecialidades();
-    this.filtrarPacientes();
+    this.filtrarEspecialistas();
   }
 
 
@@ -32,16 +34,14 @@ export class TurnosadministradorComponent implements OnInit {
   cargarTurnos()
   {
     let listadoTurnos = this.afs.listaTurnos;
-    this.turnosDelEspecialista = [];
+    this.todosLosTurnos = [];
 
     listadoTurnos.forEach( (item:any) => {
       console.log(item);
-      if(item.data.dniEspecialista == this.auth.currentUser.dni)
-      {
-        this.turnosDelEspecialista.push(item);
-      }
+
+      this.todosLosTurnos.push(item);
     });
-    this.turnosSinFiltrar = this.turnosDelEspecialista;
+    this.turnosSinFiltrar = this.todosLosTurnos;
   }
 
   /** Filtra el array de pacientes que se va a mostrar por un paciente en particular
@@ -49,20 +49,20 @@ export class TurnosadministradorComponent implements OnInit {
    * @param paciente El paciente por el que se quiere filtrar
    *  suponiendo que en paciente se le pasa 'perez, juan', al nuevo array le asignaria solo los turnos que sean de juan perez
    */
-  filtrarPorPaciente(paciente:any)
+  filtrarPorEspecialista(paciente:any)
   {
-    this.turnosDelEspecialista = this.turnosSinFiltrar; //reinicio todos los turnos
+    this.todosLosTurnos = this.turnosSinFiltrar; //reinicio todos los turnos
 
     let arrayAux:any = [];
-    this.turnosDelEspecialista.forEach( (element:any) => {
+    this.todosLosTurnos.forEach( (element:any) => {
       console.log(element);
-      if(element.data.paciente == paciente )
+      if(element.data.especialista == paciente )
       {
         arrayAux.push(element);
       }
     });
 
-    this.turnosDelEspecialista = arrayAux;
+    this.todosLosTurnos = arrayAux;
   }
 
   /** Filtra el array por una determinada especialidad
@@ -71,10 +71,10 @@ export class TurnosadministradorComponent implements OnInit {
    */
   filtrarPorEspecialidad(item:any)
   {
-    this.turnosDelEspecialista = this.turnosSinFiltrar;
+    this.todosLosTurnos = this.turnosSinFiltrar;
 
     let arrayAux:any = [];
-    this.turnosDelEspecialista.forEach( (element:any) => {
+    this.todosLosTurnos.forEach( (element:any) => {
       console.log(element);
       if(element.data.especialidad == item )
       {
@@ -82,27 +82,27 @@ export class TurnosadministradorComponent implements OnInit {
       }
     });
 
-    this.turnosDelEspecialista = arrayAux;
+    this.todosLosTurnos = arrayAux;
   }
 
 
   /** Hace el filtro de todos los pacientes. quita los repetidos para que esten una sola vez
    *  dejando en un array todos los pacientes que hay, una sola vez
    */
-  filtrarPacientes()
+  filtrarEspecialistas()
   {
-    this.turnosDelEspecialista = this.turnosSinFiltrar; //reinicio el array de turnos para que agarre todos
-    this.pacientesFiltrados = [];
+    this.todosLosTurnos = this.turnosSinFiltrar; //reinicio el array de turnos para que agarre todos
+    this.especialistasFiltrados = [];
     let data:any = [];
-    this.turnosDelEspecialista.forEach( (element:any) => {
-      data.push(element.data.paciente);
+    this.todosLosTurnos.forEach( (element:any) => {
+      data.push(element.data.especialista);
     });
 
-    this.pacientesFiltrados = data.filter((item:any,index:any)=>{
+    this.especialistasFiltrados = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
 
-    console.log(this.pacientesFiltrados)
+    console.log(this.especialistasFiltrados)
   }
 
   /** Filtra las especialidades del especialista
@@ -111,10 +111,10 @@ export class TurnosadministradorComponent implements OnInit {
    */
   filtrarEspecialidades()
   {
-    this.turnosDelEspecialista = this.turnosSinFiltrar;
+    this.todosLosTurnos = this.turnosSinFiltrar;
     this.especialidadesFiltradas = [];
     let data:any = [];
-    this.turnosDelEspecialista.forEach( (element:any) => {
+    this.todosLosTurnos.forEach( (element:any) => {
       data.push(element.data.especialidad);
     });
 
@@ -128,4 +128,31 @@ export class TurnosadministradorComponent implements OnInit {
 
 
   //#region ACCIONES
+  cancelarTurno(item:any)
+  {
+    Swal.fire({
+      input: 'text',
+      title: 'Cancelar',
+      text: '¿Por que quiere cancelar el turno?',
+      icon: 'error',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar'
+    })
+    .then(async (result) => {
+      if (result.isConfirmed) {
+        await this.afs.updateEstado(item.id, 'cancelado');
+        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=> {
+          this.cargarTurnos();
+        });
+        Swal.fire({
+          title: 'Se cancelo el turno',
+          text:  result.value ,
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
+  }
+
+  //#endregion
 }

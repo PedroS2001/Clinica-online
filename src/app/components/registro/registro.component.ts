@@ -30,6 +30,27 @@ export class RegistroComponent implements OnInit, OnChanges {
      private authService: AuthService, private toast:ToastrService) { 
   }
 
+  captcha:boolean = false;
+  verificarCaptcha(rta:any)
+  {
+    if(rta)
+    {
+      this.captcha = true;
+      this.toast.success('Captcha verificado', '', {
+        timeOut:1500,
+        closeButton:true
+      });
+    }
+    else
+    {
+      this.toast.error('Captcha incorrecto', '', {
+        timeOut:1500,
+        closeButton:true
+      });
+    }
+    console.info(rta);
+  }
+
   ngOnChanges()
   {
     if(this.tipoUsuario == 'paciente')
@@ -88,6 +109,14 @@ export class RegistroComponent implements OnInit, OnChanges {
     console.info('FORMULARIO', this.formulario);
     console.info('STATUS', this.formulario.status);
 
+    if(!this.captcha)
+    {
+      this.toast.error('Verifique el captcha', '', {
+        timeOut:1500,
+        closeButton:true
+      });
+      return;
+    }
     if(this.formulario.status == 'VALID')
     {
       this.loading = true;

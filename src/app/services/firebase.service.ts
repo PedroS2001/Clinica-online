@@ -159,12 +159,12 @@ export class FirebaseService {
   }
   updateComentario(documento:string, comentario:string, usuario:string)
   {
-    if(usuario == 'paciente')
+    if(usuario == 'especialista')
     {
-      return this.afs.collection('turnos').doc(documento).update({'comentarioPaciente': comentario});
+      return this.afs.collection('turnos').doc(documento).update({'comentarioEspecialista': comentario});
     }
     else{
-      return this.afs.collection('turnos').doc(documento).update({'comentarioEspecialista': comentario});
+      return this.afs.collection('turnos').doc(documento).update({'comentarioPaciente': comentario});
     }
 
   }

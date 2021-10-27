@@ -115,11 +115,11 @@
 
     </div>  <!--Cierre ROW-->
 
+    <div class="row">
+      <app-captcha (verificacion)="verificarCaptcha($event)" ></app-captcha>
+    </div>
     <div class="col-md-12 d-grid gap-2">
-      <button type="submit" class="bttn-pill bttn-md bttn-success" [disabled]="!formulario.valid">Registrar</button>
-      <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="!formulario.valid" >
-        Enviar
-      </button> -->
+      <button type="submit" class="bttn-pill bttn-md bttn-success" >Registrar</button>
     </div>
 
   </form>

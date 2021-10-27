@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
+import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
 import { TurnosespecialistaComponent } from './components/turnos/turnosespecialista/turnosespecialista.component';
 import { TurnospacienteComponent } from './components/turnos/turnospaciente/turnospaciente.component';
 import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'miperfil', component: MiperfilComponent},
   { path: 'paciente/misturnos', component: TurnospacienteComponent},
   { path: 'especialista/misturnos', component: TurnosespecialistaComponent},
+  { path: 'administrador/turnos', component: TurnosadministradorComponent},
+
 
 
 ];
