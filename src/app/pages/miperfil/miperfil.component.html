@@ -59,31 +59,32 @@
             </div>
         </div>
 
+
         <div class="row" *ngIf="misHorarios">
 
                 <div class="col mb-2" *ngFor="let item of listaDiario; let i = index ">
                     <div class="row">
                         <label class="btn bttn-success">
-                            <input type="checkbox" name={{i}} id={{i}} [checked]="listaDias[i]" >
+                            <input type="checkbox" name="checkDias" id={{i}} [checked]="listaDias[i]" >
                             {{item}}
                         </label>
                     </div>
                 </div>
 
-
                 <div class="col-3 m-1" align="center" *ngFor="let item of listaHorarios; let i = index">
                     <div class="row" align="center">
                         <label class="btn btn-primary active">
-                            <input type="checkbox" name={{i}} id={{i}} [checked]="listaHorarios[i]" >
+                            <input type="checkbox" name="checkboxs" id={{i+8}} [checked]="listaHorarios[i]" >
                             {{i+8}} hs
                         </label>
                     </div>
                 </div>
-                
 
+                <div class="row">
+                    <button (click)="actualizar()">Aceptar cambios</button>
+                </div>
 
         </div>
-
 
     </div>  
 

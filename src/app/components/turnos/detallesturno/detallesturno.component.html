@@ -25,10 +25,10 @@
                         <td>{{item.data.horario}}hs </td>
                         <td>{{item.data.estado}} </td>
                         <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
-                        <td *ngIf="item.data.comentario" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
+                        <td *ngIf="item.data.comentarioEspecialista || item.data.comentarioPaciente" > <button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button> </td>
 
-                        <td *ngIf="item.data.estado == 'realizado'" >Completar encuesta</td>
-                        <td *ngIf="item.data.estado == 'realizado'" >Calificar la atencion</td>
+                        <td *ngIf="item.data.estado == 'realizado' && !item.data.encuesta" > <button (click)="completarEncuesta(item)" type="button" class="btn btn-outline-info">Completar encuesta</button>  </td>
+                        <td *ngIf="item.data.estado == 'realizado' && !item.data.calificacion " > <button (click)="calificarLaAtencion(item)" type="button" class="btn btn-outline-info">Calificar la atencion</button> </td>
                     </tr>
                 </tbody>
             </table>
@@ -36,4 +36,4 @@
     </div>
 </div>
 
-<button (click)="cargarTurnos()">CargarTurnos</button>
+<!-- <button (click)="cargarTurnos()">CargarTurnos</button> -->

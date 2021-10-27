@@ -8,17 +8,17 @@ import Swal from 'sweetalert2';
   templateUrl: './turnosespecialista.component.html',
   styleUrls: ['./turnosespecialista.component.css']
 })
-export class TurnosespecialistaComponent implements OnInit, OnChanges {
+export class TurnosespecialistaComponent implements OnInit {
 
   turnosDelEspecialista:any = [];
-  constructor(private afs:FirebaseService, private auth:AuthService) { }
+  turnosSinFiltrar:any;
+
+  constructor(public afs:FirebaseService, private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.cargarTurnos();
   }
 
-  ngOnChanges()
-  {
-  }
 
   cargarTurnos()
   {
@@ -33,14 +33,17 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
       }
     });
     
+    this.turnosSinFiltrar = this.turnosDelEspecialista;
   }
 
-  filtrarPor(paciente:any)
+  filtrarPor(dni:any)
   {
+    this.turnosDelEspecialista = this.turnosSinFiltrar;
+
     let arrayAux:any = [];
     this.turnosDelEspecialista.forEach( (element:any) => {
       console.log(element);
-      if(element.data.paciente == paciente )
+      if(element.data.paciente == dni )
       {
         arrayAux.push(element);
       }
@@ -49,6 +52,57 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
     this.turnosDelEspecialista = arrayAux;
   }
 
+  filtrarPorEspecialidad(item:any)
+  {
+    this.turnosDelEspecialista = this.turnosSinFiltrar;
+
+    let arrayAux:any = [];
+    this.turnosDelEspecialista.forEach( (element:any) => {
+      console.log(element);
+      if(element.data.especialidad == item )
+      {
+        arrayAux.push(element);
+      }
+    });
+
+    this.turnosDelEspecialista = arrayAux;
+
+  }
+
+
+  pacientesFiltrados:any;
+  paraFiltrar()
+  {
+    this.turnosDelEspecialista = this.turnosSinFiltrar;
+    this.pacientesFiltrados = [];
+    let data:any = [];
+    this.turnosDelEspecialista.forEach( (element:any) => {
+      data.push(element.data.paciente);
+    });
+
+    this.pacientesFiltrados = data.filter((item:any,index:any)=>{
+      return data.indexOf(item) === index;
+    })
+
+    console.log(this.pacientesFiltrados)
+  }
+
+  especialidadesFiltradas:any;
+  paraFiltrarEspecialidades()
+  {
+    this.turnosDelEspecialista = this.turnosSinFiltrar;
+    this.especialidadesFiltradas = [];
+    let data:any = [];
+    this.turnosDelEspecialista.forEach( (element:any) => {
+      data.push(element.data.especialidad);
+    });
+
+    this.especialidadesFiltradas = data.filter((item:any,index:any)=>{
+      return data.indexOf(item) === index;
+    })
+
+    console.log(this.especialidadesFiltradas)
+  }
 
 
 
@@ -69,10 +123,9 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
     .then(async (result) => {
       if (result.isConfirmed) {
         await this.afs.updateEstado(item.id, 'cancelado');
-        await this.afs.updateComentario(item.id, result.value).then(()=> {
+        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=> {
           this.cargarTurnos();
         });
-
         Swal.fire({
           title: 'Se cancelo el turno',
           text:  result.value ,
@@ -97,7 +150,7 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
       if (result.isConfirmed) {
 
         await this.afs.updateEstado(item.id, 'rechazado');
-        await this.afs.updateComentario(item.id, result.value).then(()=>{
+        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=>{
           this.cargarTurnos();
         });
 
@@ -140,7 +193,7 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
     .then(async (result) => {
       if (result.isConfirmed) {
         await this.afs.updateEstado(item.id, 'realizado');
-        await this.afs.updateComentario(item.id, result.value).then(()=> {
+        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=> {
           this.cargarTurnos();
         });
 
@@ -155,10 +208,11 @@ export class TurnosespecialistaComponent implements OnInit, OnChanges {
   verComentario(item:any)
   {
     console.info('item',item);
+    let quien = item.data.comentarioPaciente ? 'paciente' : 'especialista';
+    let comentario = item.data.comentarioPaciente ? item.data.comentarioPaciente : item.data.comentarioEspecialista;
     Swal.fire({
-      title: 'Comentario',
       icon: 'info',
-      text: item.data.comentario,
+      text: 'Comentario del '+ quien +  ': ' + comentario,
       showLoaderOnConfirm: true,
       confirmButtonText: 'Aceptar'
     });

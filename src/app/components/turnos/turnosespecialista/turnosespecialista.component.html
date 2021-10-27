@@ -1,8 +1,19 @@
 <div class="container">
 
     <div class="row">
-        <div class="col">
-            <button type="button" (click)="filtrarPor('Falcioni, Facundo')" class="btn btn-primary">Filtrar</button>
+        <div class="col-3 p3">
+            <h3>Filtrar por paciente: </h3>
+        </div>
+        <div class="col-3 p3" *ngFor="let item of pacientesFiltrados">
+            <button type="button" (click)="filtrarPor(item)" class="btn btn-primary">{{item}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 p3">
+            <h3>Filtrar por especialidad: </h3>
+        </div>
+        <div class="col-3 p3" *ngFor="let item of especialidadesFiltradas">
+            <button type="button" (click)="filtrarPorEspecialidad(item)" class="btn btn-primary">{{item}}</button>
         </div>
     </div>
 
@@ -27,8 +38,8 @@
                         <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
                         <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="rechazarTurno(item)" type="button" class="btn btn-outline-warning">Rechazar</button></td>
                         <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="aceptarTurno(item)" type="button" class="btn btn-outline-success">Aceptar</button></td>
-                        <td *ngIf="item.data.estado == 'aceptado'" ><button (click)="finalizarTurno(item)" type="button" class="btn btn-outline-success">Finalizar</button></td>
-                        <td *ngIf="item.data.comentario" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
+                        <td *ngIf="item.data.estado == 'aceptado' " ><button (click)="finalizarTurno(item)" type="button" class="btn btn-outline-success">Finalizar</button></td>
+                        <td *ngIf="item.data.comentarioPaciente || item.data.comentarioEspecialista" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -36,4 +47,5 @@
     </div>
 </div>
 
-<button (click)="cargarTurnos()">CargarTurnos</button>
+<button (click)="paraFiltrar()">PEDRO</button>
+<button (click)="paraFiltrarEspecialidades()">PEDRO</button>

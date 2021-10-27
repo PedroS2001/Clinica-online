@@ -153,16 +153,39 @@ export class FirebaseService {
     });
   }
 
-  updateEstado(documento:any, nuevoEstado:string)
+  updateEstado(documento:string, nuevoEstado:string)
   {
     return this.afs.collection('turnos').doc(documento).update({'estado': nuevoEstado})
   }
-  updateComentario(documento:any, comentario:string)
+  updateComentario(documento:string, comentario:string, usuario:string)
   {
-    return this.afs.collection('turnos').doc(documento).update({'comentario': comentario})
+    if(usuario == 'paciente')
+    {
+      return this.afs.collection('turnos').doc(documento).update({'comentarioPaciente': comentario});
+    }
+    else{
+      return this.afs.collection('turnos').doc(documento).update({'comentarioEspecialista': comentario});
+    }
+
   }
 
+  updateDias(documento:string, dias:any)
+  {
+    return this.afs.collection('especialistas').doc(documento).update({'dias': dias});
+  }
+  updateHorarios(documento:string, horarios:any)
+  {
+    return this.afs.collection('especialistas').doc(documento).update({'horarios': horarios});
+  }
 
+  agregarCalificacion(documento:string, calificacion:any)
+  {
+    return this.afs.collection('turnos').doc(documento).update({'calificacion': calificacion});
+  }
+  completarEncuesta(documento:string, encuesta:any)
+  {
+    return this.afs.collection('turnos').doc(documento).update({'encuesta': encuesta});
+  }
 
 
 
