@@ -1,1 +1,48 @@
-<p>turnosadministrador works!</p>
+<div class="container">
+
+    <div class="row">
+        <div class="col-3 m-3">
+            <h5>Filtrar por paciente: </h5>
+        </div>
+        <div class="col-3 m-3" *ngFor="let item of pacientesFiltrados">
+            <button type="button" (click)="filtrarPorPaciente(item)" class="btn btn-primary">{{item}}</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3 m-3">
+            <h5>Filtrar por especialidad: </h5>
+        </div>
+        <div class="col-3 m-3" *ngFor="let item of especialidadesFiltradas">
+            <button type="button" (click)="filtrarPorEspecialidad(item)" class="btn btn-primary">{{item}}</button>
+        </div>
+    </div>
+
+    <div class="row" >
+        <div class="col">
+            <table class="table table-secondary table-striped table-hover" >
+                <thead>
+                    <th>Especialidad</th>
+                    <th>Paciente</th>
+                    <th>Fecha</th>
+                    <th>Horario</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of turnosDelEspecialista">
+                        <td>{{item.data.especialidad}} </td>
+                        <td>{{item.data.paciente}} </td>
+                        <td>{{item.data.fecha}} </td>
+                        <td>{{item.data.horario}}hs </td>
+                        <td>{{item.data.estado}} </td>
+                        <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
+                        <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="rechazarTurno(item)" type="button" class="btn btn-outline-warning">Rechazar</button></td>
+                        <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="aceptarTurno(item)" type="button" class="btn btn-outline-success">Aceptar</button></td>
+                        <td *ngIf="item.data.estado == 'aceptado' " ><button (click)="finalizarTurno(item)" type="button" class="btn btn-outline-success">Finalizar</button></td>
+                        <td *ngIf="item.data.comentarioPaciente || item.data.comentarioEspecialista" ><button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
