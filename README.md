@@ -1,27 +1,30 @@
-# ClinicaOnline
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
+# Clinica Online
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Autor
 
-## Build
+- [Pedro Señeriz](https://www.github.com/PedroS2001)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Pantallas y funcionalidad
 
-## Running unit tests
+### Login
+Desde esta pantalla el usuario se loguea
+![App Screenshot](https://github.com/PedroS2001/Clinica-online/blob/master/src/archivosReadme/loginSinRegistrar.png)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Registro
+Desde esta pantalla el usuario puede registrar una cuenta. No hace falta estar logueado
+![App Screenshot](https://github.com/PedroS2001/Clinica-online/blob/master/src/archivosReadme/loginSinRegistrar.png)
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Solicitar turno
+Desde esta pantalla se solicita un turno. Solo lo pueden hacer los usuarios administradores o pacientes.
+Eligen primero una especialidad, luego aparece el listado de especialistas del que debe elegir uno y se muestran los dias y horarios disponibles
+Esta es la vista de un usuario administrador, que ademas de la vista del paciente tambien tiene un listado de todos los pacientes.
+![App Screenshot](https://github.com/PedroS2001/Clinica-online/blob/master/src/archivosReadme/solicitarTurnoAdministrador.png)
+ 
+### Mis turnos
+Pantalla en la que se ven los turnos que tiene un paciente o un especialista. Esta es la vista del paciente.
+Tiene para filtrar sus turnos por especialista o especialidad
+![App Screenshot](https://github.com/PedroS2001/Clinica-online/blob/master/src/archivosReadme/misTurnosPaciente.png)
