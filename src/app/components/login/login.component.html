@@ -44,10 +44,12 @@
                 </form>
 
                                         <!-- BOTONES DE ACCESO RAPIDO -->
-                <div class="col-md-12 d-grid gap-2">
-                    <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
+                <div class="col-md-2 d-grid gap-2" *ngFor="let item of usuariosLogin" align="center">
+                        <img (click)="ingresaUsuario(item)" src={{item.data.imagen}} style="width: 50px; height: 50px; border-radius: 10%;" alt="">
+
+                    <!-- <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
                     <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaEspecialista()" >Especialista</button>
-                    <button class="bttn-unite bttn-md bttn-warning" (click)="ingresaPaciente()" >Paciente</button>
+                    <button class="bttn-unite bttn-md bttn-warning" (click)="ingresaPaciente()" >Paciente</button> -->
                 </div>  
 
             </div> <!--Cierre row formulario-->

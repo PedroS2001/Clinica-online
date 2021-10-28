@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
       'mail': ['', [Validators.required, Validators.email]],
       'password': ['', [Validators.required, Validators.minLength(6)]]
     });
+    this.cargarBotones();
   }
 
   funcioncita(correo:string)
@@ -138,5 +139,25 @@ export class LoginComponent implements OnInit {
     this.formulario.get('password')?.setValue('123456');
   }
 
+  usuariosLogin:any = [];
+  cargarBotones()
+  {
+    this.usuariosLogin.push(this.afs.arrayAdministradores[1]);
+    this.usuariosLogin.push(this.afs.arrayEspecialistas[0]);
+    this.usuariosLogin.push(this.afs.arrayEspecialistas[1]);
+    this.usuariosLogin.push(this.afs.arrayPacientes[0]);
+    this.usuariosLogin.push(this.afs.arrayPacientes[1]);
+
+    //this.maicol = this.afs.arrayAdministradores[1].data.imagen;
+    // this.afs.arrayAdministradores[1].data.mail;
+    // this.afs.arrayAdministradores[1].data.password;
+
+  }
+
+  ingresaUsuario(item:any)
+  {
+    this.formulario.get('mail')?.setValue(item.data.mail);
+    this.formulario.get('password')?.setValue(item.data.password);
+  }
 
 }
