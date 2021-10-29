@@ -107,13 +107,13 @@ export class SolicitarturnovdosComponent implements OnInit {
       
     });
 
-    console.info('listadoDias', this.listadoDias);
-    console.info('HorariodeAtencion', this.horariosAtencion);
-    console.info('arrayTotalDias', this.arrayTotalDias);
-    console.info('arrayTotalHoras', this.arrayTotalHoras);
-    console.info('arrayTotalNombres', this.arrayTotalNombres);
+    // console.info('listadoDias', this.listadoDias);
+    // console.info('HorariodeAtencion', this.horariosAtencion);
+    // console.info('arrayTotalDias', this.arrayTotalDias);
+    // console.info('arrayTotalHoras', this.arrayTotalHoras);
+    // console.info('arrayTotalNombres', this.arrayTotalNombres);
 
-    console.info('diasindice',this.dias);
+    // console.info('diasindice',this.dias);
 
     //Llama a la funcion que filtra los horarios disponibles
     this.verificarDisponibilidad();
@@ -160,12 +160,10 @@ export class SolicitarturnovdosComponent implements OnInit {
       this.datosTurno.estado = 'pendiente';
 
       this.nombreTurno = this.datosTurno.fecha+'_'+this.datosTurno.especialista + '_'+ this.datosTurno.horario;
-      console.log(this.datosTurno);
+      // console.log(this.datosTurno);
 
       this.afs.agregarTurno(this.nombreTurno, this.datosTurno).then( () =>{
-        // this.seleccionaDia(this.fechaSeleccionada);
 
-        /***HABRIA QUE EDITAR EL ESPECIALIST Y PACIENTE PARA VINCULARLO?? noup*/
         this.toastr.success('Se reservo el turno','Exito', {
           timeOut:1500,
           closeButton:true
@@ -207,7 +205,6 @@ export class SolicitarturnovdosComponent implements OnInit {
       potencialNombre = element + '_' + this.elEspecialista.data.apellido + ', ' + this.elEspecialista.data.nombre + '_' + this.arrayTotalHoras[index];
 
       this.afs.listaTurnos.forEach( (turno:any, index:number) => {
-        // console.info('turno',turno);
         if(turno.id == potencialNombre)
         {
           flagEncontro = true;
@@ -221,9 +218,9 @@ export class SolicitarturnovdosComponent implements OnInit {
         this.arrayTotalNombres.splice(index,1);
       }
     });
-    console.info('arrayTotalSplice', this.arrayTotalNombres);
-    console.info('listaTurnosDisponibles', this.listaTurnosDisponibles);
-    console.info('diasDeLaSemana', this.diasDeLaSemana);
+    // console.info('arrayTotalSplice', this.arrayTotalNombres);
+    // console.info('listaTurnosDisponibles', this.listaTurnosDisponibles);
+    // console.info('diasDeLaSemana', this.diasDeLaSemana);
   } 
 
   diasDeLaSemana:any = [];
@@ -294,5 +291,19 @@ export class SolicitarturnovdosComponent implements OnInit {
     });
   }
 
+  /** En caso de que el que ingrese sea un administrador se le muestra la tabla de pacientes
+   *  Debe seleccionar uno. esta funcion recibe el paciente que la tabla emite
+   *  y lo guarda en la variable correspondiente
+   * @param e el usuario paciente con todos sus datos
+   */
+  evento(e:any)
+  {
+    this.toastr.info('Se selecciono al paciente: ' + e.data.nombre + ' ' + e.data.apellido, '', {
+      timeOut:1500,
+      closeButton:true
+    })
+    console.log(e);
+    this.pacienteSeleccionado = e; 
+  }
 
 }

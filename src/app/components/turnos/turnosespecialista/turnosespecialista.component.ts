@@ -35,11 +35,11 @@ export class TurnosespecialistaComponent implements OnInit {
     let listadoTurnos = this.afs.listaTurnos;
     this.turnosDelEspecialista = [];
 
-    listadoTurnos.forEach( (item:any) => {
-      console.log(item);
-      if(item.data.dniEspecialista == this.auth.currentUser.dni)
+    listadoTurnos.forEach( (turno:any) => {
+      console.log(turno);
+      if(turno.data.dniEspecialista == this.auth.currentUser.dni)
       {
-        this.turnosDelEspecialista.push(item);
+        this.turnosDelEspecialista.push(turno);
       }
     });
     this.turnosSinFiltrar = this.turnosDelEspecialista;
@@ -130,7 +130,7 @@ export class TurnosespecialistaComponent implements OnInit {
 
   //#region ACCIONES
 
-  cancelarTurno(item:any)
+  cancelarTurno(turno:any)
   {
     Swal.fire({
       input: 'text',
@@ -143,8 +143,8 @@ export class TurnosespecialistaComponent implements OnInit {
     })
     .then(async (result) => {
       if (result.isConfirmed) {
-        await this.afs.updateEstado(item.id, 'cancelado');
-        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=> {
+        await this.afs.updateEstado(turno.id, 'cancelado');
+        await this.afs.updateComentario(turno.id, result.value, this.auth.currentUser.perfil).then(()=> {
           this.cargarTurnos();
         });
         Swal.fire({
@@ -157,7 +157,7 @@ export class TurnosespecialistaComponent implements OnInit {
   }
 
 
-  rechazarTurno(item:any)
+  rechazarTurno(turno:any)
   {
     Swal.fire({
       input: 'text',
@@ -170,8 +170,8 @@ export class TurnosespecialistaComponent implements OnInit {
     })
     .then(async (result) => {
       if (result.isConfirmed) {
-        await this.afs.updateEstado(item.id, 'rechazado');
-        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=>{
+        await this.afs.updateEstado(turno.id, 'rechazado');
+        await this.afs.updateComentario(turno.id, result.value, this.auth.currentUser.perfil).then(()=>{
           this.cargarTurnos();
         });
         Swal.fire({
@@ -184,7 +184,7 @@ export class TurnosespecialistaComponent implements OnInit {
   }
 
 
-  async aceptarTurno(item:any)
+  async aceptarTurno(turno:any)
   {
     Swal.fire({
       icon: 'success',
@@ -193,14 +193,15 @@ export class TurnosespecialistaComponent implements OnInit {
       showLoaderOnConfirm: true,
       confirmButtonText: 'Aceptar'
     });
-    this.afs.updateEstado(item.id, 'aceptado').then( () => {
+    this.afs.updateEstado(turno.id, 'aceptado').then( () => {
       this.cargarTurnos();
     });
   }
 
 
-  finalizarTurno(item:any)
+  finalizarTurno(turno:any)
   {
+    console.info(turno);
     Swal.fire({
       input: 'text',
       title: 'Finalizar',
@@ -212,8 +213,8 @@ export class TurnosespecialistaComponent implements OnInit {
     })
     .then(async (result) => {
       if (result.isConfirmed) {
-        await this.afs.updateEstado(item.id, 'realizado');
-        await this.afs.updateComentario(item.id, result.value, this.auth.currentUser.perfil).then(()=> {
+        await this.afs.updateEstado(turno.id, 'realizado');
+        await this.afs.updateComentario(turno.id, result.value, this.auth.currentUser.perfil).then(()=> {
           this.cargarTurnos();
         });
         Swal.fire({
@@ -221,15 +222,16 @@ export class TurnosespecialistaComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
+      this.completarHistoriaClinica(turno.data.dniPaciente);
     });
   }
 
 
-  verComentario(item:any)
+  verComentario(turno:any)
   {
-    console.info('item',item);
-    let quien = item.data.comentarioPaciente ? 'paciente' : 'especialista';
-    let comentario = item.data.comentarioPaciente ? item.data.comentarioPaciente : item.data.comentarioEspecialista;
+    console.info('turno',turno);
+    let quien = turno.data.comentarioPaciente ? 'paciente' : 'especialista';
+    let comentario = turno.data.comentarioPaciente ? turno.data.comentarioPaciente : turno.data.comentarioEspecialista;
     Swal.fire({
       icon: 'info',
       text: 'Comentario del '+ quien +  ': ' + comentario,
@@ -237,7 +239,112 @@ export class TurnosespecialistaComponent implements OnInit {
       confirmButtonText: 'Aceptar'
     });
   }
-
   //#endregion
+
+
+  completarHistoriaClinica(dniPaciente:number)
+  {
+        /*************************** DATOS FIJOS */
+    Swal.fire({
+      title: 'Datos fijos',
+      showCancelButton: true,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Enviar',
+      html:
+        '<input id="altura" placeholder="Altura" class="swal2-input">' +
+        '<input id="peso" placeholder="Peso" class="swal2-input">' +
+        '<input id="temperatura" placeholder="Temperatura" class="swal2-input">' +
+        '<input id="presion" placeholder="Presion" class="swal2-input">',
+      preConfirm: function () {
+        return new Promise(function (resolve) {
+          resolve({
+            altura: (<HTMLInputElement> document.getElementById('altura')).value,
+            peso : (<HTMLInputElement> document.getElementById('peso')).value,
+            temperatura : (<HTMLInputElement> document.getElementById('temperatura')).value,
+            presion : (<HTMLInputElement> document.getElementById('presion')).value,
+          })
+        })
+      }
+    })
+    .then((datosFijos:any) => {
+        if (datosFijos.isConfirmed) {
+          /***************************DATOS VARIABLES----CLAVES */
+        Swal.fire({
+          title: 'Datos variables',
+          showCancelButton: true,
+          showLoaderOnConfirm: true,
+          confirmButtonText: 'Enviar',
+          html:
+            '<input id="clave1" placeholder="Clave 1" class="swal2-input">' +
+            '<input id="clave2" placeholder="Clave 2" class="swal2-input">' +
+            '<input id="clave3" placeholder="Clave 3" class="swal2-input">',
+          preConfirm: function () {
+            return new Promise(function (resolve) {
+              resolve({
+                clave1: (<HTMLInputElement> document.getElementById('clave1')).value,
+                clave2 : (<HTMLInputElement> document.getElementById('clave2')).value,
+                clave3 : (<HTMLInputElement> document.getElementById('clave3')).value,
+              })
+            })
+          }
+        })
+        .then((datosVariablesClaves:any) => {
+          if (datosVariablesClaves.isConfirmed) {
+              /***********************DATOS VARIABLES ----- VALORES */
+            Swal.fire({
+              title: 'Multiple inputs',
+              showCancelButton: true,
+              showLoaderOnConfirm: true,
+              confirmButtonText: 'Enviar',
+              html:
+                '<input id="valor1" placeholder="valor 1" class="swal2-input">' +
+                '<input id="valor2" placeholder="valor 2" class="swal2-input">' +
+                '<input id="valor3" placeholder="valor 3" class="swal2-input">',
+              preConfirm: function () {
+                return new Promise(function (resolve) {
+                  resolve({
+                    valor1: (<HTMLInputElement> document.getElementById('valor1')).value,
+                    valor2 : (<HTMLInputElement> document.getElementById('valor2')).value,
+                    valor3 : (<HTMLInputElement> document.getElementById('valor3')).value,
+                  })
+                })
+              }
+            })
+            .then((datosVariablesValores:any) => {
+              /******************************* CREO UN OBJETO CON LOS VALORES Y LO AGREGO A LA BBDD */
+              if (datosVariablesValores.isConfirmed) {
+
+                let historiaClinica:any = {
+                  altura: datosFijos.value.altura,
+                  peso: datosFijos.value.peso,
+                  temperatura : datosFijos.value.temperatura,
+                  presion: datosFijos.value.presion,
+                  dinamicoUno: {clave : datosVariablesClaves.value.clave1, valor: datosVariablesValores.value.valor1},
+                  dinamicoDos: {clave : datosVariablesClaves.value.clave2, valor: datosVariablesValores.value.valor2},
+                  dinamicoTres: {clave : datosVariablesClaves.value.clave3, valor: datosVariablesValores.value.valor3},
+                };
+                
+                // console.info('HISTORIA CLINICA', historiaClinica);
+
+                //Agrega a firebase
+                this.afs.arrayPacientes.forEach( (paciente:any) => {
+                  if(paciente.data.dni == dniPaciente)
+                  {
+                    alert(paciente.id + 'ide del paciente');
+                    this.afs.agregarHistoriaClinica(paciente.id, historiaClinica);
+                  }
+                });
+              }
+            });
+
+          }
+        });
+
+      }
+
+    })
+    .catch()
+  }
+
 
 }

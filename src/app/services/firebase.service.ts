@@ -187,6 +187,19 @@ export class FirebaseService {
     return this.afs.collection('turnos').doc(documento).update({'encuesta': encuesta});
   }
 
+  agregarHistoriaClinica(documento:string, historia:any)
+  {
+    return this.afs.collection('pacientes').doc(documento).update({'historiaClinica': historia});
+  }
+
+  agregarHistoriasClinicas(historia:any)
+  {
+    return this.afs.collection('historiasClinicas').add(historia);
+  }
+  leerHistoriaClinica()
+  {
+
+  }
 
 
 }

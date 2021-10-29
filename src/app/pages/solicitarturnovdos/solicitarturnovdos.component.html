@@ -1,5 +1,13 @@
 <div class="container">
 
+    <div class="row" *ngIf="auth.currentUser.perfil == 'administrador'">
+        <div class="col-12">
+            <h2>Seleccione el paciente</h2>
+            <app-tabla-pacientes (pacienteSeleccionado)="evento($event)" ></app-tabla-pacientes>
+        </div>
+    </div>
+
+
     <div class="row" align="center">
         <div class="col-5 m-1" *ngFor="let item of listaEspecialistas, let i as index">
             <img (click)="cargarTurnosDelEspecialista(i)" id={{item}}  src={{item.data.imagen}} style="width: 100px; height: 100px;" alt="">

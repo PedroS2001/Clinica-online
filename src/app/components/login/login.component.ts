@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
+        this.authService.currentUser.id = element.id;
         // console.info('le pego',correo);
       }
     });
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
+        this.authService.currentUser.id = element.id;
         // console.info('le pego',correo);
       }
     });
@@ -51,6 +53,7 @@ export class LoginComponent implements OnInit {
       if(element.data.mail == correo)
       {
         this.authService.currentUser = element.data;
+        this.authService.currentUser.id = element.id;
         // console.info('le pego',correo);
       }
     });

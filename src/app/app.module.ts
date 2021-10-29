@@ -31,6 +31,7 @@ import { TurnosadministradorComponent } from './components/turnos/turnosadminist
 import { DetallesturnoComponent } from './components/turnos/detallesturno/detallesturno.component';
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
+import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
 
 
 
@@ -54,6 +55,7 @@ import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicita
     DetallesturnoComponent,
     CaptchaComponent,
     SolicitarturnovdosComponent,
+    HistoriaclinicaComponent,
   ],
   imports: [
     BrowserModule,
