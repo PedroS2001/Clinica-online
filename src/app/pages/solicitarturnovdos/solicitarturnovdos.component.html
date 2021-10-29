@@ -1,0 +1,16 @@
+<div class="container">
+
+    <div class="row" align="center">
+        <div class="col-5 m-1" *ngFor="let item of listaEspecialistas, let i as index">
+            <img (click)="cargarTurnosDelEspecialista(i)" id={{item}}  src={{item.data.imagen}} style="width: 100px; height: 100px;" alt="">
+        </div>
+    </div>      <!--CIERRE ROW ESPECIALISTAS-->
+
+    <div class="row">
+        <div class="col-2 p-1" *ngFor="let item of listaTurnosDisponibles, let i = index">
+            <button (click)="sacarTurno(i)" id={{item}} class="btn btn-primary">{{item}} </button>
+        </div>
+    </div>
+
+
+</div>

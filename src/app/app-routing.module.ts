@@ -8,6 +8,7 @@ import { BienvenidaComponent } from './pages/bienvenida/bienvenida.component';
 import { MiperfilComponent } from './pages/miperfil/miperfil.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.component';
+import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 
 const routes: Routes = [
@@ -16,7 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
   { path: 'usuarios', component: UsuariosComponent },
-  { path: 'solicitarturno', component: SolicitarturnoComponent },
+  { path: 'solicitarturno', component: SolicitarturnovdosComponent },
   { path: 'miperfil', component: MiperfilComponent},
   { path: 'paciente/misturnos', component: TurnospacienteComponent},
   { path: 'especialista/misturnos', component: TurnosespecialistaComponent},

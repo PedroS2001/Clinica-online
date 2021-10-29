@@ -30,6 +30,7 @@ import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.c
 import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
 import { DetallesturnoComponent } from './components/turnos/detallesturno/detallesturno.component';
 import { CaptchaComponent } from './components/captcha/captcha.component';
+import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
 
 
 
@@ -52,6 +53,7 @@ import { CaptchaComponent } from './components/captcha/captcha.component';
     TurnosadministradorComponent,
     DetallesturnoComponent,
     CaptchaComponent,
+    SolicitarturnovdosComponent,
   ],
   imports: [
     BrowserModule,
