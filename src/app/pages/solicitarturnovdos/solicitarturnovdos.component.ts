@@ -11,6 +11,7 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 export class SolicitarturnovdosComponent implements OnInit {
 
   loading:boolean = false;
+  pacienteSeleccionado:any = null;      //Sirve solo para cuando el usuario administrador saca turno
 
   constructor(public afs:FirebaseService, public auth:AuthService, private toastr:ToastrService) { 
   }
@@ -20,20 +21,23 @@ export class SolicitarturnovdosComponent implements OnInit {
     this.verificarDisponibilidad();
   }
 
+  fecha:Date = new Date();              //fecha actual, se utiliza para calcular los 15 dias proximos
+  elEspecialista:any;                   //El especialista seleccionado con el que vamos a trabajar.
 
-  pacienteSeleccionado:any = null;      //Sirve solo para cuando el usuario administrador saca turno
-  //listaEspecialistas se muestra en el html
-  listaEspecialistas:any = [];          //Lista con todos los especialistas
-  elEspecialista:any;                   //El especialista seleccionado con el que vamos a trabajar
+  listaEspecialistas:any = [];          //Lista con todos los especialistas. se muestra en el html
 
-  listadoDias:any = [];                 //Todos los dias que trabaja en estas 2 semanas
-  horariosAtencion:any = [];            //Index de los horarios en los que trabaja. El horario real seria esto+8
+  listadoDias:any = [];                 //Todos los dias que trabaja en estas 2 semanas.   ej(1-11, 5-11, 8-11) las fechas
+  
+  
+  dias:any = [];                        //Contiene los indices de los dias que trabaja.  ej(1,2,3) seria (lunes,martes,miercoles)
+  horariosAtencion:any = [];            //Index de los horarios en los que trabaja. El horario real seria esto+8.  ej(0,1,2,7,8) q enrealidad serian los horarios de las(8,9,10,16,17)
+  
+
 
 
 
   /** Carga todos los especialistas que tenemos en listaEspecialistas,
    *  que luego se va a mostrar para que el usuario pueda seleccionar el que quiera
-   * 
    */
   cargarEspecialistas()
   {
@@ -43,44 +47,55 @@ export class SolicitarturnovdosComponent implements OnInit {
     });
   }
 
-
+  /** ArraysTotales.
+   *  Los usaremos para guardar indices y que podamos manejar los 3 elementos
+   * (dias, horas y nombres que se van a mostrar) emparejados con los mismos indices
+   *  Cada indice representa una posibilidad de turno
+   *  si hay 15 posibilidades de turnos, va a haber 15 elementos en cada array
+   *  ej. [0](29-6 /  8   / 29-6 8hs)  [1](29-6 /  10  / 29-6 10hs)
+   *        (Dias /Horas / Nombres )      (Dias /Horas / Nombres )
+   *  */ 
   arrayTotalDias:any = [];
   arrayTotalHoras:any = [];
   arrayTotalNombres:any = [];
-  turnosDisponibles:any = [];
+  // turnosDisponibles:any = [];
 
-  /** 
-   * 
+  /** Calcula y carga todos los turnos que puede tener el especialista, sin discriminar si esta libre u ocupado.
+   *  Finalmente llama a la funcion que los filtra y muestra solo los libres
+   *  Esta funcion se ejecuta cuando selecciona un especialista de la listaEspecialistas
    * @param especialista el especialista seleccionado, del que se van a cargar los turnos
    */
   cargarTurnosDelEspecialista(especialista:any)
   {
+    //limpio los arrays 
     this.horariosAtencion = [];
     this.listadoDias = [];
     this.dias = [];
+    this.arrayTotalDias = [];
 
-    this.fecha = new Date();
-    this.elEspecialista = especialista;
+
+    this.elEspecialista = especialista;                 //Guardo todos los datos del especialista seleccionado en una variable
     
     especialista.data.dias.forEach( (element:any, index:number) => {
       if(element)
       {
-        this.dias.push(index);
+        this.dias.push(index);                          //Le agrego al array cada dia que el especialista trabaje
       }
     });
 
-    this.sumarDias(this.fecha,14);
+    this.fecha = new Date();
+    this.sumarDias(this.fecha,14);            //Calcula los proximos 15 dias y los agrega a la variable listadoDias(ej. 27-11)
 
     especialista.data.horarios.forEach((element:any, index:number) => {
       if(element)
       {
-        this.horariosAtencion.push(index);
+        this.horariosAtencion.push(index);    
       }
       
     });
-    this.arrayTotalDias = [];
-    this.listadoDias.forEach( (dia:any) => {
 
+    //Este doble foreach sirve para calcular para cada dia que trabaje todos los horarios que puede tener (esta funcion no filtra nada, trae todo todo lo que se puede)
+    this.listadoDias.forEach( (dia:any) => {
       this.horariosAtencion.forEach( (element:any) => {
         this.arrayTotalHoras.push(element+8);
         this.arrayTotalDias.push(dia);
@@ -97,6 +112,7 @@ export class SolicitarturnovdosComponent implements OnInit {
 
     console.info('diasindice',this.dias);
 
+    //Llama a la funcion que filtra los horarios disponibles
     this.verificarDisponibilidad();
   }
 
@@ -104,6 +120,11 @@ export class SolicitarturnovdosComponent implements OnInit {
 
   nombreTurno:any;
   datosTurno:any = new Object();
+
+  /** Carga todos los datos en un objeto y lo sube a la base de datos.
+   *  Verifica si es administrador, que haya seleccionado un usuario
+   * @param indiceArrayTotal 
+   */
   sacarTurno(indiceArrayTotal:any)
   {
     this.loading = true;
@@ -163,6 +184,14 @@ export class SolicitarturnovdosComponent implements OnInit {
   }
 
   listaTurnosDisponibles:any = [];
+
+  /** Agarra el array con todos los turnos posibles y filtra los disponibles
+   *  Calcula todos los nombres posibles para guardarse en la base de datos
+   *  Compara cada uno de esos nombres con cada uno de los que hay en la base de datos
+   *  Si el nombre coincide con alguno, significa que ese turno esta ocupado; entonces lo filtro
+   *  Si ese nombre no concide con ningun registro de la base de datos, esta libre y lo agrego a la lista de turnos libres que despues se va a mostrar
+   * 
+   */
   verificarDisponibilidad()
   {
     this.listaTurnosDisponibles = [];
@@ -179,76 +208,13 @@ export class SolicitarturnovdosComponent implements OnInit {
         {
           flagEncontro = true;
         }
-        
       });
-
       if(!flagEncontro)
       {
         this.listaTurnosDisponibles.push(potencialNombre);
       }
     });
-  }
-
-
-
-
-  //LUNES Y MIERCOLES
-  dias:any = [];//= [1,3]
-  fecha:Date = new Date();
-
-
-
-
-  /*seleccionaDia(fecha:any)
-  {
-    let potencialNombre:string;
-    //Tendria que buscar los turnos que tiene ese especialista en esa fecha seleccionada y mostrarle el horario de los disponibles
-    this.fechaSeleccionada = fecha;
-    this.horariosAtencion = [];
-
-    let horario = this.elEspecialista.data.horarios; //todos los horarios que puede trabajar
-
-    horario.forEach( (item:any, index:any) => {
-      //Si el valor es true, significa que trabaja en ese horario, si es false no.
-      if(item)
-      {
-        potencialNombre = this.arrayTotalDias[index] + '_' + this.elEspecialista.data.apellido + ', ' + this.elEspecialista.data.nombre + '_' + (index+8);
-        let pedrito = false;
-        this.afs.listaTurnos.forEach( (nombre:any) => {
-          console.info('PTENCIALLNOMBR', potencialNombre);
-          console.info('NOMBREDOC', nombre.id);
-          if(potencialNombre == nombre.id)
-          {
-            console.log('TURNO OCUPADO');
-            pedrito = true;
-          }
-          else
-          {
-            // this.horariosAtencion.push(index+8);
-            console.log('noesigual');
-          }
-        });
-
-        console.log('salio');
-        if(!pedrito)
-        {
-          alert(pedrito);
-          this.horariosAtencion.push(index+8);
-        }
-        else{
-          alert(pedrito);
-        }
-      }
-      
-    });
-    console.log(this.horariosAtencion);
-    if(this.horariosAtencion.length == 0)
-    {
-      this.horariosAtencion.push('No hay turnos disponibles');
-    }
-  }
-*/
-  
+  } 
 
 
   /** Le suma x dias a la fecha actual.
@@ -266,16 +232,14 @@ export class SolicitarturnovdosComponent implements OnInit {
 
   /** Se le pasa un numero y determina que dia de la semana es.
    *  Compara ese dia con los que trabaja el especialista
-   *  Si ese dia el especialista trabaja, agrega el dia al array de dias que se va a mostrar
-   * 
-   * @param pepe numero de 0 a 6 que simboliza un dia de la semana de domingo a sabado
+   *  Si ese dia el especialista trabaja, agrega el dia (ej. 27-10) al array de dias
+   *  @param pepe numero de 0 a 6 que simboliza un dia de la semana de domingo a sabado
    */
   asignarDias(pepe:any)
   {
     pepe += new Date().getDay() + 1 ;
-    //Obtiene el dia actual
+    //Obtiene el dia actual para determinar que dia de la semana es hoy
     let dia = this.fecha.getDate() + '-' + (this.fecha.getMonth()+1);
-    console.info('fehca dia',dia)
 
     this.dias.forEach( (element:any) => {
       
