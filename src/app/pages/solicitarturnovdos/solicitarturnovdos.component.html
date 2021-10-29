@@ -7,7 +7,7 @@
     </div>      <!--CIERRE ROW ESPECIALISTAS-->
 
     <div class="row">
-        <div class="col-2 p-1" *ngFor="let item of listaTurnosDisponibles, let i = index">
+        <div class="col-2 p-1" *ngFor="let item of arrayTotalNombres, let i = index">
             <button (click)="sacarTurno(i)" id={{item}} class="btn btn-primary">{{item}} </button>
         </div>
     </div>

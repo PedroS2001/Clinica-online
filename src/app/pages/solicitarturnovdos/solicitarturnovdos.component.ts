@@ -72,6 +72,9 @@ export class SolicitarturnovdosComponent implements OnInit {
     this.listadoDias = [];
     this.dias = [];
     this.arrayTotalDias = [];
+    this.arrayTotalHoras = [];
+    this.arrayTotalNombres = [];
+    this.diasDeLaSemana = [];
 
 
     this.elEspecialista = especialista;                 //Guardo todos los datos del especialista seleccionado en una variable
@@ -95,11 +98,11 @@ export class SolicitarturnovdosComponent implements OnInit {
     });
 
     //Este doble foreach sirve para calcular para cada dia que trabaje todos los horarios que puede tener (esta funcion no filtra nada, trae todo todo lo que se puede)
-    this.listadoDias.forEach( (dia:any) => {
+    this.listadoDias.forEach( (dia:any, index:number) => {
       this.horariosAtencion.forEach( (element:any) => {
         this.arrayTotalHoras.push(element+8);
         this.arrayTotalDias.push(dia);
-        this.arrayTotalNombres.push( dia + ' ' +(element+8)+'hs');
+        this.arrayTotalNombres.push( this.diasDeLaSemana[index] + ' ' + dia + ' ' +(element+8)+'hs');
       });
       
     });
@@ -198,12 +201,13 @@ export class SolicitarturnovdosComponent implements OnInit {
     let potencialNombre:string;
     let flagEncontro = false;
 
+
     this.arrayTotalDias.forEach((element:any, index:number) => {
       flagEncontro = false;
       potencialNombre = element + '_' + this.elEspecialista.data.apellido + ', ' + this.elEspecialista.data.nombre + '_' + this.arrayTotalHoras[index];
 
       this.afs.listaTurnos.forEach( (turno:any, index:number) => {
-        console.info('turno',turno);
+        // console.info('turno',turno);
         if(turno.id == potencialNombre)
         {
           flagEncontro = true;
@@ -213,8 +217,16 @@ export class SolicitarturnovdosComponent implements OnInit {
       {
         this.listaTurnosDisponibles.push(potencialNombre);
       }
+      else{
+        this.arrayTotalNombres.splice(index,1);
+      }
     });
+    console.info('arrayTotalSplice', this.arrayTotalNombres);
+    console.info('listaTurnosDisponibles', this.listaTurnosDisponibles);
+    console.info('diasDeLaSemana', this.diasDeLaSemana);
   } 
+
+  diasDeLaSemana:any = [];
 
 
   /** Le suma x dias a la fecha actual.
@@ -250,6 +262,32 @@ export class SolicitarturnovdosComponent implements OnInit {
 
       if(element == pepe)
       {
+        if(pepe == 1)
+        {
+          this.diasDeLaSemana.push('Lunes');
+        }
+        else if(pepe ==2)
+        {
+          this.diasDeLaSemana.push('Martes');
+        }
+        else if(pepe ==3)
+        {
+          this.diasDeLaSemana.push('Miercoles');
+        }
+        else if(pepe==4)
+        {
+          this.diasDeLaSemana.push('Jueves');
+        }
+        else if(pepe==5)
+        {
+          this.diasDeLaSemana.push('Viernes');
+        }
+        else if(pepe == 6)
+        {
+          this.diasDeLaSemana.push('Sabado');
+        }
+
+
         this.listadoDias.push(dia);
       }
       
