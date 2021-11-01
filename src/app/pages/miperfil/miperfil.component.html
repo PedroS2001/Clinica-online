@@ -85,10 +85,10 @@
 
         </div>
 
-        <div class="row" *ngIf="auth.currentUser.historiaClinica">
+        <div class="row" *ngIf="auth.currentUser.perfil == 'paciente'">
             <button type="button" class="btn btn-primary" (click)="verHistoriaClinica()">Historia Clinica</button>
             <div *ngIf="muestraHistoria">
-                <app-historiaclinica></app-historiaclinica>
+                <app-historiaclinica [usuario]="auth.currentUser" ></app-historiaclinica>
             </div>
             <!-- <div class="col-md-12 d-grid gap-2 mb-3">
                 <button (click)="verHistoriaClinica()" class="bttn-pill bttn-md bttn-success" >Historia clinica</button>

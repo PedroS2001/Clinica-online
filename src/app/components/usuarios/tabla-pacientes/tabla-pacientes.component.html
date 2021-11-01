@@ -11,6 +11,7 @@
                 <th>PASSWORD</th>
                 <th>OBRA SOCIAL</th>
                 <th colspan="2">IMAGENES</th>
+                <th>HC</th>
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,13 @@
                 <td>{{item.data.obrasocial}}</td>
                 <td> <img src={{item.data.imagen}} style="border-radius: 50%;" width="35px" height="35px" alt=""></td>
                 <td> <img src={{item.data.imagen2}} style="border-radius: 50%;" width="35px" height="35px" alt=""></td>
+                <td (click)="verHistoria(item)">Ver historia</td>
             </tr>
         </tbody>
     </table>
+
+    <div *ngIf="mostrarHistoria">
+        <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
+    </div>
+
 </div>  

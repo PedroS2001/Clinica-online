@@ -93,5 +93,13 @@ export class TablaPacientesComponent implements OnInit {
   }); 
  }
 
+ mostrarHistoria:boolean = false;
+ usuario:any;
+ verHistoria(usuario:any)
+ {
+   console.info('usuario',usuario);
+   this.mostrarHistoria = true;
+   this.usuario = usuario;
+ }
 
 }

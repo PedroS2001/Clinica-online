@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -7,7 +7,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   templateUrl: './historiaclinica.component.html',
   styleUrls: ['./historiaclinica.component.css']
 })
-export class HistoriaclinicaComponent implements OnInit {
+export class HistoriaclinicaComponent implements OnInit, OnChanges {
+
+
+  @Input() usuario:any;
 
   constructor(public auth:AuthService, public afs:FirebaseService) {
    }
@@ -16,12 +19,18 @@ export class HistoriaclinicaComponent implements OnInit {
     this.miHistoria();
   }
 
+  ngOnChanges()
+  {
+    this.miHistoria();
+    // this.usuario = this.usuario;
+  }
+
   historiasPaciente:any;
   miHistoria()
   {
     this.historiasPaciente = [];
     this.afs.listaHistorias.forEach( (historia:any) => {
-      if(historia.data.idPaciente == this.auth.currentUser.id)
+      if(historia.data.idPaciente == this.usuario.id)
       {
         this.historiasPaciente.push(historia.data);
       }
@@ -29,6 +38,7 @@ export class HistoriaclinicaComponent implements OnInit {
       
     });
     console.info(this.historiasPaciente);
+    this.separar();
   }
 
   keys:any;
@@ -45,9 +55,6 @@ export class HistoriaclinicaComponent implements OnInit {
       }
       console.info(juan);
       this.keys.push(juan);
-      // console.info(element.dinamicoUno.clave);
-      // console.info(element.dinamicoDos.clave);
-      // console.info(element.dinamicoTres.clave);
     });
 
     console.info(this.keys);

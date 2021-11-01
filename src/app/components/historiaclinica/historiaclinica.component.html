@@ -2,9 +2,6 @@
     <div class="row">
         <div class="col">HISTORIA CLINICA</div>
     </div>
-    <div class="row">
-        <div class="col">Paciente: {{auth.currentUser.apellido}}, {{auth.currentUser.nombre}}</div>
-    </div>
 
     <div class="row">
 
@@ -21,6 +18,8 @@
                     <p>{{keys[i].dinamicoUno}}</p>
                     <p>{{keys[i].dinamicoDos}}</p>
                     <p>{{keys[i].dinamicoTres}}</p>
+                    <p>Especialista: </p>
+                    <p>Especialidad: </p>
                 </div>
                 
                 <div class="col-6">
@@ -32,6 +31,8 @@
                     <p>{{item.dinamicoUno.valor}}</p>
                     <p>{{item.dinamicoDos.valor}}</p>
                     <p>{{item.dinamicoTres.valor}}</p>
+                    <p>{{item.especialista}}</p>
+                    <p>{{item.especialidad}}</p>
                 </div>
             </div>
           </div>
@@ -39,33 +40,5 @@
       </div>
      
     </div>
-
-    <table>
-        <thead>
-            <tr>
-                <th *ngFor="let item of keys">
-                    {{item.dinamicoUno}}
-                </th>
-                <!-- <th>{{item.dinamicoDos}}</th> -->
-                <!-- <th>{{item.dinamicoTres}}</th> -->
-            </tr>
-        </thead>
-
-        <!-- <tbody>
-            <tr *ngFor="let item of historiasPaciente">
-                <td>{{item.fecha}}</td>
-                <td>{{item.altura}}</td>
-                <td>{{item.peso}}</td>
-                <td>{{item.temperatura}}</td>
-                <td>{{item.presion}}</td>
-                <td>{{item.dinamicoUno.valor}}</td>
-                <td>{{item.dinamicoDos.valor}}</td>
-                <td>{{item.dinamicoTres.valor}}</td>
-
-            </tr>
-        </tbody> -->
-    </table>
-
-    <button (click)="separar()">SEPARAR</button>
 
 </div>

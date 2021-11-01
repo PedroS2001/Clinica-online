@@ -1,0 +1,17 @@
+<p>seccionpacientes works!</p>
+<button (click)="traerMISPacientes()">TRAER MIS PACIENTE</button>
+
+<div class="container">
+    <div class="row">
+        <div class="col" *ngFor="let item of pacientesEnteros">
+            <!-- {{item.data}} -->
+            <img (click)="mostrarHC(item)" src={{item.data.imagen}} style="width: 100px; height: 100px;" title={{item.data.apellido}} alt="">
+        </div>
+    </div>
+
+    <div *ngIf="mostrarHistoria">
+        <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
+    </div>
+
+</div>
+

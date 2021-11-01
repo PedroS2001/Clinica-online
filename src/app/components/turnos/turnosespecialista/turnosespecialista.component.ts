@@ -222,7 +222,7 @@ export class TurnosespecialistaComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-      this.completarHistoriaClinica(turno.data.dniPaciente, turno.data.fecha);
+      this.completarHistoriaClinica(turno.data.dniPaciente, turno.data.fecha, turno.data.especialidad);
     });
   }
 
@@ -242,7 +242,7 @@ export class TurnosespecialistaComponent implements OnInit {
   //#endregion
 
 
-  completarHistoriaClinica(dniPaciente:number, fechaa:any)
+  completarHistoriaClinica(dniPaciente:number, fechaa:any, especialidad:string)
   {
         /*************************** DATOS FIJOS */
     Swal.fire({
@@ -316,6 +316,8 @@ export class TurnosespecialistaComponent implements OnInit {
 
                 let historiaClinica:any = {
                   fecha: fechaa,
+                  especialista: this.auth.currentUser.apellido + ', '+ this.auth.currentUser.nombre,
+                  especialidad: especialidad,
                   altura: datosFijos.value.altura,
                   peso: datosFijos.value.peso,
                   temperatura : datosFijos.value.temperatura,

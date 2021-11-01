@@ -56,4 +56,9 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/solicitarturno');
   }
 
+  goToPacientes()
+  {
+    this.router.navigateByUrl('/especialista/pacientes');
+  }
+
 }

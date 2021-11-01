@@ -32,6 +32,7 @@ import { DetallesturnoComponent } from './components/turnos/detallesturno/detall
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
 import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
+import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacientes.component';
 
 
 
@@ -56,6 +57,7 @@ import { HistoriaclinicaComponent } from './components/historiaclinica/historiac
     CaptchaComponent,
     SolicitarturnovdosComponent,
     HistoriaclinicaComponent,
+    SeccionpacientesComponent,
   ],
   imports: [
     BrowserModule,
