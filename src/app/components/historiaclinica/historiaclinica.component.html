@@ -1,1 +1,71 @@
-<p>historiaclinica works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col">HISTORIA CLINICA</div>
+    </div>
+    <div class="row">
+        <div class="col">Paciente: {{auth.currentUser.apellido}}, {{auth.currentUser.nombre}}</div>
+    </div>
+
+    <div class="row">
+
+      <div class="col-xs-1-12" *ngFor="let item of historiasPaciente, let i = index">
+        <div class="card">
+          <div class="card-body">
+              <div class="row">
+                <div class="col-6">
+                    <p>Fecha: </p>
+                    <p>Altura: </p>
+                    <p>Peso: </p>
+                    <p>Temperatura: </p>
+                    <p>Presion: </p>
+                    <p>{{keys[i].dinamicoUno}}</p>
+                    <p>{{keys[i].dinamicoDos}}</p>
+                    <p>{{keys[i].dinamicoTres}}</p>
+                </div>
+                
+                <div class="col-6">
+                    <p>{{item.fecha}}</p>
+                    <p>{{item.altura}}</p>
+                    <p>{{item.peso}}</p>
+                    <p>{{item.temperatura}}</p>
+                    <p>{{item.presion}}</p>
+                    <p>{{item.dinamicoUno.valor}}</p>
+                    <p>{{item.dinamicoDos.valor}}</p>
+                    <p>{{item.dinamicoTres.valor}}</p>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th *ngFor="let item of keys">
+                    {{item.dinamicoUno}}
+                </th>
+                <!-- <th>{{item.dinamicoDos}}</th> -->
+                <!-- <th>{{item.dinamicoTres}}</th> -->
+            </tr>
+        </thead>
+
+        <!-- <tbody>
+            <tr *ngFor="let item of historiasPaciente">
+                <td>{{item.fecha}}</td>
+                <td>{{item.altura}}</td>
+                <td>{{item.peso}}</td>
+                <td>{{item.temperatura}}</td>
+                <td>{{item.presion}}</td>
+                <td>{{item.dinamicoUno.valor}}</td>
+                <td>{{item.dinamicoDos.valor}}</td>
+                <td>{{item.dinamicoTres.valor}}</td>
+
+            </tr>
+        </tbody> -->
+    </table>
+
+    <button (click)="separar()">SEPARAR</button>
+
+</div>

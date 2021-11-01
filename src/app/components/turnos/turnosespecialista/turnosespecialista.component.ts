@@ -222,7 +222,7 @@ export class TurnosespecialistaComponent implements OnInit {
           confirmButtonText: 'Aceptar'
         })
       }
-      this.completarHistoriaClinica(turno.data.dniPaciente);
+      this.completarHistoriaClinica(turno.data.dniPaciente, turno.data.fecha);
     });
   }
 
@@ -242,7 +242,7 @@ export class TurnosespecialistaComponent implements OnInit {
   //#endregion
 
 
-  completarHistoriaClinica(dniPaciente:number)
+  completarHistoriaClinica(dniPaciente:number, fechaa:any)
   {
         /*************************** DATOS FIJOS */
     Swal.fire({
@@ -292,7 +292,7 @@ export class TurnosespecialistaComponent implements OnInit {
           if (datosVariablesClaves.isConfirmed) {
               /***********************DATOS VARIABLES ----- VALORES */
             Swal.fire({
-              title: 'Multiple inputs',
+              title: 'Valores datos variables',
               showCancelButton: true,
               showLoaderOnConfirm: true,
               confirmButtonText: 'Enviar',
@@ -315,23 +315,24 @@ export class TurnosespecialistaComponent implements OnInit {
               if (datosVariablesValores.isConfirmed) {
 
                 let historiaClinica:any = {
+                  fecha: fechaa,
                   altura: datosFijos.value.altura,
                   peso: datosFijos.value.peso,
                   temperatura : datosFijos.value.temperatura,
                   presion: datosFijos.value.presion,
-                  dinamicoUno: {clave : datosVariablesClaves.value.clave1, valor: datosVariablesValores.value.valor1},
-                  dinamicoDos: {clave : datosVariablesClaves.value.clave2, valor: datosVariablesValores.value.valor2},
-                  dinamicoTres: {clave : datosVariablesClaves.value.clave3, valor: datosVariablesValores.value.valor3},
+                  dinamicoUno: {clave: datosVariablesClaves.value.clave1, valor: datosVariablesValores.value.valor1},
+                  dinamicoDos: {clave: datosVariablesClaves.value.clave2, valor: datosVariablesValores.value.valor2},
+                  dinamicoTres: {clave: datosVariablesClaves.value.clave3, valor: datosVariablesValores.value.valor3},
                 };
-                
-                // console.info('HISTORIA CLINICA', historiaClinica);
+
 
                 //Agrega a firebase
                 this.afs.arrayPacientes.forEach( (paciente:any) => {
                   if(paciente.data.dni == dniPaciente)
                   {
-                    alert(paciente.id + 'ide del paciente');
-                    this.afs.agregarHistoriaClinica(paciente.id, historiaClinica);
+                    alert(paciente.id + 'id del paciente');
+                    historiaClinica.idPaciente =  paciente.id;
+                    this.afs.agregarHistoriaClinica(historiaClinica);
                   }
                 });
               }

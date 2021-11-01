@@ -59,7 +59,6 @@
             </div>
         </div>
 
-
         <div class="row" *ngIf="misHorarios">
 
                 <div class="col mb-2" *ngFor="let item of listaDiario; let i = index ">
@@ -84,6 +83,16 @@
                     <button (click)="actualizar()">Aceptar cambios</button>
                 </div>
 
+        </div>
+
+        <div class="row" *ngIf="auth.currentUser.historiaClinica">
+            <button type="button" class="btn btn-primary" (click)="verHistoriaClinica()">Historia Clinica</button>
+            <div *ngIf="muestraHistoria">
+                <app-historiaclinica></app-historiaclinica>
+            </div>
+            <!-- <div class="col-md-12 d-grid gap-2 mb-3">
+                <button (click)="verHistoriaClinica()" class="bttn-pill bttn-md bttn-success" >Historia clinica</button>
+            </div> -->
         </div>
 
     </div>  

@@ -132,5 +132,10 @@ export class MiperfilComponent implements OnInit {
 
   }
 
+  muestraHistoria:boolean  = false;
+  verHistoriaClinica()
+  {
+    this.muestraHistoria = true;
+  }
 
 }
