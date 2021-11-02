@@ -1,4 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
@@ -60,6 +62,21 @@ export class HistoriaclinicaComponent implements OnInit, OnChanges {
 
     console.info(this.keys);
 
+  }
+
+  imprimirPDF(i:any)
+  {
+   //  let doc = new jspdf.jsPDF();
+   let data =(<HTMLElement>document.getElementById(i));  
+ 
+   html2canvas(data).then(canvas => {
+     const contentDataURL = canvas.toDataURL('image/png')  
+     // let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
+     let pdf = new jsPDF('p', 'cm', 'a4'); //Generates PDF in portrait mode
+     
+     pdf.addImage(contentDataURL, 'PNG', 0, 0, 0, 0);  
+     pdf.save('historiaclinica'+ new Date().toString() +'.pdf');   
+   }); 
   }
 
 

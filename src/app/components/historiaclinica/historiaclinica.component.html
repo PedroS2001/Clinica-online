@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
 
     <div class="row">
 
@@ -40,4 +40,43 @@
      
     </div>
 
+</div> -->
+<div class="row">
+  <div class="col-6" *ngFor="let item of historiasPaciente, let i = index">
+
+    <div class="card bg-light mb-3" id={{i}} style="width: 20rem;">
+      <div class="card-header">{{usuario.data.nombre}} {{usuario.data.apellido}}</div>
+      <div class="card-body">
+        <h5 class="card-title">{{item.fecha}}</h5>
+        <div class="row">
+          <div class="col-6">
+            <div class="row" class="card-text">Altura: </div>
+            <div class="row" class="card-text">Peso: </div>
+            <div class="row" class="card-text">Temperatura: </div>
+            <div class="row" class="card-text">Presion: </div>
+            <div class="row" class="card-text">{{keys[i].dinamicoUno}}</div>
+            <div class="row" class="card-text">{{keys[i].dinamicoDos}}</div>
+            <div class="row" class="card-text">{{keys[i].dinamicoTres}}</div>
+            <div class="row" class="card-text">Especialidad: </div>
+            <div class="row" class="card-text">Especialista: </div>
+          </div>
+          <div class="col-6">
+            <div class="row" class="card-text">{{item.altura}}</div>
+            <div class="row" class="card-text">{{item.peso}}</div>
+            <div class="row" class="card-text">{{item.temperatura}}</div>
+            <div class="row" class="card-text">{{item.presion}}</div>
+            <div class="row" class="card-text">{{item.dinamicoUno.valor}}</div>
+            <div class="row" class="card-text">{{item.dinamicoDos.valor}}</div>
+            <div class="row" class="card-text">{{item.dinamicoTres.valor}}</div>
+            <div class="row" class="card-text">{{item.especialidad}}</div>
+            <div class="row" class="card-text">{{item.especialista}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button type="button" class="btn btn-danger" (click)="imprimirPDF(i)">Descargar PDF</button>
+      </div>
+    </div>
+
+  </div>
 </div>
