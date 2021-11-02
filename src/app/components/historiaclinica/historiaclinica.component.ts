@@ -32,6 +32,7 @@ export class HistoriaclinicaComponent implements OnInit, OnChanges {
     this.afs.listaHistorias.forEach( (historia:any) => {
       if(historia.data.idPaciente == this.usuario.id)
       {
+        console.info('usuario',this.usuario);
         this.historiasPaciente.push(historia.data);
       }
       else{console.info('NO')};

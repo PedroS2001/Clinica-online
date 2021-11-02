@@ -13,6 +13,7 @@ export class SeccionpacientesComponent implements OnInit {
   constructor(private auth:AuthService, private afs:FirebaseService) { }
 
   ngOnInit(): void {
+    this.traerMISPacientes();
   }
 
   pacientesEnteros:any = [];

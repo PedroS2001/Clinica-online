@@ -1,7 +1,4 @@
 <div class="container">
-    <div class="row">
-        <div class="col">HISTORIA CLINICA</div>
-    </div>
 
     <div class="row">
 
@@ -10,7 +7,8 @@
           <div class="card-body">
               <div class="row">
                 <div class="col-6">
-                    <p>Fecha: </p>
+                    <h6>Fecha: </h6>
+                    <h6>Paciente</h6>
                     <p>Altura: </p>
                     <p>Peso: </p>
                     <p>Temperatura: </p>
@@ -23,7 +21,8 @@
                 </div>
                 
                 <div class="col-6">
-                    <p>{{item.fecha}}</p>
+                    <h6>{{item.fecha}}</h6>
+                    <h6>{{usuario.data.nombre}} {{usuario.data.apellido}}</h6>
                     <p>{{item.altura}}</p>
                     <p>{{item.peso}}</p>
                     <p>{{item.temperatura}}</p>
