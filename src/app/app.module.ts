@@ -33,6 +33,7 @@ import { CaptchaComponent } from './components/captcha/captcha.component';
 import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
 import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
 import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacientes.component';
+import { EspecialistaComponent } from './pages/especialista/especialista.component';
 
 
 
@@ -58,6 +59,7 @@ import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacie
     SolicitarturnovdosComponent,
     HistoriaclinicaComponent,
     SeccionpacientesComponent,
+    EspecialistaComponent,
   ],
   imports: [
     BrowserModule,

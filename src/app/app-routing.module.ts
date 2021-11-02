@@ -16,13 +16,14 @@ const routes: Routes = [
   { path: 'bienvenida', component: BienvenidaComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registro', component: RegisterComponent },
-  { path: 'usuarios', component: UsuariosComponent },
   { path: 'solicitarturno', component: SolicitarturnovdosComponent },
   { path: 'miperfil', component: MiperfilComponent},
-  { path: 'paciente/misturnos', component: TurnospacienteComponent},
-  { path: 'especialista/misturnos', component: TurnosespecialistaComponent},
-  { path: 'administrador/turnos', component: TurnosadministradorComponent},
-  { path: 'especialista/pacientes', component: SeccionpacientesComponent}
+  
+  { path: 'paciente', loadChildren: () => import('./pages/paciente/paciente.module').then(m => m.PacienteModule) },
+  { path: 'administrador', loadChildren: () => import('./pages/administrador/administrador.module').then(m => m.AdministradorModule) },
+  { path: 'especialista', loadChildren: () => import('./pages/especialista/especialista.module').then(m => m.EspecialistaModule) },
+
+
 
 
 
