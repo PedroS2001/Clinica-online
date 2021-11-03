@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit {
 
   goToUsuarios()
   {
-    this.router.navigateByUrl('/usuarios');
+    this.router.navigateByUrl('/administrador/usuarios');
   }
 
   goToTurnosPaciente()
@@ -54,6 +54,11 @@ export class NavbarComponent implements OnInit {
   goToSolicitarTurno()
   {
     this.router.navigateByUrl('/solicitarturno');
+  }
+
+  goToPacientes()
+  {
+    this.router.navigateByUrl('/especialista/pacientes');
   }
 
 }

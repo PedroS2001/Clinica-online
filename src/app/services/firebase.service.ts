@@ -20,6 +20,7 @@ export class FirebaseService {
     this.traerPacientes();
     this.traerEspecialidades();
     this.traerTurnos();
+    this.leerHistoriasClinicas();
    }
 
   AgregarPaciente(paciente:any)
@@ -187,6 +188,26 @@ export class FirebaseService {
     return this.afs.collection('turnos').doc(documento).update({'encuesta': encuesta});
   }
 
+  agregarHistoriaClinica(historia:any)
+  {
+    return this.afs.collection('historiasClinicas').add(historia);
+  }
 
+  listaHistorias:any;
+  leerHistoriasClinicas()
+  {
+    this.afs.collection('historiasClinicas').snapshotChanges().subscribe((Historias) => {
+      this.listaHistorias = [];
+      Historias.forEach((item: any) => {
+        this.listaHistorias.push({
+          data : item.payload.doc.data(),
+          id: item.payload.doc.id
+        });
+      })
+      setTimeout(() => {
+        console.info('Historias', this.listaHistorias);
+      }, 1500);   
+    });
+  }
 
 }

@@ -1,4 +1,4 @@
-<div class="jumbotron jumbotron-fluid">
+<!-- <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-3">PAGINA DE BIENVENIDA</h1>
         <p class="lead">Jumbo helper text</p>
@@ -8,4 +8,38 @@
         <button class="bttn-pill bttn-md bttn-primary" (click)="goToRegistro()" >Ir a Registro</button>
 
     </div>
-</div>
+</div> -->
+
+<div class="container py-4 slit-in-diagonal-1" style="max-width: 750px;" >
+    <div class="p-5 mb-4 bg-light rounded-3"  id="imgHeader">
+      <div class="container-fluid py-5" align="center">
+        <h1 class="display-5 fw-bold">Clinica Online</h1>
+        <p class="col-md-8 fs-4">Bienvenido a la clinica online. Registrese o Ingrese en su cuenta</p>
+      </div>
+    </div>
+
+    <div class="row align-items-md-stretch">
+        <div class="col-md-6">
+            <div class="h-100 p-5 bg-light border rounded-3" id="imgInicio">
+              <h2>Iniciar sesion</h2>
+              <p>Si ya tiene una cuenta inicie sesion.</p>
+               <!-- <button class="bttn-pill bttn-md bttn-primary" (click)="goToLogin()" >Ingresar </button> -->
+              <button class="btn btn-secondary" (click)="goToLogin()"  type="button">Ingreso</button>
+            </div>
+          </div>
+
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-light border rounded-3" id="imgRegistro">
+          <h2>Registrarse</h2>
+          <p>Si no tiene una cuenta ingrese aqui para registrarse</p>
+          <button class="btn btn-secondary"  (click)="goToRegistro()" type="button">Registro</button>
+        <!-- <button class="bttn-pill bttn-md bttn-primary" (click)="goToRegistro()" >Ir a Registro</button> -->
+
+        </div>
+      </div>
+    </div>
+
+    <footer class="pt-3 mt-4 text-muted border-top">
+      &copy; 2021
+    </footer>
+  </div>

@@ -1,6 +1,6 @@
 <div class="container-fluid" align="center">
 
-    <div class="row" *ngIf="auth.currentUser.perfil == 'administrador' ">
+    <div class="row" *ngIf="auth.currentUser.perfil == 'administrador'">
         <div class="col-12">
             <h2>Seleccione el paciente</h2>
             <app-tabla-pacientes (pacienteSeleccionado)="evento($event)" ></app-tabla-pacientes>

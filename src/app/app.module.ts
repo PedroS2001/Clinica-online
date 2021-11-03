@@ -30,6 +30,10 @@ import { SolicitarturnoComponent } from './pages/solicitarturno/solicitarturno.c
 import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
 import { DetallesturnoComponent } from './components/turnos/detallesturno/detallesturno.component';
 import { CaptchaComponent } from './components/captcha/captcha.component';
+import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicitarturnovdos.component';
+import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
+import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacientes.component';
+import { EspecialistaComponent } from './pages/especialista/especialista.component';
 
 
 
@@ -52,6 +56,10 @@ import { CaptchaComponent } from './components/captcha/captcha.component';
     TurnosadministradorComponent,
     DetallesturnoComponent,
     CaptchaComponent,
+    SolicitarturnovdosComponent,
+    HistoriaclinicaComponent,
+    SeccionpacientesComponent,
+    EspecialistaComponent,
   ],
   imports: [
     BrowserModule,

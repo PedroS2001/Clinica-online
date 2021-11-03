@@ -21,6 +21,11 @@
             <app-tabla-pacientes></app-tabla-pacientes>
         </div>
     </div>
+    <div class="row m-4">
+        <div class="col" align="center">
+            <button class="bttn-float bttn-md bttn-primary"(click)="exportAsXLSX()">Exportar usuarios como EXCEL</button>
+        </div>
+    </div>
 
     <div class="row m-4">
         <div class="col" align="center">
@@ -28,6 +33,7 @@
             <!-- <button class="btn btn-primary btn-block mb-4" (click)="btnAgregar()">Agregar Usuario Administrador</button> -->
         </div>
     </div>
+    
     <div class="row m-4" *ngIf="agregarUsuario">
         <div class="container">
             <app-registro [tipoUsuario]="'administrador'"></app-registro>
