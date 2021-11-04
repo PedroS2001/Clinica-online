@@ -1,5 +1,24 @@
 <div class="container">
 
+    <button type="button" (click)="filtrarPorTodo()" class="btn btn-primary">Abrir filtros</button>
+
+    <select (click)="seleccionaF()" class="form-select" id="pepe" aria-label="Default select example">
+        <option value={{item}} *ngFor="let item of objectKeys, let i = index" >{{item}}</option>
+    </select>
+
+    <select (click)="seleccionaTT()" id="mama" class="form-select" aria-label="Default select example">
+        <option *ngFor="let elemento of todosFiltros[jancarlos], let indice = index" value={{indice}} >{{elemento}}</option>
+    </select>
+    
+    <!-- <div class="row">
+        <div class="row p-3" *ngFor="let item of objectKeys, let i = index">
+            <h5>{{item}} </h5>
+            <div class="col-3 p-3" *ngFor="let elemento of todosFiltros[item], let indice = index">
+                <button type="button" (click)="filtrarPorElemento(item, indice)" class="btn btn-primary">{{elemento}}</button>
+            </div>
+        </div>
+    </div> -->
+<!-- 
     <div class="row">
         <div class="col-3 m-3">
             <h5>Filtrar por paciente: </h5>
@@ -7,15 +26,15 @@
         <div class="col-3 m-3" *ngFor="let item of pacientesFiltrados">
             <button type="button" (click)="filtrarPorPaciente(item)" class="btn btn-primary">{{item}}</button>
         </div>
-    </div>
-    <div class="row">
+    </div> -->
+    <!-- <div class="row">
         <div class="col-3 m-3">
             <h5>Filtrar por especialidad: </h5>
         </div>
         <div class="col-3 m-3" *ngFor="let item of especialidadesFiltradas">
             <button type="button" (click)="filtrarPorEspecialidad(item)" class="btn btn-primary">{{item}}</button>
         </div>
-    </div>
+    </div> -->
 
     <div class="row" >
         <div class="col">
