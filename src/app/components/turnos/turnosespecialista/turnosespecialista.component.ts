@@ -37,7 +37,7 @@ export class TurnosespecialistaComponent implements OnInit {
     this.turnosDelEspecialista = [];
 
     listadoTurnos.forEach( (turno:any) => {
-      console.log(turno);
+      // console.log(turno);
       if(turno.data.dniEspecialista == this.auth.currentUser.dni)
       {
         this.turnosDelEspecialista.push(turno);
@@ -62,7 +62,7 @@ export class TurnosespecialistaComponent implements OnInit {
 
     let arrayAux:any = [];
     this.turnosDelEspecialista.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.paciente == paciente )
       {
         arrayAux.push(element);
@@ -82,7 +82,7 @@ export class TurnosespecialistaComponent implements OnInit {
 
     let arrayAux:any = [];
     this.turnosDelEspecialista.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.especialidad == item )
       {
         arrayAux.push(element);
@@ -143,8 +143,8 @@ export class TurnosespecialistaComponent implements OnInit {
     this.todosFiltros[filtro] = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.info('TURNOS', this.turnosSinFiltrar);
-    console.log('filtroPOR'+filtro,this.todosFiltros[filtro])
+    // console.info('TURNOS', this.turnosSinFiltrar);
+    // console.log('filtroPOR'+filtro,this.todosFiltros[filtro])
   }
 
   objectKeys:any;
@@ -172,15 +172,15 @@ export class TurnosespecialistaComponent implements OnInit {
 
   filtrarPorElemento(item:any, indice:any)
   {
-    console.info('item',item);
-    console.info('indice',indice);
+    // console.info('item',item);
+    // console.info('indice',indice);
 
-    console.info('cagada',this.todosFiltros[item][indice]);
+    // console.info('cagada',this.todosFiltros[item][indice]);
     let paciente = this.todosFiltros[item][indice]
 
     let arrayAux:any = [];
     this.turnosSinFiltrar.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data[item] == paciente )
       {
         arrayAux.push(element);

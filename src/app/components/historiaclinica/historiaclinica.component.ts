@@ -34,13 +34,13 @@ export class HistoriaclinicaComponent implements OnInit, OnChanges {
     this.afs.listaHistorias.forEach( (historia:any) => {
       if(historia.data.idPaciente == this.usuario.id)
       {
-        console.info('usuario',this.usuario);
+        // console.info('usuario',this.usuario);
         this.historiasPaciente.push(historia.data);
       }
-      else{console.info('NO')};
+      // else{console.info('NO')};
       
     });
-    console.info(this.historiasPaciente);
+    // console.info(this.historiasPaciente);
     this.separar();
   }
 
@@ -56,11 +56,11 @@ export class HistoriaclinicaComponent implements OnInit, OnChanges {
         dinamicoDos : element.dinamicoDos.clave,
         dinamicoTres : element.dinamicoTres.clave
       }
-      console.info(juan);
+      // console.info(juan);
       this.keys.push(juan);
     });
 
-    console.info(this.keys);
+    // console.info(this.keys);
 
   }
 

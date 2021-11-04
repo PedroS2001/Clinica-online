@@ -34,7 +34,7 @@ export class MiperfilComponent implements OnInit {
     this.listaHorarios = this.auth.currentUser.horarios;
     this.listaDias = this.auth.currentUser.dias;
     this.asignarDias();
-    console.info('listaDias', this.listaDias);
+    // console.info('listaDias', this.listaDias);
     if(this.flag)
     {
       this.listaDias.shift();
@@ -89,7 +89,7 @@ export class MiperfilComponent implements OnInit {
       this.nuevaListaDias.unshift(false);
       this.flag2 = false;
     }
-    console.info('listaoDias', this.nuevaListaDias);
+    // console.info('listaoDias', this.nuevaListaDias);
   }
 
   levantarDatosCheckboxHoras()
@@ -100,7 +100,7 @@ export class MiperfilComponent implements OnInit {
       // console.log('checkeado?' + item.checked + ' indice ' + index);
     });
 
-    console.info('listaodHORARIO', this.nuevaListaHorarios);
+    // console.info('listaodHORARIO', this.nuevaListaHorarios);
   }
   
   actualizar()
@@ -125,8 +125,8 @@ export class MiperfilComponent implements OnInit {
 
     /*console.log('Se modificaria el siguiento documento... colection especialistas doc ' + documento);
     console.log('Se le asignarian los siguientes valores ');*/
-    console.log('NUEVOS DIAS ' + this.nuevaListaDias);
-    console.log('NUEVOS HORARIOS ' + this.nuevaListaHorarios);
+    // console.log('NUEVOS DIAS ' + this.nuevaListaDias);
+    // console.log('NUEVOS HORARIOS ' + this.nuevaListaHorarios);
 
 
 

@@ -62,7 +62,7 @@ export class DetallesturnoComponent implements OnInit {
     this.turnosDelPaciente = [];
 
     listadoTurnos.forEach( (item:any) => {
-      console.log(item);
+      // console.log(item);
       if(item.data.dniPaciente == this.auth.currentUser.dni)
       {
         this.turnosDelPaciente.push(item);
@@ -85,7 +85,7 @@ export class DetallesturnoComponent implements OnInit {
 
     let arrayAux:any = [];
     this.turnosDelPaciente.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.especialista == paciente )
       {
         arrayAux.push(element);
@@ -105,7 +105,7 @@ export class DetallesturnoComponent implements OnInit {
 
     let arrayAux:any = [];
     this.turnosDelPaciente.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.especialidad == item )
       {
         arrayAux.push(element);
@@ -132,7 +132,7 @@ export class DetallesturnoComponent implements OnInit {
       return data.indexOf(item) === index;
     })
 
-    console.log(this.especialistasFiltrados)
+    // console.log(this.especialistasFiltrados)
   }
 
   /** Filtra las especialidades del especialista
@@ -151,7 +151,7 @@ export class DetallesturnoComponent implements OnInit {
     this.especialidadesFiltradas = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.log(this.especialidadesFiltradas)
+    // console.log(this.especialidadesFiltradas)
   }
 
 
@@ -181,8 +181,8 @@ export class DetallesturnoComponent implements OnInit {
     this.todosFiltros[filtro] = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.info('TURNOS', this.turnosSinFiltrar);
-    console.log('filtroPOR'+filtro,this.todosFiltros[filtro])
+    // console.info('TURNOS', this.turnosSinFiltrar);
+    // console.log('filtroPOR'+filtro,this.todosFiltros[filtro])
   }
 
   objectKeys:any;
@@ -210,15 +210,15 @@ export class DetallesturnoComponent implements OnInit {
 
   filtrarPorElemento(item:any, indice:any)
   {
-    console.info('item',item);
-    console.info('indice',indice);
+    // console.info('item',item);
+    // console.info('indice',indice);
 
-    console.info('cagada',this.todosFiltros[item][indice]);
+    // console.info('cagada',this.todosFiltros[item][indice]);
     let paciente = this.todosFiltros[item][indice]
 
     let arrayAux:any = [];
     this.turnosSinFiltrar.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data[item] == paciente )
       {
         arrayAux.push(element);
@@ -278,7 +278,7 @@ export class DetallesturnoComponent implements OnInit {
 
   verComentario(item:any)
   {
-    console.info('item',item);
+    // console.info('item',item);
     let quien = item.data.comentarioEspecialista ? 'especialista' : 'paciente';
     let comentario = item.data.comentarioEspecialista ? item.data.comentarioEspecialista : item.data.comentarioPaciente;
     Swal.fire({
@@ -292,7 +292,7 @@ export class DetallesturnoComponent implements OnInit {
 
   completarEncuesta(item:any)
   {
-    console.info('item',item);
+    // console.info('item',item);
     Swal.fire({
       // text: 'Comentario de ' + item.data.comentarioDe + ':  ' + item.data.comentario,
       icon: 'question',
@@ -336,7 +336,7 @@ export class DetallesturnoComponent implements OnInit {
                   confirmButtonText: 'Enviar'
                 }).then(async (result4)=>{
                   if (result4.isConfirmed) {
-                    console.info('todaslasrespuestas', result1.value,result2.value,result3.value, result4.value)
+                    // console.info('todaslasrespuestas', result1.value,result2.value,result3.value, result4.value)
 
                     let preguntas = [];
                     preguntas.push(result1.value);
@@ -366,7 +366,7 @@ export class DetallesturnoComponent implements OnInit {
 
   calificarLaAtencion(item:any)
   {
-    console.info('item',item);
+    // console.info('item',item);
     Swal.fire({
       input: 'range',
       inputAttributes: {min:'1', max:'5', step:'1'},
@@ -377,7 +377,7 @@ export class DetallesturnoComponent implements OnInit {
       confirmButtonText: 'Enviar'
     })
     .then(async (result) => {
-      console.info('estrellas',result.value);
+      // console.info('estrellas',result.value);
       if (result.isConfirmed) {
         Swal.fire({
           input: 'text',

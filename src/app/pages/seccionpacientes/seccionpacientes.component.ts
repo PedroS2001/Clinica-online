@@ -29,7 +29,7 @@ export class SeccionpacientesComponent implements OnInit {
     pacientesFiltrados = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.info(pacientesFiltrados);
+    // console.info(pacientesFiltrados);
 
     let elEspecialista = this.auth.currentUser.apellido + ', ' +this.auth.currentUser.nombre;
 
@@ -53,14 +53,14 @@ export class SeccionpacientesComponent implements OnInit {
           {
             pp=false;
             this.misPacientes.push(paciente);
-            console.info('dniIgual');
+            // console.info('dniIgual');
           }
         }
-        console.info('dnipaciente', paciente);
+        // console.info('dnipaciente', paciente);
       });
     });
 
-    console.info('paceintecConTurnos', this.misPacientes);
+    // console.info('paceintecConTurnos', this.misPacientes);
 
     this.misPacientes.forEach( (miPaciente:any) => {
       
@@ -73,7 +73,7 @@ export class SeccionpacientesComponent implements OnInit {
       });
     });
 
-    console.info('pacietne entero', this.pacientesEnteros);
+    // console.info('pacietne entero', this.pacientesEnteros);
 
   }
 

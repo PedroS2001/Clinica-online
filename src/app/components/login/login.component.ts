@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
     this.authService.Ingresar(correo, clave)
     .then((result) => {
   
-      console.info('RESULTADO', result);
+      // console.info('RESULTADO', result);
       //si tiene el email verificado lo logueo, sino le aviso que no esta logueado
       if(result.user?.emailVerified)
       {
@@ -93,7 +93,7 @@ export class LoginComponent implements OnInit {
         }
         this.authService.estaLogueado = true;
         
-        console.info('currentUser', this.authService.currentUser);  
+        // console.info('currentUser', this.authService.currentUser);  
         this.toastr.success('Ingreso con exito','Bienvenido', {
           timeOut:1500,
           closeButton:true

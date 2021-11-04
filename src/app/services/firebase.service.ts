@@ -70,7 +70,7 @@ export class FirebaseService {
         });
       })
       setTimeout(() => {
-        console.info('Especialistas', this.arrayEspecialistas);
+        // console.info('Especialistas', this.arrayEspecialistas);
       }, 1500);
     });
   }
@@ -86,7 +86,7 @@ export class FirebaseService {
         });
       })
       setTimeout(() => {
-        console.info('Pacientes', this.arrayPacientes);
+        // console.info('Pacientes', this.arrayPacientes);
       }, 1500);
     });
   }
@@ -102,7 +102,7 @@ export class FirebaseService {
         });
       })
       setTimeout(() => {
-        console.info('Administradores', this.arrayAdministradores);
+        // console.info('Administradores', this.arrayAdministradores);
       }, 1500);   
     });
   }
@@ -123,7 +123,7 @@ export class FirebaseService {
         );
       })
       setTimeout(() => {
-        console.info('Especialidades', this.listaEspecialidades);
+        // console.info('Especialidades', this.listaEspecialidades);
       }, 1500);   
     });
   }
@@ -149,7 +149,7 @@ export class FirebaseService {
         });
       })
       setTimeout(() => {
-        console.info('Turnos', this.listaTurnos);
+        // console.info('Turnos', this.listaTurnos);
       }, 1500);   
     });
   }
@@ -205,7 +205,7 @@ export class FirebaseService {
         });
       })
       setTimeout(() => {
-        console.info('Historias', this.listaHistorias);
+        // console.info('Historias', this.listaHistorias);
       }, 1500);   
     });
   }

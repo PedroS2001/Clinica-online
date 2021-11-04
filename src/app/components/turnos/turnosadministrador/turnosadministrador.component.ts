@@ -37,7 +37,7 @@ export class TurnosadministradorComponent implements OnInit {
     this.todosLosTurnos = [];
 
     listadoTurnos.forEach( (item:any) => {
-      console.log(item);
+      // console.log(item);
 
       this.todosLosTurnos.push(item);
     });
@@ -55,7 +55,7 @@ export class TurnosadministradorComponent implements OnInit {
 
     let arrayAux:any = [];
     this.todosLosTurnos.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.especialista == paciente )
       {
         arrayAux.push(element);
@@ -75,7 +75,7 @@ export class TurnosadministradorComponent implements OnInit {
 
     let arrayAux:any = [];
     this.todosLosTurnos.forEach( (element:any) => {
-      console.log(element);
+      // console.log(element);
       if(element.data.especialidad == item )
       {
         arrayAux.push(element);
@@ -102,7 +102,7 @@ export class TurnosadministradorComponent implements OnInit {
       return data.indexOf(item) === index;
     })
 
-    console.log(this.especialistasFiltrados)
+    // console.log(this.especialistasFiltrados)
   }
 
   /** Filtra las especialidades del especialista
@@ -121,7 +121,7 @@ export class TurnosadministradorComponent implements OnInit {
     this.especialidadesFiltradas = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.log(this.especialidadesFiltradas)
+    // console.log(this.especialidadesFiltradas)
   }
 
 
