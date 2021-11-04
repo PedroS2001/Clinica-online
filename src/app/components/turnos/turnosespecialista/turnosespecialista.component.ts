@@ -24,6 +24,7 @@ export class TurnosespecialistaComponent implements OnInit {
     this.cargarTurnos();
     this.filtrarEspecialidades();
     this.filtrarPacientes();
+    this.filtrarPorX('especialidad')
   }
 
 
@@ -43,6 +44,11 @@ export class TurnosespecialistaComponent implements OnInit {
       }
     });
     this.turnosSinFiltrar = this.turnosDelEspecialista;
+
+
+    (<HTMLInputElement> document.getElementById('mama')).value = '';
+    (<HTMLInputElement> document.getElementById('pepe')).value = '';
+
   }
 
   /** Filtra el array de pacientes que se va a mostrar por un paciente en particular
@@ -103,7 +109,7 @@ export class TurnosespecialistaComponent implements OnInit {
       return data.indexOf(item) === index;
     })
 
-    console.log(this.pacientesFiltrados)
+    // console.log(this.pacientesFiltrados)
   }
 
   /** Filtra las especialidades del especialista
@@ -122,9 +128,67 @@ export class TurnosespecialistaComponent implements OnInit {
     this.especialidadesFiltradas = data.filter((item:any,index:any)=>{
       return data.indexOf(item) === index;
     })
-    console.log(this.especialidadesFiltradas)
+    // console.log(this.especialidadesFiltradas)
   }
 
+  todosFiltros:any = [];
+  filtrarPorX(filtro:any)
+  {
+    this.todosFiltros[filtro] = {};
+    let data:any = [];
+    this.turnosSinFiltrar.forEach( (element:any) => {
+      data.push(element.data[filtro]);
+    });
+
+    this.todosFiltros[filtro] = data.filter((item:any,index:any)=>{
+      return data.indexOf(item) === index;
+    })
+    console.info('TURNOS', this.turnosSinFiltrar);
+    console.log('filtroPOR'+filtro,this.todosFiltros[filtro])
+  }
+
+  objectKeys:any;
+  filtrarPorTodo()
+  {
+    this.objectKeys = Object.keys(this.turnosSinFiltrar[0].data);
+    this.objectKeys.forEach( (element:any) => {
+      this.filtrarPorX(element);
+    });
+
+  }
+
+  jancarlos:any;
+  seleccionaF()
+  {
+    this.jancarlos = (<HTMLInputElement> document.getElementById('pepe')).value;
+    this.seleccionaTT();
+  };
+
+  seleccionaTT()
+  {
+    let mama = (<HTMLInputElement> document.getElementById('mama')).value;
+    this.filtrarPorElemento(this.jancarlos, mama)
+  }
+
+  filtrarPorElemento(item:any, indice:any)
+  {
+    console.info('item',item);
+    console.info('indice',indice);
+
+    console.info('cagada',this.todosFiltros[item][indice]);
+    let paciente = this.todosFiltros[item][indice]
+
+    let arrayAux:any = [];
+    this.turnosSinFiltrar.forEach( (element:any) => {
+      console.log(element);
+      if(element.data[item] == paciente )
+      {
+        arrayAux.push(element);
+      }
+    });
+
+    this.turnosDelEspecialista = arrayAux;
+  }
 
 
 
