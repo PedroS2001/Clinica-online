@@ -109,6 +109,10 @@ export class FirebaseService {
 
 
 
+  AgregarEspecialidad(especialidad:any)
+  {
+    return this.afs.collection('especialidades').doc(especialidad).set({'especialidad':especialidad});
+  }
   LeerEspecialidades()
   {
     return this.afs.collection('especialidades').snapshotChanges();

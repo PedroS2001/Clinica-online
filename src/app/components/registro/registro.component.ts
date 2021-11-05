@@ -160,6 +160,19 @@ export class RegistroComponent implements OnInit, OnChanges {
         }
         else if(this.tipoUsuario == 'especialista')
         {
+          let bandera = false;
+          this.afs.listaEspecialidades.forEach( (unaEspecialidad:any) => {
+            if(unaEspecialidad == formValue.especialidad)
+            {
+              console.info('pepe');
+              bandera = true;
+            }
+          });
+          if(!bandera)
+          {
+            this.afs.AgregarEspecialidad(formValue.especialidad);
+          }
+
           this.nuevoUsuario = {
             nombre: formValue.nombre,
             apellido: formValue.apellido,
