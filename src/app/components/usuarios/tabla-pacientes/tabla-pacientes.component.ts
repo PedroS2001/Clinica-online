@@ -27,13 +27,56 @@ export class TablaPacientesComponent implements OnInit {
   }
 
 
- mostrarHistoria:boolean = false;
+//  mostrarHistoria:boolean = false;
+//  usuario:any;
+//  verHistoria(usuario:any)
+//  {
+//    console.info('usuario',usuario);
+//    this.mostrarHistoria = true;
+//    this.usuario = usuario;
+//  }
+
+ 
+
  usuario:any;
- verHistoria(usuario:any)
+ mostrarHistoria:boolean = false;
+ turnosDelPaciente:any;
+ mostrarHC(paciente:any)
  {
-   console.info('usuario',usuario);
-   this.mostrarHistoria = true;
-   this.usuario = usuario;
+   this.turnosDelPaciente = [];
+   console.info('paciente',paciente);
+   this.afs.listaTurnos.forEach( (unTurno:any) => {
+     if(unTurno.data.dniPaciente == paciente.data.dni )
+     {
+       this.turnosDelPaciente.push(unTurno);
+     }
+     
+   });
+
+   this.exportAsXLSX(paciente);
  }
+
+
+ exportAsXLSX(paciente:any):void {
+  let arrayDatas:any = [];
+  let elementFilter:any;
+
+
+  this.turnosDelPaciente.forEach((turno:any) => {
+
+    elementFilter = [{
+      fecha: turno.data.fecha,
+      horario: turno.data.horario+'hs',
+      especialidad: turno.data.especialidad,
+      especialista: turno.data.especialista
+
+    }];
+
+    console.info('elementofilter', elementFilter[0]);
+    arrayDatas.push(elementFilter[0]);
+  });
+
+  this.excelService.exportAsExcelFile(arrayDatas, 'turnosTomadosPor:' + paciente.data.apellido);
+  }
 
 }
