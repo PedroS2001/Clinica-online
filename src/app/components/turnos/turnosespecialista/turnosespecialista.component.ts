@@ -157,39 +157,6 @@ export class TurnosespecialistaComponent implements OnInit {
 
   }
 
-  jancarlos:any;
-  seleccionaF()
-  {
-    this.jancarlos = (<HTMLInputElement> document.getElementById('pepe')).value;
-    this.seleccionaTT();
-  };
-
-  seleccionaTT()
-  {
-    let mama = (<HTMLInputElement> document.getElementById('mama')).value;
-    this.filtrarPorElemento(this.jancarlos, mama)
-  }
-
-  filtrarPorElemento(item:any, indice:any)
-  {
-    console.info('item',item);
-    console.info('indice',indice);
-
-    console.info('cagada',this.todosFiltros[item][indice]);
-    let paciente = this.todosFiltros[item][indice]
-
-    let arrayAux:any = [];
-    this.turnosSinFiltrar.forEach( (element:any) => {
-      console.log(element);
-      if(element.data[item] == paciente )
-      {
-        arrayAux.push(element);
-      }
-    });
-
-    this.turnosDelEspecialista = arrayAux;
-  }
-
 
 
   //#region ACCIONES
@@ -414,12 +381,11 @@ export class TurnosespecialistaComponent implements OnInit {
   }
 
 
-  searchParam:any = 'hola';
+  parametro:string = '';
   superFiltro()
   {
     this.turnosDelEspecialista = [];
-    console.info(this.searchParam);
-    this.searchParam = this.searchParam.trim().toLowerCase();
+    this.parametro = this.parametro.trim().toLowerCase();
 
     this.turnosSinFiltrar.forEach( (element:any) => {
       let dniEspecialista = element?.data?.dniEspecialista.toString().toLowerCase();
@@ -432,10 +398,8 @@ export class TurnosespecialistaComponent implements OnInit {
       let horario = element?.data?.horario?.toString().toLowerCase();
       let paciente = element?.data?.paciente?.toString().toLowerCase();
 
-
-      console.log(element);
-      if(dniEspecialista?.includes(this.searchParam) || dniPaciente?.includes(this.searchParam) || especialidad?.includes(this.searchParam) || especialista?.includes(this.searchParam) ||
-      comentarioEspecialista?.includes(this.searchParam) || estado?.includes(this.searchParam) || fecha?.includes(this.searchParam) || horario?.includes(this.searchParam) || paciente?.includes(this.searchParam)     )
+      if(dniEspecialista?.includes(this.parametro) || dniPaciente?.includes(this.parametro) || especialidad?.includes(this.parametro) || especialista?.includes(this.parametro) ||
+      comentarioEspecialista?.includes(this.parametro) || estado?.includes(this.parametro) || fecha?.includes(this.parametro) || horario?.includes(this.parametro) || paciente?.includes(this.parametro)     )
       {
         this.turnosDelEspecialista.push(element);
       }

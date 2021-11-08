@@ -53,22 +53,11 @@
             </div>
         </div>
 
-        <div class="row" *ngIf="auth.currentUser.obrasocial" align="center">
-            <div class="col-md-12 d-grid gap-2 mb-3">
-                <button type="submit" class="bttn-pill bttn-md bttn-success" >Mis horarios</button>
-            </div>
-        </div>
-
-        <!-- <button (click)="cargarTurnos()">Cargar Turnos</button>
-        <button (click)="filtrarEspecialistas()" expand="block" fill="clear" shape="round">
-            filtrarEspecialistas
-        </button> -->
 
         <div class="row">
-            <p>pepe</p>
             <div class="float-cont" align="center" >
                 <div class="col" *ngFor='let item of especialistasEnteros; let i = index' >
-                    <div class="float-button" (click)="mostrarHC(item)">
+                    <div class="float-button" (click)="descargarTurnos(item)">
                         <img src={{item.data.imagen}} alt="">
                     </div>
                 <h5 style="padding: 0; margin: 0;">{{item.data.nombre}} {{item.data.apellido}}</h5>

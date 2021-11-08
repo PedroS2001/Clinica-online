@@ -220,7 +220,7 @@ export class MiperfilComponent implements OnInit {
  turnosDelEspecialista:any;
  misTurnosConElEspecialista:any;
 
- mostrarHC(especialista:any)
+ descargarTurnos(especialista:any)
  {
    this.turnosDelEspecialista = [];
    console.info('especialista',especialista);
