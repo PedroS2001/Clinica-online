@@ -27,6 +27,8 @@ export type ChartOptions = {
 export class GraficosComponent implements OnInit {
 
   queGrafico:any;
+  logs:any;
+
   constructor(private auth:AuthService, private afs:FirebaseService) {
   
   }
@@ -34,6 +36,9 @@ export class GraficosComponent implements OnInit {
   ngOnInit(): void {
     this.cargarValoresPorEspecialidad();
     this.calcularDiasConTurno();
+    this.afs.leerLogs().subscribe((logs:any) =>{
+      this.logs = logs;
+    })
   }
 
   @ViewChild('chartObj') chart!: ChartComponent;
@@ -276,8 +281,7 @@ export class GraficosComponent implements OnInit {
     };
   }
 
-  /************************************** TURNOS POR MEDICO *************************************************** */
-
+  /************************************** *************************************************** */
 
   imprimirPDF()
   {
@@ -292,6 +296,18 @@ export class GraficosComponent implements OnInit {
      pdf.addImage(contentDataURL, 'PNG', 0, 0, 0, 0);  
      pdf.save('estadisticas'+ this.queGrafico +'.pdf');   
    }); 
+  }
+
+  verLogs:boolean = false;
+  leerLogs()
+  {
+    this.verLogs = true;
+    console.info(this.logs);
+
+    this.logs.forEach( (element:any) => {
+      console.info( (element.fecha/86400)+25569+(-5/24) );
+      
+    });
   }
 
 }

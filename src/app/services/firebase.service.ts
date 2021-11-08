@@ -214,4 +214,17 @@ export class FirebaseService {
     });
   }
 
+  agregarLog(correo:string){
+    let fecha = Date.now();
+    console.log(fecha);
+    let user = {"correo":correo, "fecha":fecha};
+
+    return this.afs.collection('logs').add(user);
+  }
+
+  leerLogs()
+  {
+    return this.afs.collection('logs').valueChanges();
+  }
+
 }
