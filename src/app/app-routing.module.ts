@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { GraficosComponent } from './components/graficos/graficos.component';
 import { LoginComponent } from './components/login/login.component';
 import { TurnosadministradorComponent } from './components/turnos/turnosadministrador/turnosadministrador.component';
 import { TurnosespecialistaComponent } from './components/turnos/turnosespecialista/turnosespecialista.component';
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'registro', component: RegisterComponent },
   { path: 'solicitarturno', component: SolicitarturnovdosComponent },
   { path: 'miperfil', component: MiperfilComponent},
+
   
   { path: 'paciente', loadChildren: () => import('./pages/paciente/paciente.module').then(m => m.PacienteModule) },
   { path: 'administrador', loadChildren: () => import('./pages/administrador/administrador.module').then(m => m.AdministradorModule) },

@@ -33,6 +33,10 @@ export class NavbarComponent implements OnInit {
   {
     this.router.navigateByUrl('/administrador/usuarios');
   }
+  goToEstadisticas()
+  {
+    this.router.navigateByUrl('/administrador/estadisticas');
+  }
 
   goToTurnosPaciente()
   {

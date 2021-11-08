@@ -34,6 +34,8 @@ import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicita
 import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
 import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacientes.component';
 import { EspecialistaComponent } from './pages/especialista/especialista.component';
+import { GraficosComponent } from './components/graficos/graficos.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 
@@ -60,9 +62,11 @@ import { EspecialistaComponent } from './pages/especialista/especialista.compone
     HistoriaclinicaComponent,
     SeccionpacientesComponent,
     EspecialistaComponent,
+    GraficosComponent,
   ],
   imports: [
     BrowserModule,
+    NgApexchartsModule,
     BrowserAnimationsModule,
     AngularFireModule,
     AngularFireAuthModule,
