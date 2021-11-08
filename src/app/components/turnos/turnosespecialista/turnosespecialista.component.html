@@ -9,6 +9,9 @@
     <select (click)="seleccionaTT()" id="mama" class="form-select" aria-label="Default select example">
         <option *ngFor="let elemento of todosFiltros[jancarlos], let indice = index" value={{indice}} >{{elemento}}</option>
     </select>
+
+    <input type="text" [(ngModel)]="searchParam" (keyup)="superFiltro()" >
+    <button (click)="superFiltro()">superfiltro</button>
     
     <!-- <div class="row">
         <div class="row p-3" *ngFor="let item of objectKeys, let i = index">

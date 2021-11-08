@@ -414,4 +414,35 @@ export class TurnosespecialistaComponent implements OnInit {
   }
 
 
+  searchParam:any = 'hola';
+  superFiltro()
+  {
+    this.turnosDelEspecialista = [];
+    console.info(this.searchParam);
+    this.searchParam = this.searchParam.trim().toLowerCase();
+
+    this.turnosSinFiltrar.forEach( (element:any) => {
+      let dniEspecialista = element?.data?.dniEspecialista.toString().toLowerCase();
+      let dniPaciente = element?.data?.dniPaciente?.toString().toLowerCase();
+      let especialidad = element?.data.especialidad?.toString().toLowerCase();
+      let especialista = element?.data?.especialista?.toString().toLowerCase();
+      let comentarioEspecialista = element?.data?.comentarioEspecialista?.toString().toLowerCase();
+      let estado = element?.data?.estado?.toString().toLowerCase();
+      let fecha  = element?.data?.fecha?.toString().toLowerCase();
+      let horario = element?.data?.horario?.toString().toLowerCase();
+      let paciente = element?.data?.paciente?.toString().toLowerCase();
+
+
+      console.log(element);
+      if(dniEspecialista?.includes(this.searchParam) || dniPaciente?.includes(this.searchParam) || especialidad?.includes(this.searchParam) || especialista?.includes(this.searchParam) ||
+      comentarioEspecialista?.includes(this.searchParam) || estado?.includes(this.searchParam) || fecha?.includes(this.searchParam) || horario?.includes(this.searchParam) || paciente?.includes(this.searchParam)     )
+      {
+        this.turnosDelEspecialista.push(element);
+      }
+
+    });
+
+  }
+
+
 }
