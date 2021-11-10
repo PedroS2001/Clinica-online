@@ -403,6 +403,30 @@ export class TurnosespecialistaComponent implements OnInit {
       {
         this.turnosDelEspecialista.push(element);
       }
+      else
+      {
+        /*this.afs.listaHistorias.forEach( (historia:any) => {
+          console.info(historia);
+          let altura = historia?.data?.altura?.toString().toLowerCase();
+          let peso = historia?.data?.peso?.toString().toLowerCase();
+          let presion = historia?.data?.presion?.toString().toLowerCase();
+          let temperatura = historia?.data?.temperatura?.toString().toLowerCase();
+          
+          if(altura?.includes(this.parametro) || peso?.includes(this.parametro) || presion?.includes(this.parametro) || temperatura?.includes(this.parametro))
+          {
+            this.turnosDelEspecialista.push(element);
+          }
+          if(historia?.data?.dinamicoUno?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoUno?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoDos?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoDos?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoTres?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoTres?.valor?.toLowerCase().trim().includes(this.parametro) )
+          {
+            this.turnosDelEspecialista.push(element);
+          }
+
+        });*/
+
+      }
+
 
     });
 

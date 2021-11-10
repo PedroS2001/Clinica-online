@@ -3,7 +3,7 @@
     <div class="miContenedor p-3 mb-5" style="padding: 50px">
 
         <div class="row" align="center">
-            <h1 style="font-family: 'Bebas Neue';">{{auth.currentUser.nombre}} {{auth.currentUser.apellido}}</h1>
+            <h1 appDtitulo style="font-family: 'Bebas Neue';">{{auth.currentUser.nombre}} {{auth.currentUser.apellido}}</h1>
         </div>
         
 
@@ -17,39 +17,39 @@
         <div class="row" align="center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">DNI</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.dni}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#05FD94'" type="text" class="form-control" readonly value={{auth.currentUser.dni}} aria-describedby="basic-addon2">
               </div>
         </div>
 
         <div class="row" align="center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">EDAD</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.edad}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#05E3C4'" type="text" class="form-control" readonly value={{auth.currentUser.edad}} aria-describedby="basic-addon2">
               </div>
         </div>
 
         <div class="row" align="center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">CORREO</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.mail}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#11DBFA'" type="text" class="form-control" readonly value={{auth.currentUser.mail}} aria-describedby="basic-addon2">
               </div>
         </div>
-
+        
         <div class="row" align="center">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">CLAVE</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.password}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#058BE3'" type="text" class="form-control" readonly value={{auth.currentUser.password}} aria-describedby="basic-addon2">
               </div>
         </div>
 
         <div class="row" align="center">
             <div *ngIf="auth.currentUser.especialidad" class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">ESPECIALIDAD</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.especialidad}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#0559FD'" type="text" class="form-control" readonly value={{auth.currentUser.especialidad}} aria-describedby="basic-addon2">
             </div>
             <div *ngIf="auth.currentUser.obrasocial" class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">OBRA SOCIAL</span>
-                <input type="text" class="form-control" readonly value={{auth.currentUser.obrasocial}} aria-describedby="basic-addon2">
+                <input appDresaltar [appAppresaltar]="'#0559FD'" type="text" class="form-control" readonly value={{auth.currentUser.obrasocial}} aria-describedby="basic-addon2">
             </div>
         </div>
 

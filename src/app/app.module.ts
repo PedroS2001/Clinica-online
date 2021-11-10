@@ -36,6 +36,8 @@ import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacie
 import { EspecialistaComponent } from './pages/especialista/especialista.component';
 import { GraficosComponent } from './components/graficos/graficos.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { DresaltarDirective } from './directives/dresaltar.directive';
+import { DtituloDirective } from './directives/dtitulo.directive';
 
 
 
@@ -63,6 +65,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     SeccionpacientesComponent,
     EspecialistaComponent,
     GraficosComponent,
+    DresaltarDirective,
+    DtituloDirective,
   ],
   imports: [
     BrowserModule,
