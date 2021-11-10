@@ -157,42 +157,6 @@ export class TurnosespecialistaComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-  jancarlos:any;
-  seleccionaF()
-  {
-    this.jancarlos = (<HTMLInputElement> document.getElementById('pepe')).value;
-    this.seleccionaTT();
-  };
-
-  seleccionaTT()
-  {
-    let mama = (<HTMLInputElement> document.getElementById('mama')).value;
-    this.filtrarPorElemento(this.jancarlos, mama)
-  }
-
-  filtrarPorElemento(item:any, indice:any)
-  {
-    // console.info('item',item);
-    // console.info('indice',indice);
-
-    // console.info('cagada',this.todosFiltros[item][indice]);
-    let paciente = this.todosFiltros[item][indice]
-
-    let arrayAux:any = [];
-    this.turnosSinFiltrar.forEach( (element:any) => {
-      // console.log(element);
-      if(element.data[item] == paciente )
-      {
-        arrayAux.push(element);
-      }
-    });
-
-    this.turnosDelEspecialista = arrayAux;
-  }
-
-=======
->>>>>>> produccion
 
 
   //#region ACCIONES
