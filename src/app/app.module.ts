@@ -39,6 +39,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { DresaltarDirective } from './directives/dresaltar.directive';
 import { DtituloDirective } from './directives/dtitulo.directive';
 import { MarcoDirective } from './directives/marco.directive';
+import { PcapitalzePipe } from './pipes/pcapitalze.pipe';
+import { PpuntosdniPipe } from './pipes/ppuntosdni.pipe';
+import { PnombrecompletoPipe } from './pipes/pnombrecompleto.pipe';
 
 
 
@@ -69,6 +72,9 @@ import { MarcoDirective } from './directives/marco.directive';
     DresaltarDirective,
     DtituloDirective,
     MarcoDirective,
+    PcapitalzePipe,
+    PpuntosdniPipe,
+    PnombrecompletoPipe,
   ],
   imports: [
     BrowserModule,

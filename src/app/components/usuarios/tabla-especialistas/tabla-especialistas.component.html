@@ -16,13 +16,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let item of afs.arrayEspecialistas; let i = index">
-                <td scope="row">{{item.data.nombre}}</td>
-                <td>{{item.data.apellido}}</td>
-                <td>{{item.data.dni}}</td>
+                <td scope="row">{{item.data.nombre  | pcapitalze }}</td>
+                <td>{{item.data.apellido  | pcapitalze }}</td>
+                <td>{{item.data.dni | ppuntosdni}}</td>
                 <td>{{item.data.edad}}</td>
                 <td>{{item.data.mail}}</td>
                 <td>{{item.data.password}}</td>
-                <td>{{item.data.especialidad}}</td>
+                <td>{{item.data.especialidad  | pcapitalze }}</td>
                 <td> <img src={{item.data.imagen}} style="border-radius: 50%;" width="35px" height="35px" alt=""></td>
                 <td>
                     <div (click)="cambiarEstado(i)">

@@ -23,7 +23,7 @@
                 <h2>ESPECIALISTAS</h2>
             </div>
             <div class="row p-1" *ngFor="let item of listaEspecialistas, let i as index">
-                <button (click)="seleccionaEspecialista(i)"  id={{i}}  class="bttn-unite bttn-md bttn-primary">{{item.data.nombre}} {{item.data.apellido}} </button>
+                <button (click)="seleccionaEspecialista(i)"  id={{i}}  class="bttn-unite bttn-md bttn-primary">{{item.data.nombre | pnombrecompleto}}</button>
             </div>
         </div>
 

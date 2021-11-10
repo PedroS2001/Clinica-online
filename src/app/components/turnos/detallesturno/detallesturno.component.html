@@ -19,11 +19,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of turnosDelPaciente">
-                        <td>{{item.data.especialidad}} </td>
-                        <td>{{item.data.especialista}} </td>
+                        <td>{{item.data.especialidad | pcapitalze }} </td>
+                        <td>{{item.data.especialista | pcapitalze}} </td>
                         <td>{{item.data.fecha}} </td>
                         <td>{{item.data.horario}}hs </td>
-                        <td> <strong> {{item.data.estado}} </strong> </td>
+                        <td> <strong> {{item.data.estado | pcapitalze }} </strong> </td>
                         <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
                         <td *ngIf="item.data.comentarioEspecialista || item.data.comentarioPaciente" > <button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button> </td>
 
