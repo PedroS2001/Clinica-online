@@ -9,7 +9,7 @@
 
             <div class="row ">
                 <div class="container " align="center" >
-                    <img src="./assets/icono.png" style="border-radius: 50%;" width="150px" height="150px">
+                    <img appMarco src="./assets/icono.png" style="border-radius: 50%;" width="150px" height="150px">
                 </div>
             </div>
                                         <!-- FORMULARIO -->
@@ -45,7 +45,7 @@
 
                                         <!-- BOTONES DE ACCESO RAPIDO -->
                 <div class="col-md-2 d-grid gap-2" *ngFor="let item of usuariosLogin" align="center">
-                        <img (click)="ingresaUsuario(item)" src={{item?.data?.imagen}} style="width: 50px; height: 50px; border-radius: 10%;" alt="">
+                        <img appMarco (click)="ingresaUsuario(item)" src={{item?.data?.imagen}} style="width: 50px; height: 50px; border-radius: 10%;" alt="">
 
                     <!-- <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
                     <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaEspecialista()" >Especialista</button>

@@ -38,6 +38,7 @@ import { GraficosComponent } from './components/graficos/graficos.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { DresaltarDirective } from './directives/dresaltar.directive';
 import { DtituloDirective } from './directives/dtitulo.directive';
+import { MarcoDirective } from './directives/marco.directive';
 
 
 
@@ -67,6 +68,7 @@ import { DtituloDirective } from './directives/dtitulo.directive';
     GraficosComponent,
     DresaltarDirective,
     DtituloDirective,
+    MarcoDirective,
   ],
   imports: [
     BrowserModule,

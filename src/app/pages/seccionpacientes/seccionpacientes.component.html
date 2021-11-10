@@ -5,7 +5,7 @@
         <div class="float-cont" align="center" >
             <div class="col" *ngFor='let item of pacientesEnteros; let i = index' (click)="mostrarHC(item)">
                 <div class="float-button">
-                    <img src={{item.data.imagen}} alt="">
+                    <img appMarco src={{item.data.imagen}} alt="">
                 </div>
             <h5 style="padding: 0; margin: 0;">{{item.data.nombre}} {{item.data.apellido}}</h5>
             </div>
