@@ -1,40 +1,10 @@
 <div class="container">
 
-    <button type="button" (click)="filtrarPorTodo()" class="btn btn-primary">Abrir filtros</button>
-
-    <select (click)="seleccionaF()" class="form-select" id="pepe" aria-label="Default select example">
-        <option value={{item}} *ngFor="let item of objectKeys, let i = index" >{{item}}</option>
-    </select>
-
-    <select (click)="seleccionaTT()" id="mama" class="form-select" aria-label="Default select example">
-        <option *ngFor="let elemento of todosFiltros[jancarlos], let indice = index" value={{indice}} >{{elemento}}</option>
-    </select>
-    
-    <!-- <div class="row">
-        <div class="row p-3" *ngFor="let item of objectKeys, let i = index">
-            <h5>{{item}} </h5>
-            <div class="col-3 p-3" *ngFor="let elemento of todosFiltros[item], let indice = index">
-                <button type="button" (click)="filtrarPorElemento(item, indice)" class="btn btn-primary">{{elemento}}</button>
-            </div>
-        </div>
-    </div> -->
-<!-- 
     <div class="row">
-        <div class="col-3 m-3">
-            <h5>Filtrar por paciente: </h5>
+        <div class="col m-3">
+            <input type="text" class="form-control" placeholder="Filtre por algun parametro" [(ngModel)]="parametro" (keyup)="superFiltro()" >
         </div>
-        <div class="col-3 m-3" *ngFor="let item of pacientesFiltrados">
-            <button type="button" (click)="filtrarPorPaciente(item)" class="btn btn-primary">{{item}}</button>
-        </div>
-    </div> -->
-    <!-- <div class="row">
-        <div class="col-3 m-3">
-            <h5>Filtrar por especialidad: </h5>
-        </div>
-        <div class="col-3 m-3" *ngFor="let item of especialidadesFiltradas">
-            <button type="button" (click)="filtrarPorEspecialidad(item)" class="btn btn-primary">{{item}}</button>
-        </div>
-    </div> -->
+    </div>
 
     <div class="row" >
         <div class="col">
@@ -49,11 +19,11 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of turnosDelEspecialista">
-                        <td>{{item.data.especialidad}} </td>
-                        <td>{{item.data.paciente}} </td>
-                        <td>{{item.data.fecha}} </td>
+                        <td>{{item.data.especialidad | pcapitalze }} </td>
+                        <td>{{item.data.paciente | pcapitalze }} </td>
+                        <td>{{item.data.fecha | pcapitalze }} </td>
                         <td>{{item.data.horario}}hs </td>
-                        <td>{{item.data.estado}} </td>
+                        <td>{{item.data.estado | pcapitalze }} </td>
                         <td *ngIf="item.data.estado == 'pendiente'" > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
                         <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="rechazarTurno(item)" type="button" class="btn btn-outline-warning">Rechazar</button></td>
                         <td *ngIf="item.data.estado == 'pendiente'" ><button (click)="aceptarTurno(item)" type="button" class="btn btn-outline-success">Aceptar</button></td>
@@ -65,8 +35,4 @@
         </div>
     </div>
 
-    <!-- <button (click)="completarHistoriaClinica()">FinalizarTurno</button> -->
-    <div class="row">
-        <button type="button" (click)="cargarTurnos()" class="btn btn-primary">Limpiar filtros</button>
-    </div>
 </div>

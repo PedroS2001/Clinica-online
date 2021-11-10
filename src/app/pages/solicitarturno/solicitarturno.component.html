@@ -1,4 +1,4 @@
-<div class="container-fluid" align="center">
+<div class="container-fluid slide-in-top" align="center">
 
     <div class="row" *ngIf="auth.currentUser.perfil == 'administrador'">
         <div class="col-12">
@@ -23,7 +23,7 @@
                 <h2>ESPECIALISTAS</h2>
             </div>
             <div class="row p-1" *ngFor="let item of listaEspecialistas, let i as index">
-                <button (click)="seleccionaEspecialista(i)"  id={{i}}  class="bttn-unite bttn-md bttn-primary">{{item.data.nombre}} {{item.data.apellido}} </button>
+                <button (click)="seleccionaEspecialista(i)"  id={{i}}  class="bttn-unite bttn-md bttn-primary">{{item.data.nombre | pnombrecompleto}}</button>
             </div>
         </div>
 
@@ -37,12 +37,7 @@
                 <h2>Dias que trabaja</h2>
             </div>
             <div class="row p-1" *ngFor="let item of listadoDias, let i as index">
-                <div *ngIf="item.dia;else templateName">
-                    <h4>{{item.dia}}</h4>
-                </div>
-                <ng-template #templateName>
-                    <button (click)="seleccionaDia(i)" id={{i}} class="bttn-unite bttn-md bttn-primary">{{item}} </button>
-                </ng-template>
+                <button (click)="seleccionaDia(i)" id={{i}} class="bttn-unite bttn-md bttn-primary">{{item}} </button>
             </div>
             
         </div>

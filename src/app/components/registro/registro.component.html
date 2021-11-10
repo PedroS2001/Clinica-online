@@ -86,14 +86,22 @@
 
         <div *ngIf="tipoUsuario=='especialista'">
           <div class="form-group mb-3">
-            <!-- <label for="especialidad" class="form-label" style="margin-left: 10px;">Especialidad</label> -->
-            
+
+            <label for="exampleDataList" class="form-label">Especialidad</label>
+            <input class="form-control miContenedor" list="datalistOptions" id="especialidad" formControlName='especialidad' placeholder="Selecciona tu especialidad">
+            <datalist id="datalistOptions">
+              <option value="Cirujano">
+              <option value="Dentista">
+              <option value="Oftalmologo">
+              <!-- <option value="Chicago"> -->
+            </datalist>
+<!--             
             <select class="form-control miContenedor" id="especialidad">
               <option value="" selected >Especialidad</option>
               <option value="cirujano" >Cirujano</option>
               <option value="dentista" >Dentista</option>
               <option value="oftalmologo">Oftalmologo</option>
-            </select>
+            </select> -->
           </div>
         </div>
 

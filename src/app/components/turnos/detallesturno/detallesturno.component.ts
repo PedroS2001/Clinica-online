@@ -10,50 +10,17 @@ import Swal from 'sweetalert2';
 })
 export class DetallesturnoComponent implements OnInit {
 
-   //Listas que se van a mostrar
+  
   turnosDelPaciente:any = [];   //Los turnos del especialista que se van a mostrar
-  especialistasFiltrados:any;           //Todos los pacientes de este especialista 1 sola vez, se utiliza para el filtro
-  especialidadesFiltradas:any;      //Todas las especialidades de este especialista 1 sola vez, se utiliza para el filtro
    
-  turnosSinFiltrar:any;             //Todos los turnos del especialista. Se mantiene constante
+  turnosSinFiltrar:any;         //Todos los turnos del especialista. Se mantiene constante
 
-  // turnosDelPaciente:any = [];
   constructor(private afs:FirebaseService, private auth:AuthService) { }
 
   ngOnInit(): void {
     this.cargarTurnos();
-    this.filtrarEspecialidades();
-    this.filtrarEspecialistas();
   }
 
-  /*cargarTurnos()
-  {
-    let listadoTurnos = this.afs.listaTurnos;
-    this.turnosDelPaciente = [];
-
-    listadoTurnos.forEach( (item:any) => {
-      console.log(item);
-      if(item.data.dniPaciente == this.auth.currentUser.dni)
-      {
-        this.turnosDelPaciente.push(item);
-      }
-    });
-  }
-
-  filtrarPor(especialista:any)
-  {
-    let arrayAux:any = [];
-    this.turnosDelPaciente.forEach( (element:any) => {
-      console.log(element);
-      if(element.data.especialista == especialista )
-      {
-        arrayAux.push(element);
-      }
-    });
-
-    this.turnosDelPaciente = arrayAux;
-
-  }*/
 
 
   cargarTurnos()
@@ -70,10 +37,9 @@ export class DetallesturnoComponent implements OnInit {
     });
     this.turnosSinFiltrar = this.turnosDelPaciente;
 
-    (<HTMLInputElement> document.getElementById('mama')).value = '';
-    (<HTMLInputElement> document.getElementById('pepe')).value = '';
   }
 
+<<<<<<< HEAD
   /** Filtra el array de pacientes que se va a mostrar por un paciente en particular
    * 
    * @param paciente El paciente por el que se quiere filtrar
@@ -94,22 +60,39 @@ export class DetallesturnoComponent implements OnInit {
 
     this.turnosDelPaciente = arrayAux;
   }
+=======
+>>>>>>> produccion
 
-  /** Filtra el array por una determinada especialidad
-   * 
-   * @param item la especialidad 
-   */
-  filtrarPorEspecialidad(item:any)
+  parametro:string = '';
+  superFiltro()
   {
-    this.turnosDelPaciente = this.turnosSinFiltrar;
+    this.turnosDelPaciente = [];
+    this.parametro = this.parametro.trim().toLowerCase();
 
+<<<<<<< HEAD
     let arrayAux:any = [];
     this.turnosDelPaciente.forEach( (element:any) => {
       // console.log(element);
       if(element.data.especialidad == item )
+=======
+    this.turnosSinFiltrar.forEach( (element:any) => {
+      let dniEspecialista = element?.data?.dniEspecialista.toString().toLowerCase();
+      let dniPaciente = element?.data?.dniPaciente?.toString().toLowerCase();
+      let especialidad = element?.data.especialidad?.toString().toLowerCase();
+      let especialista = element?.data?.especialista?.toString().toLowerCase();
+      let comentarioEspecialista = element?.data?.comentarioEspecialista?.toString().toLowerCase();
+      let estado = element?.data?.estado?.toString().toLowerCase();
+      let fecha  = element?.data?.fecha?.toString().toLowerCase();
+      let horario = element?.data?.horario?.toString().toLowerCase();
+      let paciente = element?.data?.paciente?.toString().toLowerCase();
+
+      if(dniEspecialista?.includes(this.parametro) || dniPaciente?.includes(this.parametro) || especialidad?.includes(this.parametro) || especialista?.includes(this.parametro) ||
+      comentarioEspecialista?.includes(this.parametro) || estado?.includes(this.parametro) || fecha?.includes(this.parametro) || horario?.includes(this.parametro) || paciente?.includes(this.parametro)     )
+>>>>>>> produccion
       {
-        arrayAux.push(element);
+        this.turnosDelPaciente.push(element);
       }
+<<<<<<< HEAD
     });
 
     this.turnosDelPaciente = arrayAux;
@@ -222,31 +205,40 @@ export class DetallesturnoComponent implements OnInit {
       if(element.data[item] == paciente )
       {
         arrayAux.push(element);
+=======
+      else
+      {
+        /*this.afs.listaHistorias.forEach( (historia:any) => {
+          console.info(historia);
+          let altura = historia?.data?.altura?.toString().toLowerCase();
+          let peso = historia?.data?.peso?.toString().toLowerCase();
+          let presion = historia?.data?.presion?.toString().toLowerCase();
+          let temperatura = historia?.data?.temperatura?.toString().toLowerCase();
+          
+          if(altura?.includes(this.parametro) || peso?.includes(this.parametro) || presion?.includes(this.parametro) || temperatura?.includes(this.parametro))
+          {
+            this.turnosDelPaciente.push(element);
+          }
+          if(historia?.data?.dinamicoUno?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoUno?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoDos?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoDos?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoTres?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoTres?.valor?.toLowerCase().trim().includes(this.parametro) )
+          {
+            this.turnosDelPaciente.push(element);
+          }
+
+        });*/
+
+>>>>>>> produccion
       }
+
     });
 
-    this.turnosDelPaciente = arrayAux;
   }
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   //#region ACCIONES
 
   cancelarTurno(item:any)

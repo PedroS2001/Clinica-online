@@ -31,12 +31,12 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let item of todosLosTurnos">
-                        <td>{{item.data.especialidad}} </td>
-                        <td>{{item.data.especialista}} </td>
-                        <td>{{item.data.paciente}} </td>
+                        <td>{{item.data.especialidad | pcapitalze }} </td>
+                        <td>{{item.data.especialista | pcapitalze }} </td>
+                        <td>{{item.data.paciente | pcapitalze }} </td>
                         <td>{{item.data.fecha}} </td>
                         <td>{{item.data.horario}}hs </td>
-                        <td>{{item.data.estado}} </td>
+                        <td>{{item.data.estado | pcapitalze }} </td>
                         <td *ngIf="item.data.estado == 'pendiente' " > <button (click)="cancelarTurno(item)" type="button" class="btn btn-outline-danger">Cancelar</button> </td>
                     </tr>
                 </tbody>

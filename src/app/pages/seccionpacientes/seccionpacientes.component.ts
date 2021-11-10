@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-seccionpacientes',
@@ -79,11 +80,41 @@ export class SeccionpacientesComponent implements OnInit {
 
   usuario:any;
   mostrarHistoria:boolean = false;
+  turnosDelPaciente:any;
   mostrarHC(paciente:any)
   {
+    this.turnosDelPaciente = [];
+    console.info('paciente',paciente);
+    this.afs.listaTurnos.forEach( (unTurno:any) => {
+      if(unTurno.data.dniPaciente == paciente.data.dni )
+      {
+        if(unTurno.data.estado == 'realizado')
+        {
+          this.turnosDelPaciente.push(unTurno);
+          console.info('pedro',unTurno);
+        }
+      }
+      
+    });
     this.usuario = paciente;
     this.mostrarHistoria = true;
-
   }
+
+  
+  verComentario(item:any)
+  {
+    console.info('item',item);
+    let quien = item.data.comentarioEspecialista ? 'especialista' : 'paciente';
+    let comentario = item.data.comentarioEspecialista ? item.data.comentarioEspecialista : item.data.comentarioPaciente;
+    Swal.fire({
+      // title: 'Comentario',
+      icon: 'info',
+      text: 'Comentario del '+ quien +  ': ' + comentario,
+      showLoaderOnConfirm: true,
+      confirmButtonText: 'Aceptar'
+    });
+  }
+
+
 
 }

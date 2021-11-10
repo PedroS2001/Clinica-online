@@ -92,6 +92,7 @@ export class LoginComponent implements OnInit {
           }
         }
         this.authService.estaLogueado = true;
+        this.afs.agregarLog(correo);
         
         // console.info('currentUser', this.authService.currentUser);  
         this.toastr.success('Ingreso con exito','Bienvenido', {

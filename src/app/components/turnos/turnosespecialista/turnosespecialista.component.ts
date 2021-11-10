@@ -157,6 +157,7 @@ export class TurnosespecialistaComponent implements OnInit {
 
   }
 
+<<<<<<< HEAD
   jancarlos:any;
   seleccionaF()
   {
@@ -190,6 +191,8 @@ export class TurnosespecialistaComponent implements OnInit {
     this.turnosDelEspecialista = arrayAux;
   }
 
+=======
+>>>>>>> produccion
 
 
   //#region ACCIONES
@@ -411,6 +414,58 @@ export class TurnosespecialistaComponent implements OnInit {
 
     })
     .catch()
+  }
+
+
+  parametro:string = '';
+  superFiltro()
+  {
+    this.turnosDelEspecialista = [];
+    this.parametro = this.parametro.trim().toLowerCase();
+
+    this.turnosSinFiltrar.forEach( (element:any) => {
+      let dniEspecialista = element?.data?.dniEspecialista.toString().toLowerCase();
+      let dniPaciente = element?.data?.dniPaciente?.toString().toLowerCase();
+      let especialidad = element?.data.especialidad?.toString().toLowerCase();
+      let especialista = element?.data?.especialista?.toString().toLowerCase();
+      let comentarioEspecialista = element?.data?.comentarioEspecialista?.toString().toLowerCase();
+      let estado = element?.data?.estado?.toString().toLowerCase();
+      let fecha  = element?.data?.fecha?.toString().toLowerCase();
+      let horario = element?.data?.horario?.toString().toLowerCase();
+      let paciente = element?.data?.paciente?.toString().toLowerCase();
+
+      if(dniEspecialista?.includes(this.parametro) || dniPaciente?.includes(this.parametro) || especialidad?.includes(this.parametro) || especialista?.includes(this.parametro) ||
+      comentarioEspecialista?.includes(this.parametro) || estado?.includes(this.parametro) || fecha?.includes(this.parametro) || horario?.includes(this.parametro) || paciente?.includes(this.parametro)     )
+      {
+        this.turnosDelEspecialista.push(element);
+      }
+      else
+      {
+        /*this.afs.listaHistorias.forEach( (historia:any) => {
+          console.info(historia);
+          let altura = historia?.data?.altura?.toString().toLowerCase();
+          let peso = historia?.data?.peso?.toString().toLowerCase();
+          let presion = historia?.data?.presion?.toString().toLowerCase();
+          let temperatura = historia?.data?.temperatura?.toString().toLowerCase();
+          
+          if(altura?.includes(this.parametro) || peso?.includes(this.parametro) || presion?.includes(this.parametro) || temperatura?.includes(this.parametro))
+          {
+            this.turnosDelEspecialista.push(element);
+          }
+          if(historia?.data?.dinamicoUno?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoUno?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoDos?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoDos?.valor?.toLowerCase().trim().includes(this.parametro) || 
+              historia?.data?.dinamicoTres?.clave?.toLowerCase().trim().includes(this.parametro) || historia?.data?.dinamicoTres?.valor?.toLowerCase().trim().includes(this.parametro) )
+          {
+            this.turnosDelEspecialista.push(element);
+          }
+
+        });*/
+
+      }
+
+
+    });
+
   }
 
 

@@ -1,4 +1,20 @@
-<div class="container-fluid">
+<div class="float-cont" align="center" >
+    <div class="col" *ngFor='let item of afs.arrayPacientes; let i = index' (click)="mostrar(i)">
+        <div class="float-button" (click)="mostrarHC(item)">
+            <img src={{item.data.imagen}} alt="">
+        </div>
+      <h5 style="padding: 0; margin: 0;">{{item.data.nombre}} {{item.data.apellido}}</h5>
+    </div>
+</div>
+<div *ngIf="mostrarHistoria">
+    <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
+</div>
+
+
+
+
+
+<!-- <div class="container-fluid">
 
     <table class="table text-center">
         <thead>
@@ -34,4 +50,4 @@
         <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
     </div>
 
-</div>  
+</div>   -->

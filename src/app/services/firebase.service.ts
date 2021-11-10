@@ -109,6 +109,10 @@ export class FirebaseService {
 
 
 
+  AgregarEspecialidad(especialidad:any)
+  {
+    return this.afs.collection('especialidades').doc(especialidad).set({'especialidad':especialidad});
+  }
   LeerEspecialidades()
   {
     return this.afs.collection('especialidades').snapshotChanges();
@@ -208,6 +212,19 @@ export class FirebaseService {
         // console.info('Historias', this.listaHistorias);
       }, 1500);   
     });
+  }
+
+  agregarLog(correo:string){
+    let fecha = Date.now();
+    console.log(fecha);
+    let user = {"correo":correo, "fecha":fecha};
+
+    return this.afs.collection('logs').add(user);
+  }
+
+  leerLogs()
+  {
+    return this.afs.collection('logs').valueChanges();
   }
 
 }

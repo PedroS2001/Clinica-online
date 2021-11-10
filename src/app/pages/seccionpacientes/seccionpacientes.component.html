@@ -1,16 +1,62 @@
 <!-- <button (click)="traerMISPacientes()">TRAER MIS PACIENTE</button> -->
 
-<div class="container">
+<div class="container slide-in-top">
     <div class="row">
-        <div class="col" *ngFor="let item of pacientesEnteros">
-            <!-- {{item.data}} -->
-            <img (click)="mostrarHC(item)" src={{item.data.imagen}} style="width: 100px; height: 100px;" title={{item.data.apellido}} alt="">
+        <div class="float-cont" align="center" >
+            <div class="col" *ngFor='let item of pacientesEnteros; let i = index' (click)="mostrarHC(item)">
+                <div class="float-button">
+                    <img appMarco src={{item.data.imagen}} alt="">
+                </div>
+            <h5 style="padding: 0; margin: 0;">{{item.data | pnombrecompleto}}</h5>
+            </div>
         </div>
     </div>
 
-    <div *ngIf="mostrarHistoria">
-        <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
+    
+
+
+
+    <div class="row" >
+        <div class="col">
+            <table class="table table-secondary table-striped table-hover">
+                <thead>
+                    <th>Especialidad</th>
+                    <th>Especialista</th>
+                    <th>Fecha</th>
+                    <th>Horario</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of turnosDelPaciente">
+                        <td>{{item.data.especialidad}} </td>
+                        <td>{{item.data.especialista}} </td>
+                        <td>{{item.data.fecha}} </td>
+                        <td>{{item.data.horario}}hs </td>
+                        <td> <strong> {{item.data.estado}} </strong> </td>
+                        <td *ngIf="item.data.comentarioEspecialista || item.data.comentarioPaciente" > <button (click)="verComentario(item)" type="button" class="btn btn-outline-info">Ver reseña</button> </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+    
+
+
+
+
+        <!-- <div class="row">
+        <div class="col" *ngFor="let item of pacientesEnteros">
+            <img (click)="mostrarHC(item)" src={{item.data.imagen}} style="width: 100px; height: 100px;" title={{item.data.apellido}} alt="">
+        </div>
+    </div> -->
+
+    <!-- <div>
+        <app-detallesturno></app-detallesturno>
+    </div> -->
+
+    <!-- <div *ngIf="mostrarHistoria">
+        <app-historiaclinica [usuario]="usuario" ></app-historiaclinica>
+    </div> -->
 
 </div>
-

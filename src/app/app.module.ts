@@ -34,6 +34,14 @@ import { SolicitarturnovdosComponent } from './pages/solicitarturnovdos/solicita
 import { HistoriaclinicaComponent } from './components/historiaclinica/historiaclinica.component';
 import { SeccionpacientesComponent } from './pages/seccionpacientes/seccionpacientes.component';
 import { EspecialistaComponent } from './pages/especialista/especialista.component';
+import { GraficosComponent } from './components/graficos/graficos.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { DresaltarDirective } from './directives/dresaltar.directive';
+import { DtituloDirective } from './directives/dtitulo.directive';
+import { MarcoDirective } from './directives/marco.directive';
+import { PcapitalzePipe } from './pipes/pcapitalze.pipe';
+import { PpuntosdniPipe } from './pipes/ppuntosdni.pipe';
+import { PnombrecompletoPipe } from './pipes/pnombrecompleto.pipe';
 
 
 
@@ -60,9 +68,17 @@ import { EspecialistaComponent } from './pages/especialista/especialista.compone
     HistoriaclinicaComponent,
     SeccionpacientesComponent,
     EspecialistaComponent,
+    GraficosComponent,
+    DresaltarDirective,
+    DtituloDirective,
+    MarcoDirective,
+    PcapitalzePipe,
+    PpuntosdniPipe,
+    PnombrecompletoPipe,
   ],
   imports: [
     BrowserModule,
+    NgApexchartsModule,
     BrowserAnimationsModule,
     AngularFireModule,
     AngularFireAuthModule,

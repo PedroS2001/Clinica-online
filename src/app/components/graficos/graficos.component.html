@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+
+        <div id="chart">
+            <apx-chart
+            [series]="chartOptions.series!"
+            [chart]="chartOptions.chart!"
+            [dataLabels]="chartOptions.dataLabels!"
+            [plotOptions]="chartOptions.plotOptions!"
+            [yaxis]="chartOptions.yaxis!"
+            [xaxis]="chartOptions.xaxis!"
+            [fill]="chartOptions.fill!"
+            [title]="chartOptions.title!"
+            ></apx-chart>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-danger" *ngIf="queGrafico" (click)="imprimirPDF()">Imprimir PDF</button>
+        </div>
+        <div class="col-6 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosXEspecialidad()">Turnos por especialidad</button>
+        </div>
+        <div class="col-6 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosPorDia()">Turnos por Dia</button>
+        </div>
+        <div class="col-6 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="leerLogs()">Ver Logs</button>
+        </div>
+
+    </div>
+
+    <table class="table table-striped" *ngIf="verLogs">
+        <thead>
+            <tr>
+                <th>Correo</th>
+                <th>Fecha y hora</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of logs">
+                <td scope="row">{{item.correo}}</td>
+               
+                <td> {{item.fecha | date: 'dd/MM/yyyy HH:mm:ss'}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</div>
+  
+
+
+<!-- <br>
+<button (click)="cargarValoresPorEspecialidad()">cargar valores por especialidad</button>
+<br>
+<button (click)="cargarTurnosPorDia()">Cargar turnos por dia</button>
+<button (click)="calcularDiasConTurno()">calcular dias con turno</button> -->
+
