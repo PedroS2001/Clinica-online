@@ -147,8 +147,8 @@ export class LoginComponent implements OnInit {
   cargarBotones()
   {
     this.usuariosLogin.push(this.afs.arrayAdministradores[1]);
-    this.usuariosLogin.push(this.afs.arrayEspecialistas[0]);
-    this.usuariosLogin.push(this.afs.arrayEspecialistas[1]);
+    this.usuariosLogin.push(this.afs.arrayEspecialistas[2]);
+    this.usuariosLogin.push(this.afs.arrayEspecialistas[3]);
     this.usuariosLogin.push(this.afs.arrayPacientes[0]);
     this.usuariosLogin.push(this.afs.arrayPacientes[1]);
 
