@@ -28,6 +28,7 @@ import {
   ApexNonAxisChartSeries,
   ApexResponsive,
 } from "ng-apexcharts";
+import { ArchivosService } from 'src/app/services/archivos.service';
 
 
 
@@ -42,7 +43,7 @@ export class GraficosComponent implements OnInit {
   logs:any;
   chartOptionsPie!: { series: any; chart: { width: number; type: string; }; labels: string[]; responsive: { breakpoint: number; options: { chart: { width: number; }; legend: { position: string; }; }; }[]; };
 
-  constructor(private auth:AuthService, private afs:FirebaseService) {
+  constructor(private auth:AuthService, private afs:FirebaseService, private archivoS:ArchivosService) {
   
   }
 
@@ -646,5 +647,27 @@ export class GraficosComponent implements OnInit {
   {
     this.verLogs = true;
   }
+
+  
+ exportAsXLSX():void {
+  let arrayDatas:any = [];
+  let elementFilter:any;
+
+  this.logs.forEach((log:any) => {
+
+    elementFilter = [{
+      correo: log.correo,
+      fecha: new Date(log.fecha).toLocaleDateString() +'  '+ new Date(log.fecha).toLocaleTimeString()
+
+    }];
+
+    console.info('elementofilter', elementFilter[0]);
+    arrayDatas.push(elementFilter[0]);
+  });
+
+    this.archivoS.exportAsExcelFile(arrayDatas, 'logsAl'+Date.now());
+  }
+
+
 
 }

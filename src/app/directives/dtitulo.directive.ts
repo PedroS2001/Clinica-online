@@ -6,6 +6,10 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 export class DtituloDirective {
 
   @Input() tamanio = '';
+  /** Se utiliza en la seccion MiPerfil, en el nombre
+   * Y en el login, para remarcar que esta en el login
+   * 
+   */
 
   constructor(private elemento: ElementRef) {
     this.elemento = elemento;

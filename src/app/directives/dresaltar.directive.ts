@@ -7,6 +7,9 @@ export class DresaltarDirective {
 
   @Input() appAppresaltar = '';
 
+  /** Se utiliza en mi perfil, para resaltar los atributos del perfil cuando se le pasa el mouse por arriba
+   * 
+   */
   constructor(private elemento: ElementRef) {
     this.elemento = elemento;
     this.elemento.nativeElement.style.backgroundColor = "";
