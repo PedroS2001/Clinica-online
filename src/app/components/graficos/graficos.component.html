@@ -27,6 +27,24 @@
         <div class="col-6 p-3">
             <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="leerLogs()">Ver Logs</button>
         </div>
+        <div class="col-6 p-2">
+            <div class="row">
+                <div class="col-6">
+                    <label for="dateInicio">Inicio del lapso</label>
+                    <input type="date" class="form-control" id="dateInicio" #dateInicio value="2021-11-10" min="2021-10-20" max="2021-11-11">
+                </div>
+                <div class="col-6">
+                    <label for="dateFin">Fin del lapso</label>
+                    <input type="date" class="form-control" id="dateFin" #dateFin value="2021-11-10" min="2021-10-25" max="2021-11-11">
+                </div>
+            </div>
+        </div>
+        <div class="col-6 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosXEspecialista()">Turnos por Especialista</button>
+        </div>
+        <div class="col-6 p-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosFinalizadosXEspecialista()">Turnos Finalizadospor Especialista</button>
+        </div>
 
     </div>
 
@@ -48,6 +66,17 @@
     </table>
 
 </div>
+
+<div class="row">
+    <div class="col-6">
+        <input type="date" class="form-control" id="dateInicio" #dateInicio value="2021-11-10" min="2021-10-25" max="2021-11-11">
+    </div>
+    <div class="col-6">
+        <input type="date" class="form-control" id="dateFin" #dateFin value="2021-11-10" min="2021-10-25" max="2021-11-11">
+    </div>
+</div>
+
+<!-- <button (click)="seleccionaLapso()">PEPE</button> -->
   
 
 
