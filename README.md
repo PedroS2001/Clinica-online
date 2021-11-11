@@ -8,7 +8,6 @@
 
 - [Pedro Señeriz](https://www.github.com/PedroS2001)
 
-![imgane](https://github.com/PedroS2001/Clinica-online/blob/master/src/archivosReadme/loginSinRegistrar.png)
 ## Pantallas y funcionalidad
 
 ### Bienvenida
