@@ -6,7 +6,12 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
-
+export type ChartOptionsPie = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -19,6 +24,13 @@ export type ChartOptions = {
   title: ApexTitleSubtitle;
 };
 
+import {
+  ApexNonAxisChartSeries,
+  ApexResponsive,
+} from "ng-apexcharts";
+
+
+
 @Component({
   selector: 'app-graficos',
   templateUrl: './graficos.component.html',
@@ -28,6 +40,7 @@ export class GraficosComponent implements OnInit {
 
   queGrafico:any;
   logs:any;
+  chartOptionsPie!: { series: any; chart: { width: number; type: string; }; labels: string[]; responsive: { breakpoint: number; options: { chart: { width: number; }; legend: { position: string; }; }; }[]; };
 
   constructor(private auth:AuthService, private afs:FirebaseService) {
   
@@ -43,7 +56,6 @@ export class GraficosComponent implements OnInit {
 
   @ViewChild('chartObj') chart!: ChartComponent;
   public chartOptions!: Partial<ChartOptions>;
-
 
 
   valoresPorEspecialidad:any;
@@ -197,8 +209,6 @@ export class GraficosComponent implements OnInit {
     console.info('turnosPordia', this.turnosPordia);
   }
   
-
-
   armarGraficoTurnosPorDia()
   {
     this.queGrafico = 'Turnos por dia';
@@ -281,6 +291,339 @@ export class GraficosComponent implements OnInit {
     };
   }
 
+  /************************************** TURNOS POR MEDICO EN UN LAPSO DE TIEMPO *************************************************** */
+
+
+  turnosMedicoPorLapso:any;
+  turnosFinalizadosMedicoPorLapso:any;
+
+  fechasEnElLapso:any;
+  turnosXMedico:any;
+  apellidosEspecialistas:any;
+  seleccionaLapso()
+  {
+    this.fechasEnElLapso =[];
+    let fechaInicio = (<HTMLInputElement>document.getElementById('dateInicio'));
+    let fechaFin = (<HTMLInputElement>document.getElementById('dateFin'));
+
+    console.info(fechaInicio.value);
+    console.info(fechaFin.value);
+
+    let fechaIniciov2 = fechaInicio.value.toString().split('-'); //fechaIniciov2[2] es el dia fechaIniciov2[1] es el Mes
+    let fechaFinv2 = fechaFin.value.toString().split('-');
+
+    let primerMes = true;
+    for(let j = parseInt(fechaIniciov2[1]); j<=parseInt(fechaFinv2[1]); j++)
+    { 
+      let diaComienzo = parseInt(fechaIniciov2[2]);
+      if(primerMes)
+      {
+        diaComienzo = parseInt(fechaIniciov2[2]);
+        primerMes = false;
+      }
+      else
+      {
+        diaComienzo = 1;
+      }
+      console.info('jota',j);
+      if(j == parseInt(fechaFinv2[1]) )
+      {
+        for(let i = diaComienzo ; i<= parseInt(fechaFinv2[2]) ; i++ )
+        {
+          this.fechasEnElLapso.push(i+'-'+j);
+          console.info('i',i);
+        }
+      }
+      else
+      {
+        for(let i = diaComienzo; i<=31; i++ )
+        {
+          console.info('i',i);
+          this.fechasEnElLapso.push(i+'-'+j)
+        }
+      }
+    }
+
+  }
+
+  segundaParte()
+  {
+    this.seleccionaLapso();
+    console.info('fechasenellapso', this.fechasEnElLapso);
+
+
+    this.apellidosEspecialistas = [];
+    this.turnosXMedico= []
+
+    this.afs.arrayEspecialistas.forEach( (especialista:any) => {
+      this.apellidosEspecialistas.push(especialista.data.apellido);
+      // console.info('especialista',especialista);
+      let aux = 0;
+      
+      this.afs.listaTurnos.forEach( (turno:any) => {
+
+        this.fechasEnElLapso.forEach( (unaFecha:any) => {
+          if(unaFecha == turno.data.fecha)
+          {
+            if(turno.data.dniEspecialista == especialista.data.dni)
+            {
+              aux++;
+            }
+          }
+          
+        });
+
+      });
+      this.turnosXMedico.push(aux);
+    });
+
+    console.info('turnosXMedico', this.turnosXMedico);
+    
+
+    
+  }
+
+
+  armarGraficoTurnosXEspecialista()
+  {
+    this.segundaParte();
+    this.queGrafico = 'Turnos por especialista en un lapso de tiempo'
+    this.chartOptions = {
+      series: [
+        {
+          name: "Turnos",
+          data:  this.turnosXMedico
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: "bottom" // top, center, bottom
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function(val:any) {
+          return val;
+        },
+        style: {
+          fontSize: "14px",
+          colors: ["#304758"]
+        }
+      },
+
+      xaxis: {
+        categories:  this.apellidosEspecialistas,
+        position: "bottom",
+        labels: {
+          offsetY: 0
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: "gradient",
+            gradient: {
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5
+            }
+          }
+        },
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: function(val:any) {
+            return val;
+          }
+        }
+      },
+      title: {
+        text: "Turnos por Especialista en un lapso de tiempo",
+        floating: false,
+        align: "center",
+        style: {
+          color: "#444"
+        }
+      }
+    };
+  }
+
+
+  /************************* TURNOS FINALIZADOS POR MEDICO EN UN LAPSO DE TIEMPO **************************/
+
+
+
+  turnosFinXMedico:any;
+  turnosCompletadosEnUnLapso()
+  {
+    this.turnosFinXMedico = []
+
+    this.seleccionaLapso();
+
+    this.apellidosEspecialistas = [];
+    this.afs.arrayEspecialistas.forEach( (especialista:any) => {
+      this.apellidosEspecialistas.push(especialista.data.apellido);
+      let aux = 0;
+      
+      this.afs.listaTurnos.forEach( (turno:any) => {
+        this.fechasEnElLapso.forEach( (unaFecha:any) => {
+          if(unaFecha == turno.data.fecha)
+          {
+            if(turno.data.dniEspecialista == especialista.data.dni && turno.data.estado == 'realizado')
+            {
+              aux++;
+            }
+          }
+        });
+      });
+      this.turnosFinXMedico.push(aux);
+    });
+    
+  }
+
+
+  armarGraficoTurnosFinalizadosXEspecialista()
+  { 
+    this.turnosCompletadosEnUnLapso();
+
+    this.queGrafico = 'Turnos Finalizados por especialista en un lapso de tiempo'
+    this.chartOptions = {
+      series: [
+        {
+          name: "Turnos",
+          data:  this.turnosFinXMedico
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: "bottom" // top, center, bottom
+          }
+        }
+      },
+      dataLabels: {
+        enabled: true,
+        formatter: function(val:any) {
+          return val;
+        },
+        style: {
+          fontSize: "14px",
+          colors: ["#304758"]
+        }
+      },
+
+      xaxis: {
+        categories:  this.apellidosEspecialistas,
+        position: "bottom",
+        labels: {
+          offsetY: 0
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: "gradient",
+            gradient: {
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5
+            }
+          }
+        },
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: true,
+          formatter: function(val:any) {
+            return val;
+          }
+        }
+      },
+      title: {
+        text: "Turnos por Especialista en un lapso de tiempo",
+        floating: false,
+        align: "center",
+        style: {
+          color: "#444"
+        }
+      }
+    };
+  }
+
+
+  armarGraficodeTorta()
+  {
+    this.chartOptionsPie = {
+      series: this.turnosFinXMedico,
+      chart: {
+        width: 380,
+        type: "pie"
+      },
+      labels: [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200
+            },
+            legend: {
+              position: "bottom"
+            }
+          }
+        }
+      ]
+    };
+  }
+
+
+
+
+
+
+
   /************************************** *************************************************** */
 
   imprimirPDF()
@@ -302,12 +645,6 @@ export class GraficosComponent implements OnInit {
   leerLogs()
   {
     this.verLogs = true;
-    console.info(this.logs);
-
-    this.logs.forEach( (element:any) => {
-      console.info( (element.fecha/86400)+25569+(-5/24) );
-      
-    });
   }
 
 }
