@@ -42,6 +42,7 @@ import { MarcoDirective } from './directives/marco.directive';
 import { PcapitalzePipe } from './pipes/pcapitalze.pipe';
 import { PpuntosdniPipe } from './pipes/ppuntosdni.pipe';
 import { PnombrecompletoPipe } from './pipes/pnombrecompleto.pipe';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 
 
@@ -78,6 +79,7 @@ import { PnombrecompletoPipe } from './pipes/pnombrecompleto.pipe';
   ],
   imports: [
     BrowserModule,
+    HighchartsChartModule,
     NgApexchartsModule,
     BrowserAnimationsModule,
     AngularFireModule,

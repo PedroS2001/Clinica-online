@@ -71,23 +71,9 @@
     </div>
 
 </div>
-<!-- 
-<div class="row">
-    <div class="col-6">
-        <input type="date" class="form-control" id="dateInicio" #dateInicio value="2021-11-10" min="2021-10-25" max="2021-11-11">
-    </div>
-    <div class="col-6">
-        <input type="date" class="form-control" id="dateFin" #dateFin value="2021-11-10" min="2021-10-25" max="2021-11-11">
-    </div>
-</div> -->
 
-<!-- <button (click)="seleccionaLapso()">PEPE</button> -->
-  
-
-
-<!-- <br>
-<button (click)="cargarValoresPorEspecialidad()">cargar valores por especialidad</button>
-<br>
-<button (click)="cargarTurnosPorDia()">Cargar turnos por dia</button>
-<button (click)="calcularDiasConTurno()">calcular dias con turno</button> -->
-
+<h1 (click)="armarGraficoHighChart()">Angular Highcharts demo</h1>   
+<highcharts-chart
+   [Highcharts] = "highcharts" 
+   [options] = "chartOptionsv2">
+</highcharts-chart>

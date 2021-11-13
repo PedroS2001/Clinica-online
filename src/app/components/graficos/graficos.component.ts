@@ -6,6 +6,10 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 
+
+import * as Highcharts from 'highcharts';
+
+
 export type ChartOptionsPie = {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
@@ -666,6 +670,42 @@ export class GraficosComponent implements OnInit {
   });
 
     this.archivoS.exportAsExcelFile(arrayDatas, 'logsAl'+Date.now());
+  }
+
+
+
+
+  chartOptionsv2:any;
+  highcharts = Highcharts;
+
+  armarGraficoHighChart()
+  {
+    this.turnosCompletadosEnUnLapso();
+    console.info('apeesp',this.apellidosEspecialistas);
+    console.info('turnxmed',this.turnosFinXMedico);
+    // this.apellidosEspecialistas = ['juan', 'pedro', 'martias', 'marcos'];
+    // this.turnosFinXMedico = [2,3,9,4]
+
+    let data :any= [];
+    this.apellidosEspecialistas.forEach( (apEsp:string, index:number) => {
+      let elem:any = {};
+      elem.name = apEsp;
+      elem.y = this.turnosFinXMedico[index];
+      data.push(elem);
+    });
+
+    this.chartOptionsv2 = Highcharts.setOptions( {
+      chart: {
+        type: 'pie',
+      },
+      title: {
+        text: "Turnos finalizados por especialista en el lapso seleccionado"
+      },
+      series: [{
+        data : data,
+        type: 'pie'
+      }]
+    })
   }
 
 
