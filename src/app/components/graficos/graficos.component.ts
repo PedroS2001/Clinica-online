@@ -43,6 +43,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 })
 export class GraficosComponent implements OnInit {
 
+  esHighChart:boolean = false;
   queGrafico:any;
   logs:any;
   chartOptionsPie!: { series: any; chart: { width: number; type: string; }; labels: string[]; responsive: { breakpoint: number; options: { chart: { width: number; }; legend: { position: string; }; }; }[]; };
@@ -89,6 +90,7 @@ export class GraficosComponent implements OnInit {
 
   armarGraficoTurnosXEspecialidad()
   {
+    this.esHighChart = false;
     this.queGrafico = 'Turnos por especialidad'
     this.chartOptions = {
       series: [
@@ -216,6 +218,7 @@ export class GraficosComponent implements OnInit {
   
   armarGraficoTurnosPorDia()
   {
+    this.esHighChart = false;
     this.queGrafico = 'Turnos por dia';
     this.chartOptions = {
       series: [
@@ -391,6 +394,7 @@ export class GraficosComponent implements OnInit {
 
   armarGraficoTurnosXEspecialista()
   {
+    this.esHighChart = false;
     this.segundaParte();
     this.queGrafico = 'Turnos por especialista en un lapso de tiempo'
     this.chartOptions = {
@@ -506,122 +510,122 @@ export class GraficosComponent implements OnInit {
   }
 
 
-  armarGraficoTurnosFinalizadosXEspecialista()
-  { 
-    this.turnosCompletadosEnUnLapso();
+  // armarGraficoTurnosFinalizadosXEspecialista()
+  // { 
+  //   this.turnosCompletadosEnUnLapso();
 
-    this.queGrafico = 'Turnos Finalizados por especialista en un lapso de tiempo'
-    this.chartOptions = {
-      series: [
-        {
-          name: "Turnos",
-          data:  this.turnosFinXMedico
-        }
-      ],
-      chart: {
-        height: 350,
-        type: "bar"
-      },
-      plotOptions: {
-        bar: {
-          dataLabels: {
-            position: "bottom" // top, center, bottom
-          }
-        }
-      },
-      dataLabels: {
-        enabled: true,
-        formatter: function(val:any) {
-          return val;
-        },
-        style: {
-          fontSize: "14px",
-          colors: ["#304758"]
-        }
-      },
+  //   this.queGrafico = 'Turnos Finalizados por especialista en un lapso de tiempo'
+  //   this.chartOptions = {
+  //     series: [
+  //       {
+  //         name: "Turnos",
+  //         data:  this.turnosFinXMedico
+  //       }
+  //     ],
+  //     chart: {
+  //       height: 350,
+  //       type: "bar"
+  //     },
+  //     plotOptions: {
+  //       bar: {
+  //         dataLabels: {
+  //           position: "bottom" // top, center, bottom
+  //         }
+  //       }
+  //     },
+  //     dataLabels: {
+  //       enabled: true,
+  //       formatter: function(val:any) {
+  //         return val;
+  //       },
+  //       style: {
+  //         fontSize: "14px",
+  //         colors: ["#304758"]
+  //       }
+  //     },
 
-      xaxis: {
-        categories:  this.apellidosEspecialistas,
-        position: "bottom",
-        labels: {
-          offsetY: 0
-        },
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        crosshairs: {
-          fill: {
-            type: "gradient",
-            gradient: {
-              colorFrom: "#D8E3F0",
-              colorTo: "#BED1E6",
-              stops: [0, 100],
-              opacityFrom: 0.4,
-              opacityTo: 0.5
-            }
-          }
-        },
-      },
-      yaxis: {
-        axisBorder: {
-          show: false
-        },
-        axisTicks: {
-          show: false
-        },
-        labels: {
-          show: true,
-          formatter: function(val:any) {
-            return val;
-          }
-        }
-      },
-      title: {
-        text: "Turnos por Especialista en un lapso de tiempo",
-        floating: false,
-        align: "center",
-        style: {
-          color: "#444"
-        }
-      }
-    };
-  }
+  //     xaxis: {
+  //       categories:  this.apellidosEspecialistas,
+  //       position: "bottom",
+  //       labels: {
+  //         offsetY: 0
+  //       },
+  //       axisBorder: {
+  //         show: false
+  //       },
+  //       axisTicks: {
+  //         show: false
+  //       },
+  //       crosshairs: {
+  //         fill: {
+  //           type: "gradient",
+  //           gradient: {
+  //             colorFrom: "#D8E3F0",
+  //             colorTo: "#BED1E6",
+  //             stops: [0, 100],
+  //             opacityFrom: 0.4,
+  //             opacityTo: 0.5
+  //           }
+  //         }
+  //       },
+  //     },
+  //     yaxis: {
+  //       axisBorder: {
+  //         show: false
+  //       },
+  //       axisTicks: {
+  //         show: false
+  //       },
+  //       labels: {
+  //         show: true,
+  //         formatter: function(val:any) {
+  //           return val;
+  //         }
+  //       }
+  //     },
+  //     title: {
+  //       text: "Turnos por Especialista en un lapso de tiempo",
+  //       floating: false,
+  //       align: "center",
+  //       style: {
+  //         color: "#444"
+  //       }
+  //     }
+  //   };
+  // }
 
 
-  armarGraficodeTorta()
-  {
-    this.chartOptionsPie = {
-      series: this.turnosFinXMedico,
-      chart: {
-        width: 380,
-        type: "pie"
-      },
-      labels: [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
-      responsive: [
-        {
-          breakpoint: 480,
-          options: {
-            chart: {
-              width: 200
-            },
-            legend: {
-              position: "bottom"
-            }
-          }
-        }
-      ]
-    };
-  }
+  // armarGraficodeTorta()
+  // {
+  //   this.chartOptionsPie = {
+  //     series: this.turnosFinXMedico,
+  //     chart: {
+  //       width: 380,
+  //       type: "pie"
+  //     },
+  //     labels: [
+  //       "Monday",
+  //       "Tuesday",
+  //       "Wednesday",
+  //       "Thursday",
+  //       "Friday",
+  //       "Saturday"
+  //     ],
+  //     responsive: [
+  //       {
+  //         breakpoint: 480,
+  //         options: {
+  //           chart: {
+  //             width: 200
+  //           },
+  //           legend: {
+  //             position: "bottom"
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   };
+  // }
 
 
 
@@ -680,6 +684,7 @@ export class GraficosComponent implements OnInit {
 
   armarGraficoHighChart()
   {
+    this.esHighChart = true;
     this.turnosCompletadosEnUnLapso();
     console.info('apeesp',this.apellidosEspecialistas);
     console.info('turnxmed',this.turnosFinXMedico);

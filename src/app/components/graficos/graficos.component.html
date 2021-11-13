@@ -2,7 +2,7 @@
     <div class="row">
 
         <div id="chart">
-            <apx-chart
+            <apx-chart  *ngIf="!esHighChart"
             [series]="chartOptions.series!"
             [chart]="chartOptions.chart!"
             [dataLabels]="chartOptions.dataLabels!"
@@ -12,6 +12,11 @@
             [fill]="chartOptions.fill!"
             [title]="chartOptions.title!"
             ></apx-chart>
+
+            <highcharts-chart *ngIf="esHighChart"
+                [Highcharts] = "highcharts" 
+                [options] = "chartOptionsv2">
+            </highcharts-chart>
         </div>
     </div>
     <div class="row">
@@ -43,11 +48,16 @@
             <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosXEspecialista()">Turnos por Especialista</button>
         </div>
         <div class="col-6 p-3">
-            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoTurnosFinalizadosXEspecialista()">Turnos Finalizadospor Especialista</button>
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="armarGraficoHighChart()">Turnos Finalizadospor Especialista</button>
         </div>
 
     </div>
 
+    <div class="row" *ngIf="verLogs">
+        <div class="col-3">
+            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-danger" (click)="exportAsXLSX()">Descargar logs</button>
+        </div>
+    </div>
     <table class="table table-striped" *ngIf="verLogs">
         <thead>
             <tr>
@@ -64,16 +74,7 @@
 
         </tbody>
     </table>
-    <div class="row" *ngIf="verLogs">
-        <div class="col-3">
-            <button style="height: 100%; width: 100%;" class="bttn-unite bttn-md bttn-primary" (click)="exportAsXLSX()">Descargar logs</button>
-        </div>
-    </div>
 
 </div>
 
-<h1 (click)="armarGraficoHighChart()">Angular Highcharts demo</h1>   
-<highcharts-chart
-   [Highcharts] = "highcharts" 
-   [options] = "chartOptionsv2">
-</highcharts-chart>
+<!-- <h1 (click)="armarGraficoHighChart()">Angular Highcharts demo</h1>    -->
