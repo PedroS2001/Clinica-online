@@ -43,6 +43,7 @@ import { PcapitalzePipe } from './pipes/pcapitalze.pipe';
 import { PpuntosdniPipe } from './pipes/ppuntosdni.pipe';
 import { PnombrecompletoPipe } from './pipes/pnombrecompleto.pipe';
 import { HighchartsChartModule } from 'highcharts-angular';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 
 
@@ -79,6 +80,7 @@ import { HighchartsChartModule } from 'highcharts-angular';
   ],
   imports: [
     BrowserModule,
+    NgxPaginationModule,
     HighchartsChartModule,
     NgApexchartsModule,
     BrowserAnimationsModule,

@@ -43,6 +43,7 @@ import { ArchivosService } from 'src/app/services/archivos.service';
 })
 export class GraficosComponent implements OnInit {
 
+  p:number = 1;
   esHighChart:boolean = false;
   queGrafico:any;
   logs:any;
