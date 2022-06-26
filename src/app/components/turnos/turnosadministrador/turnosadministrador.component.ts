@@ -10,10 +10,9 @@ import Swal from 'sweetalert2';
 })
 export class TurnosadministradorComponent implements OnInit {
 
-  
   //Listas que se van a mostrar
-  todosLosTurnos:any = [];   //Los turnos del especialista que se van a mostrar
-  especialistasFiltrados:any;           //Todos los pacientes de este especialista 1 sola vez, se utiliza para el filtro
+  todosLosTurnos:any = [];          //Los turnos del especialista que se van a mostrar
+  especialistasFiltrados:any;       //Todos los pacientes de este especialista 1 sola vez, se utiliza para el filtro
   especialidadesFiltradas:any;      //Todas las especialidades de este especialista 1 sola vez, se utiliza para el filtro
   
   turnosSinFiltrar:any;             //Todos los turnos del especialista. Se mantiene constante
@@ -37,8 +36,6 @@ export class TurnosadministradorComponent implements OnInit {
     this.todosLosTurnos = [];
 
     listadoTurnos.forEach( (item:any) => {
-      // console.log(item);
-
       this.todosLosTurnos.push(item);
     });
     this.turnosSinFiltrar = this.todosLosTurnos;
@@ -52,16 +49,7 @@ export class TurnosadministradorComponent implements OnInit {
   filtrarPorEspecialista(paciente:any)
   {
     this.todosLosTurnos = this.turnosSinFiltrar; //reinicio todos los turnos
-
-    let arrayAux:any = [];
-    this.todosLosTurnos.forEach( (element:any) => {
-      // console.log(element);
-      if(element.data.especialista == paciente )
-      {
-        arrayAux.push(element);
-      }
-    });
-
+    let arrayAux:any = this.todosLosTurnos.filter( (element:any) => element.data.especialista == paciente  );
     this.todosLosTurnos = arrayAux;
   }
 
@@ -72,15 +60,7 @@ export class TurnosadministradorComponent implements OnInit {
   filtrarPorEspecialidad(item:any)
   {
     this.todosLosTurnos = this.turnosSinFiltrar;
-
-    let arrayAux:any = [];
-    this.todosLosTurnos.forEach( (element:any) => {
-      // console.log(element);
-      if(element.data.especialidad == item )
-      {
-        arrayAux.push(element);
-      }
-    });
+    let arrayAux:any = this.todosLosTurnos.filter( (element:any) => element.data.especialidad == item  );
 
     this.todosLosTurnos = arrayAux;
   }
@@ -98,11 +78,8 @@ export class TurnosadministradorComponent implements OnInit {
       data.push(element.data.especialista);
     });
 
-    this.especialistasFiltrados = data.filter((item:any,index:any)=>{
-      return data.indexOf(item) === index;
-    })
+    this.especialistasFiltrados = data.filter( (item:any, index:any) => data.indexOf(item) === index )
 
-    // console.log(this.especialistasFiltrados)
   }
 
   /** Filtra las especialidades del especialista
@@ -118,7 +95,7 @@ export class TurnosadministradorComponent implements OnInit {
       data.push(element.data.especialidad);
     });
 
-    this.especialidadesFiltradas = data.filter((item:any,index:any)=>{
+    this.especialidadesFiltradas = data.filter( (item:any,index:any) => {
       return data.indexOf(item) === index;
     })
     // console.log(this.especialidadesFiltradas)

@@ -164,7 +164,6 @@ export class RegistroComponent implements OnInit, OnChanges {
           this.afs.listaEspecialidades.forEach( (unaEspecialidad:any) => {
             if(unaEspecialidad == formValue.especialidad)
             {
-              console.info('pepe');
               bandera = true;
             }
           });

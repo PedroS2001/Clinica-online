@@ -1,0 +1,26 @@
+.pepe {
+    justify-content: space-between;
+}
+
+.nav-linkk {
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.miNavb {
+    background-color: #16695e;
+}
+
+a {
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+a:hover {
+    transform: scale(1.1);
+    color: azure;
+}
+
+
+@media screen and (max-width: 576px) {}

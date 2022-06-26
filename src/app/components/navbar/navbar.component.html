@@ -1,22 +1,30 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-md navbar-light miNavb">
     <div class="container-fluid">
-        <a class="navbar-brand" (click)="goToBienvenida()" ><img src="./assets/icono.png" height="50px" width="50px"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+        <a class="navbar-brand" (click)="goToBienvenida()"><img src="./assets/icono.png" height="50px" width="50px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarID"
             aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarID">
+        <div class="collapse navbar-collapse pepe" id="navbarID">
             <div class="navbar-nav">
-                <a class="nav-link " aria-current="page" (click)="goToLogin()" >Login</a>
-                <a class="nav-link " aria-current="page" (click)="goToRegistro()" >Registro</a>
-                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-link " aria-current="page" (click)="goToEstadisticas()" >Estadisticas</a>
-                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-link " aria-current="page" (click)="goToUsuarios()" >Usuarios</a>
-                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-link " aria-current="page" (click)="goToTurnosAdministrador()" >Turnos A</a>
-                <a *ngIf="auth.currentUser?.perfil == 'administrador' || auth.currentUser?.perfil == 'paciente'" class="nav-link " aria-current="page" (click)="goToSolicitarTurno()" >Solicitar turno</a>
-                <a *ngIf="auth.currentUser?.perfil == 'paciente'" class="nav-link " aria-current="page" (click)="goToTurnosPaciente()" >Mis turnos P</a>
-                <a *ngIf="auth.currentUser?.perfil == 'especialista'" class="nav-link " aria-current="page" (click)="goToTurnosEspecialista()" >Mis turnos E</a>
-                <a *ngIf="auth.currentUser?.perfil == 'especialista'" class="nav-link " aria-current="page" (click)="goToPacientes()" >Pacientes</a>
-                <a *ngIf="auth.currentUser" class="nav-link " aria-current="page" (click)="goToMiPerfil()" >Mi Perfil</a>
+                <a class="nav-linkk " aria-current="page" (click)="goToLogin()">Login</a>
+                <a class="nav-linkk " aria-current="page" (click)="goToRegistro()">Registro</a>
+                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-linkk " aria-current="page"
+                    (click)="goToEstadisticas()">Estadisticas</a>
+                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-linkk " aria-current="page"
+                    (click)="goToUsuarios()">Usuarios</a>
+                <a *ngIf="auth.currentUser?.perfil == 'administrador'" class="nav-linkk " aria-current="page"
+                    (click)="goToTurnosAdministrador()">Turnos A</a>
+                <a *ngIf="auth.currentUser?.perfil == 'administrador' || auth.currentUser?.perfil == 'paciente'"
+                    class="nav-linkk " aria-current="page" (click)="goToSolicitarTurno()">Solicitar turno</a>
+                <a *ngIf="auth.currentUser?.perfil == 'paciente'" class="nav-linkk " aria-current="page"
+                    (click)="goToTurnosPaciente()">Mis turnos P</a>
+                <a *ngIf="auth.currentUser?.perfil == 'especialista'" class="nav-linkk " aria-current="page"
+                    (click)="goToTurnosEspecialista()">Mis turnos E</a>
+                <a *ngIf="auth.currentUser?.perfil == 'especialista'" class="nav-linkk " aria-current="page"
+                    (click)="goToPacientes()">Pacientes</a>
+                <a *ngIf="auth.currentUser" class="nav-linkk " aria-current="page" (click)="goToMiPerfil()">Mi
+                    Perfil</a>
 
             </div>
             <label *ngIf="auth.currentUser" align="right" for="" style="color: white;">{{auth.currentUser.mail}}</label>

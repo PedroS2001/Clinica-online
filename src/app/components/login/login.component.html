@@ -2,22 +2,23 @@
 
     <div class="miContenedor p-3 mb-5" style="padding: 50px">
         <div class="col">
-                                        <!-- TITULO Y FOTO -->
+            <!-- TITULO Y FOTO -->
             <div class="row" align="center">
                 <h1 appDtitulo style="font-family: 'Bebas Neue';">INGRESO</h1>
             </div>
 
             <div class="row ">
-                <div class="container " align="center" >
+                <div class="container " align="center">
                     <img appMarco src="./assets/icono.png" style="border-radius: 50%;" width="150px" height="150px">
                 </div>
             </div>
-                                        <!-- FORMULARIO -->
+            <!-- FORMULARIO -->
             <div class="row">
                 <form [formGroup]="formulario" (ngSubmit)="Ingresar()">
                     <div class="mb-3">
                         <label for="mail" class="form-label">Mail</label>
-                        <input type="email" class="form-control miContenedor" id="mail" placeholder="Mail" formControlName='mail'>
+                        <input type="email" class="form-control miContenedor" id="mail" placeholder="Mail"
+                            formControlName='mail'>
                         <small class="invalid"
                             *ngIf="formulario.controls.mail.errors?.required  && formulario.controls.mail.touched">
                             El mail es requerido</small>
@@ -43,20 +44,22 @@
                     </div>
                 </form>
 
-                                        <!-- BOTONES DE ACCESO RAPIDO -->
-                <div class="col-md-2 d-grid gap-2" *ngFor="let item of usuariosLogin" align="center">
-                        <img appMarco (click)="ingresaUsuario(item)" src={{item?.data?.imagen}} style="width: 50px; height: 50px; border-radius: 10%;" alt="">
+                <!-- BOTONES DE ACCESO RAPIDO -->
+                <div style="display: flex; flex-flow: row wrap; align-items: center; justify-content: space-around;">
+                    <img *ngFor="let item of usuariosLogin" appMarco (click)="ingresaUsuario(item)"
+                        src={{item?.data?.imagen}} style="width: 50px; height: 50px; border-radius: 10%; margin: 15px;"
+                        alt={{item?.data?.nombre}}>
+                </div>
 
-                    <!-- <button class="bttn-unite bttn-md bttn-royal" (click)="ingresaAdministrador()" >Administrador</button>
-                    <button class="bttn-unite bttn-md bttn-primary" (click)="ingresaEspecialista()" >Especialista</button>
-                    <button class="bttn-unite bttn-md bttn-warning" (click)="ingresaPaciente()" >Paciente</button> -->
-                </div>  
+            </div>
+            <!--Cierre row formulario-->
+        </div>
+        <!--Cierre col general-->
 
-            </div> <!--Cierre row formulario-->
-        </div> <!--Cierre col general-->
+    </div>
+    <!--Cierre miContenedor-->
 
-    </div>  <!--Cierre miContenedor-->
+</div>
+<!--Cierre container 720p-->
 
-</div>   <!--Cierre container 720p-->
-
-<ngx-loading [show]="loading"  [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }" ></ngx-loading>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px', fullScreenBackdrop: true }"></ngx-loading>

@@ -58,7 +58,6 @@ export class SolicitarturnovdosComponent implements OnInit {
   arrayTotalDias:any = [];
   arrayTotalHoras:any = [];
   arrayTotalNombres:any = [];
-  // turnosDisponibles:any = [];
 
   /** Calcula y carga todos los turnos que puede tener el especialista, sin discriminar si esta libre u ocupado.
    *  Finalmente llama a la funcion que los filtra y muestra solo los libres
